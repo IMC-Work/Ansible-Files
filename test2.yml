@@ -1,0 +1,44 @@
+---
+- hosts: all
+  gather_facts: false      
+  tasks:
+     
+  - name: create a directory
+    ansible.builtin.win_file:
+      path: C:\temp\ansibleservices
+      state: directory
+
+  - name: create the file
+    ansible.builtin.win_file:
+      path: C:\temp\ansibleservices\ian.txt
+      state: touch  
+    register: filedata
+
+  - name: check service
+    win_service:
+      name: '*'
+    register: result
+    failed_when: result is not defined
+
+  - name: add all auto services to file to check later on
+    community.windows.win_lineinfile:
+      path: C:\temp\ian.txt
+      line: "{{ result.name }}"
+    when: result.start_mode == "auto"  
+
+  - name: start service if stopped
+    win_service:
+      name: 'spooler'
+      state: started
+    register: result2
+    when: result.start_mode  == "auto"
+
+  - name: print status
+    ansible.builtin.debug:
+      msg: "service is now {{ result2.state }}"
+    when: result.state == "stopped" and result2.state == "running"
+
+  - name: delete the file
+    ansible.builtin.win_file:
+      path: C:\temp\ansibleservices\ian.txt
+      state: absent 

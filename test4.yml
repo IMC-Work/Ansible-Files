@@ -1,0 +1,22 @@
+---   
+- hosts: all
+  gather_facts: false
+  vars:
+     number: 0
+  tasks: 
+
+  - name: collect facts
+    ansible.windows.win_service_info:
+      name: win*
+    register: info
+
+  - name: Increment
+    set_fact: number = {{ number | int + 1 }}  
+
+  - name: debug
+    debug:
+      msg: " {{info.services[0].name }} "
+
+  - name: debug2
+    debug:
+      msg: " {{info.services[1].name}} is set to {{info.services[1].start_mode}}"    

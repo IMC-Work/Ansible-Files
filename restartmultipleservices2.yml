@@ -1,0 +1,32 @@
+---      
+ - name: check if the service exists or not
+   ansible.windows.win_service:
+      name: "{{ item }}"
+   register: res1
+   ignore_errors: true
+
+ - name: restart the service as it exists
+   ansible.windows.win_service:
+      name: "{{ item }}"
+      state: started
+   register: result
+   ignore_errors: true   
+   when: res1.exists  == true
+
+ - name: debug1
+   ansible.builtin.debug:
+     msg: "the {{ item }} service was stopped, now started"
+   ignore_errors: true  
+   when: result.changed == true
+
+ - name: debug2
+   ansible.builtin.debug:
+     msg: "the {{ item }} service was already started"
+   ignore_errors: true
+   when: result.changed == false and res1.exists == true
+
+ - name: debug3
+   ansible.builtin.debug:
+     msg: "the {{ item }} service does not exist or cannot restart it"
+   ignore_errors: true  
+   when: res1.exists == false  

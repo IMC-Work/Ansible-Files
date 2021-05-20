@@ -1,0 +1,38 @@
+---     
+ - name: check if the service exists or not
+   ansible.windows.win_service_info:
+      name: "{{ item }}"
+   register: res1
+   ignore_errors: true
+
+ - name: debuggy1
+   ansible.builtin.debug:
+     msg: "service checking is {{res1.services[num].name}} and num is {{num}}" 
+
+ - name: increment
+   set_fact:
+#     num: "{{num|int + 1 }}" 
+     num: 4
+
+ - name: debug
+   ansible.builtin.debug:
+     msg: "number is now {{num}}"   
+
+ - name: debug1
+   ansible.builtin.debug:
+     msg: "service checking is {{res1.services[num].name}} and num is {{ num }}"
+#
+#   [num+1] works ok
+#
+ - name: debug2
+   ansible.builtin.debug:      
+     msg: "start mode {{res1.services[num].start_mode}} and {{res1.services[num].state}}"
+
+ - name: restart the auto service if stopped
+   ansible.windows.win_service:
+#      name: "{{ item }}"
+      name: "{{res1.services[num].name}}"   
+      state: started
+   register: result   
+   when: res1.services[num].start_mode == "auto" and res1.services[num].state != "started"
+   

@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: false   
+  tasks:
+      
+   - name: restart a single service
+     win_service:
+       name: spooler
+       state: started
+     register: result  
+
+   - name: debug1
+     ansible.builtin.debug:
+       msg: "service was stopped, now restarted"
+     when: result.changed == true
+
+   - name: debug2
+     ansible.builtin.debug:  
+       msg: "service was already started" 
+     when: result.changed == false
+
+   - name: debug3
+     ansible.builtin.debug:
+       msg: "service is set to auto"
+     when: result.start_mode == "auto"
+
+   - name: debug4
+     ansible.builtin.debug:
+       msg: "service is not set to auto"
+     when: result.start_mode != "auto"  
+    

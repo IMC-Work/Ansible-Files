@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: false   
+  tasks:
+      
+   - name: restart a single service
+     win_service:
+       name: wuauserv
+       state: started
+     register: result  
+
+   - name: debug1
+     ansible.builtin.debug:
+       msg: "service is set to auto"
+     when: result.start_mode == "auto"
+
+   - name: debug2
+     ansible.builtin.debug:  
+       msg: "service is not set to auto" 
+     when: result.start_mode != "auto"
+    

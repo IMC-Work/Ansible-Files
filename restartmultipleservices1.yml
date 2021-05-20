@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: false      
+  tasks:
+      
+  - name: restart mutiple services - part 1
+    include_tasks: restartmultipleservices2.yml
+#    loop:
+#      - 'a*'
+    loop:
+      - 'spooler'
+      - 'wuauserv'
+      - 'ian'  

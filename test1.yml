@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+      
+   - name: get disk facts
+     community.windows.win_disk_facts:
+      
+   - name: Output First Disk size
+     debug:
+       var: ansible_facts.disk[0].size
+ 
+   - name: convert disk into various formats
+     debug:
+       msg: "{{ free }} vs {{ freedisk }} vs {{ freedisk }} "
+     vars:
+       disk: "{{ ansible_facts.disks|selectattr('system_disk')|first }}"
+       disksize_gib_human: "{{ disk.size|filesizeformat(true) }}"
+       disksize_gib: "{{ (disk.size/1024|pow(3))|round|int }} gib"
+       free: "{{ disk }}"
+       freedisk: "{{ ansible_facts.disks[0].size_remaining }}" 

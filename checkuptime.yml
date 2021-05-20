@@ -1,0 +1,42 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+     uptime_threshold: 60  
+  tasks:
+    
+   - name: get the affected windows host's uptime
+     win_shell: "[convert]::ToInt32(($(Get-Date) - $(Get-WmiObject
+        Win32_OperatingSystem).ConvertToDateTime($(Get-WmiObject
+        Win32_OperatingSystem).LastBootUpTime)).TotalMInutes);"
+     register: uptime_raw
+     changed_when: false
+     ignore_errors: true
+
+   - name: Save Uptime related variables
+     set_fact:
+      uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
+      uptime_above_limit:
+        "{{ (uptime_raw.stdout_lines[0] | int) >= (uptime_threshold | int) }}"
+
+   - debug:
+       msg: "Below Uptime_threshold - No reboot required"
+     when: uptime_above_limit is false     
+
+   - debug:
+       msg: "Above Uptime_threshold - so rebooting the server NOW"      
+     when: uptime_above_limit is true    
+
+   - name: Reboot server
+     ansible.windows.win_reboot:
+      reboot_timeout: 100
+     register: reboot_status  
+     when: uptime_above_limit is true
+
+   - debug:
+       msg: "Server was rebooted"
+     when: uptime_above_limit is true
+
+   - debug:
+       msg: "Server was NOT rebooted"
+     when: uptime_above_limit is false    
