@@ -1,0 +1,59 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    filepath: c:\temp\services.txt
+  tasks:
+ 
+  - name: copy text
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\services.txt -pattern "Service="
+    register: service
+
+  - name: debug2
+    ansible.builtin.debug:
+      msg: "{{ service.stdout_lines }}"
+
+  - name: set value as fact
+    set_fact: service={{ service.stdout_lines }}
+
+  - name: debug3
+    ansible.builtin.debug:
+      msg: "{{ service }}"
+
+  - name: trim rubbish
+    set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
+      #    failed_when: data1 == ""
+    
+  - name: fail
+    fail:
+      msg: " *****   empty file   *******"
+    when: data1 == ""  
+
+  - name: debuggy
+    ansible.builtin.debug:
+      msg: "service is {{ data1 }}"
+#
+#  Only call this playbook if DATA1 has anything in it,
+#  otherwise end the playbook - message saying all services
+#  are started
+#
+  - name: check service exists
+    ansible.windows.win_service:
+      name: "{{ data1 }}"
+    register: res1
+    ignore_errors: true
+    
+  - name: restart a service as it exists
+    ansible.windows.win_service:
+      name: "{{ data1 }}"
+      state: started
+    register: result  
+    ignore_errors: true
+    when: res1.exists == true
+
+  - name: debug
+    ansible.builtin.debug:
+      msg: "service is started"
+    when: result.state == "started" and res1.exists == true
+

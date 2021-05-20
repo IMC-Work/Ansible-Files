@@ -1,0 +1,37 @@
+---
+ - name: set fact
+   set_fact: service={{ res1.services[item].name}}
+
+ - name: debug
+   ansible.builtin.debug:
+     msg: "service is {{ service }}"      
+      
+ - name: write entry to log file
+   win_eventlog_entry:
+     log: Application
+     source: Ansible
+     event_id: 1971
+     message: "{{ service }} will attempt to  restarted via Ansible"
+   when: res1.services[item].start_mode == "auto" and res1.services[item].state == "stopped"
+
+ - name: restart the auto service if stopped
+   ansible.windows.win_service:
+      name: "{{ service }}"
+      state: started
+   register: result
+   when: res1.services[item].start_mode == "auto" and res1.services[item].state == "stopped"
+    
+ - name: check if service has now started
+   ansible.windows.win_service_info:
+     name: "{{ service }}"
+   register: result2
+   when: res1.services[item].start_mode == "auto" and res1.services[item].state == "stopped"
+
+ - name: debug2
+   ansible.builtin.debug:
+     msg: "service {{ service }} and result2 is {{ result2 }}"
+   when: res1.services[item].start_mode == "auto" and res1.services[item].state == "stopped" and result2.services[item].state == "started"
+   
+   # amend after start
+   # put in a check to meta end if file > item
+   # put in the kill command if required 

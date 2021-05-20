@@ -1,0 +1,33 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+     uptime_days:
+     uptime_days2:
+     uptime_mins:        
+
+  tasks:
+    
+   - name: get the affected windows host's uptime
+     win_shell: "[convert]::ToInt32(($(Get-Date) - $(Get-WmiObject
+        Win32_OperatingSystem).ConvertToDateTime($(Get-WmiObject
+        Win32_OperatingSystem).LastBootUpTime)).TotalMInutes);"
+     register: uptime_raw
+     changed_when: false
+     ignore_errors: true
+
+   - name: Convert Uptime related variables
+     set_fact:
+      uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
+      uptime_days: "{{ uptime_raw.stdout_lines[0] | int / 1440 }}"  
+      uptime_hours: "{{ uptime_raw.stdout_lines[0] | int / 60 }}"
+      #      uptime_days1: "{{ uptime_days | int | truncate }}"
+
+   - name: information     
+     debug:
+       msg: " uptime is {{uptime_mins}} {{uptime_hours}} {{uptime_days}}"
+
+   - name: number of days    
+     debug:
+       msg: "number of days: = {{ uptime_days | truncate | int }}"
+# msg: "number of days: = {{ uptime_days1 }} "    

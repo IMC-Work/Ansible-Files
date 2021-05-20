@@ -3,11 +3,14 @@
   gather_facts: false      
   tasks:
       
-  - name: restart mutiple services - part 1
-    include_tasks: restartmultipleservices2.yml
+#  - name: restart mutiple services - part 1
+#    include_tasks: restartmultipleservices2.yml
 #    loop:
-#      - 'a*'
+#      - 'spooler'
+#      - 'wuauserv'
+#      - 'ian'
+
+  - name: restart multiple services - part 1
+    include_tasks: test12.yml
     loop:
-      - 'spooler'
-      - 'wuauserv'
-      - 'ian'  
+      - '*'

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+   - name: Write entry to the windows event log
+     win_eventlog_entry:
+       log: Application
+       source: Ansible
+       event_id: 999
+       message: This is an Ansible Error Message

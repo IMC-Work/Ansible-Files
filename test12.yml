@@ -7,20 +7,10 @@
 
  - name: debug
    ansible.builtin.debug:
-     msg:
-       - "service is {{ res1.services[num].name }} and num is {{ num }}"
-       - "service is {{ res1.services[1].name }} and num is now 1"
-       - "service is {{ res1.services[2].name }} and num is now 2"
-       - "service is {{ res1.services[3].name }} and num is now 3"
-       - "service is {{ res1.services[4].name }} and num is now 4"
-       - "service is {{ res1.services[5].name }} and num is now 5"
-       - "service is {{ res1.services[6].name }} and num is now 6"
-       - "service is {{ res1.services[7].name }} and num is now 7"
+     msg: "{{res1}}"
 
- - name: restart the auto service if stopped
-   ansible.windows.win_service:
-      name: "{{ res1.services[num].mame }}"
-      state: started
-   register: result
-   when: res1.services[num].start_mode == "auto" and res1.services[num].state == "stopped"
-   
+ - name: write to file
+   community.windows.win_lineinfile:
+     path: C:\temp\ian.txt
+     line: "Service={{  }}"
+     #   when: res1.start_mode == "auto"   

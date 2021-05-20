@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  
+   - name: test copy data to file
+     community.windows.win_lineinfile:
+      path: C:\temp\services.txt
+      line: howday-dooday

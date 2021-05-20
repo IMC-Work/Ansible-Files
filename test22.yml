@@ -1,0 +1,61 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    filepath: c:\temp\autoservices.txt
+  tasks:
+
+  - name: copy PS1 files from Ansible node to host temp folder
+    ansible.windows.win_copy:
+      src: \\VBOXsvr\VM_Shared_Folder\PS_Scripts
+      dest: C:\temp
+      remote_src: yes
+    register: file_copy
+  
+  - name: run PS_Script
+    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
+
+  - name: pause tasks for 30 seconds
+    ansible.builtin.pause:
+      seconds: 3
+      prompt: Waiting for script to run, please wait!
+
+  - name: copy text  
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
+    register: service
+
+  - name: read file, copy data to service
+    set_fact: service={{ service.stdout_lines }}
+
+  - name: remove everything apart from service name  
+    set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
+
+  - name: stop message
+    ansible.builtin.debug:
+      msg: "all services are started after the reboot"
+    when: data1 == "" or data1|length <2
+
+  - name: write entry to the windows event log
+    win_eventlog_entry:
+      log: Application
+      source: Ansible
+      event_id: 1971
+      message: All AUTO Services are started after rebooted
+    when: data1 == "" or data1|length <2
+
+  - name: write entry to file on server
+    community.windows.win_lineinfile:
+      path: C:\temp\autoservices.txt
+      line: All Auto Services are started after reboot
+    when: data1 == "" or data1|length <2  
+
+  - name: stop playbook as all services are started
+    meta: end_host
+    when:
+      - data1 == "" or data1|length < 2
+
+  - name: loopy loop - does this 6 times!
+    include_tasks: test23.yml
+    loop: "{{ [1, 2, 3, 4, 5, 6] }}"
+

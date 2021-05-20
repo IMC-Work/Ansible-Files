@@ -2,7 +2,8 @@
 - hosts: all
   gather_facts: false
   vars:
-     uptime_threshold: 60  
+     uptime_threshold: 60        
+
   tasks:
     
    - name: get the affected windows host's uptime
@@ -18,9 +19,9 @@
       uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
       uptime_above_limit:
         "{{ (uptime_raw.stdout_lines[0] | int) >= (uptime_threshold | int) }}"
-
+     
    - debug:
-       msg: "Below Uptime_threshold - No reboot required"
+       msg: "Below Uptime_threshold - No reboot required "
      when: uptime_above_limit is false     
 
    - debug:
@@ -35,8 +36,4 @@
 
    - debug:
        msg: "Server was rebooted"
-     when: uptime_above_limit is true
-
-   - debug:
-       msg: "Server was NOT rebooted"
-     when: uptime_above_limit is false    
+     when: uptime_above_limit is true    
