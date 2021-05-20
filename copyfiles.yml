@@ -1,4 +1,4 @@
----     
+---
 - hosts: all
   gather_facts: false
   tasks:
@@ -10,13 +10,13 @@
         remote_src: yes
 
     - name: copy file from windows to centos
-#     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT    
+#     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
       fetch:
         src: C:/temp/ian.txt
         dest: /home/ian/files/
         remote_src: yes
-        
+
     - name: copy ansible directory from centos to windows
       ansible.windows.win_copy:
-        src: /ansible/
+        src: /ansible-files/
         dest: C:\temp\ansiblefiles\
