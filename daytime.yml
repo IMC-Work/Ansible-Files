@@ -2,14 +2,12 @@
 - hosts: all
   gather_facts: false
   vars:
-     total_uptime_hours:
      total_uptime_mins:
      uptime_days:
      uptime_hours:
      uptime_mins:
-     uptime_mins2:
      uptime_remain_mins:
-     uptime_remain_mins2:
+
   tasks:
 
    - name: get the affected windows host's uptime
