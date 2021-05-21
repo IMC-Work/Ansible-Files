@@ -8,6 +8,7 @@
      uptime_hours:
      uptime_mins:
      uptime_mins2:
+     uptime_mins-hours:
 
   tasks:
 
