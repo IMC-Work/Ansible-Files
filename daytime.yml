@@ -6,6 +6,7 @@
      total_uptime_mins:
      uptime_days:
      uptime_hours:
+     uptime_mins:
 
   tasks:
 
@@ -37,6 +38,14 @@
      set_fact:
       uptime_hours: "{{ uptime_hours.stdout_lines[0] | int }}"
 
+   - name: powershell get total mins
+     win_shell: "{{ total_uptime_mins }} / 1"
+     register: uptime_mins
+
+   - name: Get remaining minutes
+     set_fact:
+      uptime_mins: "{{ uptime_mins.stdout_lines[0] | int }}"
+
    - name: Convert Uptime related variables
      set_fact:
      # uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
@@ -51,4 +60,5 @@
                #- "number of days: = {{ uptime_days | truncate | int }}"
          - "Total_Uptime_Minutes: = {{ total_uptime_mins }}"
          - "Total uptime days:= {{ uptime_days }}"
-         - "Total uptime hours: = {{ uptime_hours }}"
+         - "Total uptime hours:= {{ uptime_hours }}"
+         - "Total uptime minutes:= {{ uptime_mins }}"
