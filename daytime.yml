@@ -9,7 +9,7 @@
      uptime_mins:
      uptime_mins2:
      uptime_remain_mins:
-
+     uptime_remain_mins2:
   tasks:
 
    - name: get the affected windows host's uptime
@@ -33,13 +33,13 @@
      set_fact:
       uptime_days: "{{ uptime_days.stdout_lines[0] | int }}"
 
-   - name: remove number of hours from total
+   - name: remove number of hours from total minutes
      win_shell: " {{ total_uptime_mins }} - ({{uptime_days}} * 1440)"
-     register: uptime_mins3
+     register: uptime_remain_mins
 
    - name: Get total days
      set_fact:
-      uptime_remain_mins: "{{ uptime_mins3.stdout_lines[0] | int }}"
+      uptime_remain_mins: "{{ uptime_remain_mins.stdout_lines[0] | int }}"
 
    - name: powershell get total hours
      win_shell: "{{ uptime_remain_mins }} / 60"
