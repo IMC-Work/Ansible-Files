@@ -23,7 +23,7 @@
    - name: Get total minutes
      set_fact:
   #    total_uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
-      total_uptime_mins: "1501"
+      total_uptime_mins: "3492"
 
    - name: powershell gets total days
      win_shell: "{{ total_uptime_mins }} / 1440"
