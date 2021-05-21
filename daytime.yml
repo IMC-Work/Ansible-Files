@@ -2,9 +2,10 @@
 - hosts: all
   gather_facts: false
   vars:
-     total_:
+     total_uptime_hours:
      total_uptime_mins:
      uptime_days:
+     uptime_hours:
 
   tasks:
 
@@ -20,14 +21,21 @@
      set_fact:
       total_uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
 
-   - name: powershell gets total hours
+   - name: powershell gets total days
      win_shell: "{{ total_uptime_mins }} / 1440"
-#     win_shell: "{{ uptime_mins }} * 3"
      register: uptime_days
 
    - name: Get total days
      set_fact:
       uptime_days: "{{ uptime_days.stdout_lines[0] | int }}"
+
+   - name: powershell get total hours
+     win_shell: "{{ total_uptime_mins }} / 60"
+     register: uptime_hours
+
+   - name: Get total hours
+     set_fact:
+      uptime_hours: "{{ update_hours.stdout_lines[0] | int }}"
 
    - name: Convert Uptime related variables
      set_fact:
@@ -43,3 +51,4 @@
                #- "number of days: = {{ uptime_days | truncate | int }}"
          - "Total_Uptime_Minutes: = {{ total_uptime_mins }}"
          - "Total uptime days:= {{ uptime_days }}"
+         - "Total uptime hours: = {{ uptime_hours }}"
