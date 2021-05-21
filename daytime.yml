@@ -35,7 +35,7 @@
 
    - name: Get total hours
      set_fact:
-      uptime_hours: "{{ update_hours.stdout_lines[0] | int }}"
+      uptime_hours: "{{ uptime_hours.stdout_lines[0] | int }}"
 
    - name: Convert Uptime related variables
      set_fact:
