@@ -2,9 +2,9 @@
 - hosts: all
   gather_facts: false
   vars:
+     total_:
+     total_uptime_mins:
      uptime_days:
-     uptime_days3:
-     uptime_mins:
 
   tasks:
 
@@ -16,29 +16,30 @@
      changed_when: false
      ignore_errors: true
 
- - name: set_fact1
-   set_fact:
-    uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
+   - name: Get total minutes
+     set_fact:
+      total_uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
 
- - name: more powershell stuff
-   win_shell: (uptime_mins * 3)
-   register: Uptime
+   - name: powershell gets total hours
+      win_shell: "{{ total_uptime_mins / 1440}}"
+#     win_shell: "{{ uptime_mins }} * 3"
+     register: uptime_days
+
+   - name: Get total days
+     set_fact:
+      uptime_days: "{{ uptime_days.stdout_lines[0] | int }}"
 
    - name: Convert Uptime related variables
      set_fact:
-      uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
-      uptime_days: "{{ uptime_raw.stdout_lines[0] | int / 1440 }}"
-      uptime_hours: "{{ uptime_raw.stdout_lines[0] | int / 60 }}"
+     # uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
+    #  uptime_days: "{{ uptime_raw.stdout_lines[0] | int / 1440 }}"
+    #  uptime_hours: "{{ uptime_raw.stdout_lines[0] | int / 60 }}"
       #      uptime_days1: "{{ uptime_days | int | truncate }}"
 
    - name: information
      debug:
-       msg: " uptime is {{uptime_mins}} {{uptime_hours}} {{uptime_days}}"
-
-   - name: number of days
-     debug:
        msg:
-         - "number of days: = {{ uptime_days | truncate | int }}"
-         - "new number: = {{Uptime}}"
-
-# msg: "number of days: = {{ uptime_days1 }} "
+               #         - "uptime is {{uptime_mins}} {{uptime_hours}} {{uptime_days}}"
+               #- "number of days: = {{ uptime_days | truncate | int }}"
+         - "Total_Uptime_Minutes: = {{ total_uptime_mins }}"
+         - "Total uptime days:= {{ uptime_days }}"
