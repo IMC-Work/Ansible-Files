@@ -19,4 +19,4 @@
     - name: copy ansible directory from centos to windows
       ansible.windows.win_copy:
         src: /ansible-files/
-        dest: C:\temp\ansiblefiles999999\
+        dest: C:\temp\ansiblefiles\
