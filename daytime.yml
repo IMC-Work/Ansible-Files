@@ -35,9 +35,9 @@
      win_shell: " {{ total_uptime_mins }} - ({{uptime_days}} * 1440)"
      register: uptime_mins-hours
 
-  - name: Get total days
-    set_fact:
-     uptime_mins2: "{{ uptime_mins-hours.stdout_lines[0] | int }}"
+   - name: Get total days
+     set_fact:
+      uptime_mins2: "{{ uptime_mins-hours.stdout_lines[0] | int }}"
 
    - name: powershell get total hours
      win_shell: "{{ uptime_mins2 }} / 60"
