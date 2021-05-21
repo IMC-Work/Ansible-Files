@@ -41,7 +41,7 @@
       uptime_remain_mins: "{{ uptime_mins3.stdout_lines[0] | int }}"
 
    - name: powershell get total hours
-     win_shell: "{{ uptime_mins2 }} / 60"
+     win_shell: "{{ uptime_remain_mins }} / 60"
      register: uptime_hours
 
    - name: Get total hours
