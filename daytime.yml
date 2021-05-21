@@ -16,6 +16,14 @@
      changed_when: false
      ignore_errors: true
 
+ - name: set_fact1
+   set_fact:
+    uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
+
+ - name: more powershell stuff
+   win_shell: (uptime_mins * 3)
+   register: Uptime
+
    - name: Convert Uptime related variables
      set_fact:
       uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
@@ -29,5 +37,8 @@
 
    - name: number of days
      debug:
-       msg: "number of days: = {{ uptime_days | truncate | int }}"
+       msg:
+         - "number of days: = {{ uptime_days | truncate | int }}"
+         - "new number: = {{Uptime}}"
+
 # msg: "number of days: = {{ uptime_days1 }} "
