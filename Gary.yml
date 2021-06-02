@@ -1,0 +1,26 @@
+
+---
+# **** Setting Socket tunnel ****
+- name: Role ensures that the socks tunnel is setup
+  hosts: all
+#  connection: local
+  gather_facts: false
+#  vars:
+#    acc_id: "{{ blueid_shortcode }}"
+#    transaction_id: "{{ tower_job_id }}"
+#  roles:
+#    - role: ansible-role-event-socks-tunnel
+
+- name: Check WUAUSERV
+  win_service:
+    name: wuauserv
+    state: started
+  register: status
+
+- debug:
+    msg: " Windows Update service is running "
+  when: status.failed == false
+
+- debug:
+    msg: " Windows Update service is stopped and didnt restart - please investigate "
+ when: status.failed == true
