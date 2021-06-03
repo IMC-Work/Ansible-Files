@@ -18,14 +18,14 @@
       state: started
     register: status
 
-  - debug:
-      msg: " Windows Update service is running "
-    when: status.failed == false
+#  - debug:
+#      msg: " Windows Update service is running "
+#    when: status.failed == false
 
-  - name: stop playbook as service is running
-    meta: end_host
-    when:
-      - status.failed == false
+#  - name: stop playbook as service is running
+#    meta: end_host
+#    when:
+#      - status.failed == false
 
   - name: kill process of service
     ansible.windows.win_command: taskkill /f /fi "SERVICES eq wuauserv"
