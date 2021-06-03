@@ -5,6 +5,7 @@
 - hosts: all
 #  connection: local
   gather_facts: false
+  tasks:
 #  vars:
 #    acc_id: "{{ blueid_shortcode }}"
 #    transaction_id: "{{ tower_job_id }}"
