@@ -1,8 +1,8 @@
 
 ---
 # **** Setting Socket tunnel ****
-- name: Role ensures that the socks tunnel is setup
-  hosts: all
+#- name: Role ensures that the socks tunnel is setup
+- hosts: all
 #  connection: local
   gather_facts: false
 #  vars:
@@ -12,7 +12,7 @@
 #    - role: ansible-role-event-socks-tunnel
 
 - name: Check WUAUSERV
-  win_service:
+  ansible.windows.win_service:
     name: wuauserv
     state: started
   register: status
@@ -35,7 +35,7 @@
     seconds: 3
     prompt: Waiting for taskkill command, please wait!
 
-- name: Check WUAUSERV
+- name: Re-Check WUAUSERV
   ansible.windows.win_service:
     name: wuauserv
     state: started
