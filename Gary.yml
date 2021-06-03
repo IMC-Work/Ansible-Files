@@ -30,12 +30,12 @@
   - name: kill process of service
     ansible.windows.win_command: cmd.exe -
     args:
-      stdin: taskkill /fi "SERVICES eq wuauserv" /f
+      stdin: taskkill /FI "SERVICES eq wuauserv" /F
     register: result_service_kill
 
   - name: pause tasks for 30 seconds
     ansible.builtin.pause:
-      seconds: 180
+      seconds: 30
       prompt: Waiting for taskkill command, please wait!
 
   - name: Re-Check WUAUSERV
