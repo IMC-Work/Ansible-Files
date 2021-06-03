@@ -28,7 +28,7 @@
 #      - status.failed == false
 
   - name: kill process of service
-    ansible.windows.win_command: taskkill /f /fi "SERVICES eq wuauserv"
+    ansible.windows.win_command: taskkill /fi "SERVICES eq wuauserv" /f
     register: result_service_kill
 
   - name: pause tasks for 30 seconds
