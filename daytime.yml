@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: wintest
   gather_facts: false
   vars:
      total_uptime_mins:
