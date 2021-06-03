@@ -12,11 +12,11 @@
 #  roles:
 #    - role: ansible-role-event-socks-tunnel
 
-  - name: Check WUAUSERV
-    ansible.windows.win_service:
-      name: wuauserv
-      state: started
-    register: status
+#  - name: Check WUAUSERV
+#    ansible.windows.win_service:
+#      name: wuauserv
+#      state: started
+#    register: status
 
 #  - debug:
 #      msg: " Windows Update service is running "
@@ -27,12 +27,11 @@
 #    when:
 #      - status.failed == false
 
-  - name: kill process of service
-#    ansible.windows.win_command: taskkill /fi "SERVICES eq wuauserv" /f
-    ansible.windows.win_command: cmd.exe -
-    args:
-      stdin: taskkill /fi "SERVICES eq wuauserv" /f
-    register: result_service_kill
+#  - name: kill process of service
+#    ansible.windows.win_command: cmd.exe -
+#    args:
+#      stdin: taskkill /fi "SERVICES eq wuauserv" /f
+#    register: result_service_kill
 
   - name: pause tasks for 30 seconds
     ansible.builtin.pause:
