@@ -13,7 +13,7 @@
       stdin: hostname
     register: server_name
 
-  - name: Check if Patch1 installed
+  - name: Check if Patch installed
     ansible.windows.win_command: powershell.exe -
     args:
       stdin: Get-Hotfix {{ patch_number }}
@@ -21,7 +21,7 @@
     ignore_errors: true
 
   - name: set the fact
-    set_fact: patch={{ result_patch1_installed.stdout_lines }}
+    set_fact: patch={{ result_patch_installed.stdout_lines }}
 
   - debug:
       msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
@@ -32,13 +32,8 @@
     when: patch|length < 1
 
   - name: write to file
-    ansible.builtin.lineinfile:-
-      path: /home/ian/files/{{ patch_number }}.txt
-      line: "{{ patch_number }} is installed on {{ server_name.stdout_lines[0] }"
-    when: patch|length > 2
-
-  - name: write to file
-    ansible.builtin.lineinfile:-
-      path: ???????
-      line: "{{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }"
-    when: patch1|length < 1
+    lineinfile:
+      dest: /ansible/ian.conf
+      line: "is installed on" 
+      create: yes
+      state: present

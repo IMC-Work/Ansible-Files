@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  
+- name: write to file
+  lineinfile:
+    dest: /ansible/ian.conf
+    line: "is installed on"
+    create: yes
+    state: present
