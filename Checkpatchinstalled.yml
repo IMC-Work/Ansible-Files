@@ -17,7 +17,6 @@
   - debug:
       msg:
         - " {{ result_patch_installed }} "
-        - " server is {{ hosts }} "
         - " stdout_lines is {{ stdout_lines[0] }} "
         - " stderr_lines is {{ stderr_lines[0] }} "
 
