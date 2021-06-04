@@ -13,6 +13,7 @@
   - name: patch_number3
     prompt: What is the third patch number?
     private: no
+    when: patch_number2|length > 2
 
   tasks:
   - name: Get server name
