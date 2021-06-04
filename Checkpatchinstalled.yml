@@ -1,12 +1,12 @@
 ---
-- hosts: all
+- hosts: wintest
   gather_facts: false
   vars_prompt:
   - name: patch_number1
     prompt: What is the patch number?
     private: no
 
- tasks:
+  tasks:
   - name: Check if Patch installed
     ansible.windows.win_command: powershell.exe -
     args:
