@@ -14,12 +14,12 @@
     register: result_patch_installed
     ignore_errors: true
 
-  - debug: Info
+  - debug:
       msg:
         - " {{ result_patch_installed }} "
-        - " server is {{ item }}"
-        - " stdout_lines is {{ stdout_lines[0] }}"
-        - " stderr_lines is {{ stderr_lines[0] }}"
+        - " server is {{ item }} "
+        - " stdout_lines is {{ stdout_lines[0] }} "
+        - " stderr_lines is {{ stderr_lines[0] }} "
 
   - debug:
       msg: " Patch is installed - yipee "
