@@ -42,7 +42,7 @@
   - name: stop playbook as only 1 patch requested
     meta: end_host
     when:
-      - patch_number2 == 0
+      - patch_number2|length < 2
 
   - name: Check if Patch2 installed
     ansible.windows.win_command: powershell.exe -
@@ -65,7 +65,7 @@
   - name: stop playbook as only 2 patches requested
     meta: end_host
     when:
-      - patch_number3 == 0
+      - patch_number3|length < 2
 
   - name: Check if Patch3 installed
     ansible.windows.win_command: powershell.exe -
