@@ -1,16 +1,16 @@
 ---
 - hosts: all
   gather_facts: false
-  tasks:
   vars_prompt:
-  - name: patch_number
+  - name: patch_number1
     prompt: What is the patch number?
     private: no
 
+ tasks:
   - name: Check if Patch installed
     ansible.windows.win_command: powershell.exe -
     args:
-      stdin: Get-Hotfix {{ patch_number }}
+      stdin: Get-Hotfix {{ patch_number1 }}
     register: result_patch_installed
 
   - debug:
@@ -23,3 +23,6 @@
   - debug:
       msg: " Patch is not installed - boo hoo "
     when: result_patch_installed != true
+
+#   check if patch number2 = 0 - if so stop, else check patch 2 as avove
+#  also need to try and get the server name on ths file
