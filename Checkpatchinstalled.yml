@@ -14,15 +14,21 @@
     register: result_patch_installed
     ignore_errors: true
 
+  - name: Get server name
+    ansible.windows.win_command: powershell.exe -
+    args:
+      stdin: hostname
+    register: sever_name
+
   - name: set the fact
     set_fact: patch1={{ result_patch_installed.stdout_lines }}
 
   - debug:
-      msg: " {{ patch_number1 }} is installed - yipee "
+      msg: " {{ patch_number1 }} is installed on {{ server_name }}- yipee "
     when: patch1|length > 2
 
   - debug:
-      msg: " {{ patch_number1 }} is not installed - boo hoo "
+      msg: " {{ patch_number1 }} is not installed on {{ sever_name }}- boo hoo "
     when: patch1|length < 1
 
 #   check if patch number2 = 0 - if so stop, else check patch 2 as avove
