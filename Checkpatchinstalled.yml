@@ -2,16 +2,8 @@
 - hosts: all
   gather_facts: false
   vars_prompt:
-  - name: patch_number1
-    prompt: What is the first patch number?
-    private: no
-
-  - name: patch_number2
-    prompt: What is the second patch number?
-    private: no
-    
-  - name: patch_number3
-    prompt: What is the third patch number?
+  - name: patch_number
+    prompt: What is the patch number?
     private: no
 
   tasks:
@@ -24,67 +16,29 @@
   - name: Check if Patch1 installed
     ansible.windows.win_command: powershell.exe -
     args:
-      stdin: Get-Hotfix {{ patch_number1 }}
-    register: result_patch1_installed
+      stdin: Get-Hotfix {{ patch_number }}
+    register: result_patch_installed
     ignore_errors: true
 
   - name: set the fact
-    set_fact: patch1={{ result_patch1_installed.stdout_lines }}
+    set_fact: patch={{ result_patch1_installed.stdout_lines }}
 
   - debug:
-      msg: " {{ patch_number1 }} is installed on {{ server_name.stdout_lines[0] }} "
-    when: patch1|length > 2
+      msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
+    when: patch|length > 2
 
   - debug:
-      msg: " {{ patch_number1 }} is not installed on {{ server_name.stdout_lines[0] }}"
+      msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
+    when: patch|length < 1
+
+  - name: write to file
+    ansible.builtin.lineinfile:-
+      path: /home/ian/files/{{ patch_number }}.txt
+      line: "{{ patch_number }} is installed on {{ server_name.stdout_lines[0] }"
+    when: patch|length > 2
+
+  - name: write to file
+    ansible.builtin.lineinfile:-
+      path: ???????
+      line: "{{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }"
     when: patch1|length < 1
-
-  - name: stop playbook as only 1 patch requested
-    meta: end_host
-    when:
-      - patch_number2|length < 2
-
-  - name: Check if Patch2 installed
-    ansible.windows.win_command: powershell.exe -
-    args:
-      stdin: Get-Hotfix {{ patch_number2 }}
-    register: result_patch2_installed
-    ignore_errors: true
-
-  - name: set the fact
-    set_fact: patch2={{ result_patch2_installed.stdout_lines }}
-
-  - debug:
-      msg: " {{ patch_number2 }} is installed on {{ server_name.stdout_lines[0] }} "
-    when: patch2|length > 2
-
-  - debug:
-      msg: " {{ patch_number2 }} is not installed on {{ server_name.stdout_lines[0] }}"
-    when: patch2|length < 1
-
-  - name: stop playbook as only 2 patches requested
-    meta: end_host
-    when:
-      - patch_number3|length < 2
-
-  - name: Check if Patch3 installed
-    ansible.windows.win_command: powershell.exe -
-    args:
-      stdin: Get-Hotfix {{ patch_number3 }}
-    register: result_patch3_installed
-    ignore_errors: true
-
-  - name: set the fact
-    set_fact: patch3={{ result_patch3_installed.stdout_lines }}
-
-  - debug:
-      msg: " {{ patch_number3 }} is installed on {{ server_name.stdout_lines[0] }} "
-    when: patch3|length > 2
-
-  - debug:
-      msg: " {{ patch_number3 }} is not installed on {{ server_name.stdout_lines[0] }}"
-    when: patch3|length < 1
-
-
-#   check if patch number2 = 0 - if so stop, else check patch 2 as avove
-#  also need to try and get the server name on ths file
