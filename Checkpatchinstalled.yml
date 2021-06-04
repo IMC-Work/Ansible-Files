@@ -24,7 +24,7 @@
     set_fact: patch1={{ result_patch_installed.stdout_lines }}
 
   - debug:
-      msg: " {{ patch_number1 }} is installed on {{ server_name }}- yipee "
+      msg: " {{ patch_number1 }} is installed on {{ server_name.stdout_lines[0] }}- yipee "
     when: patch1|length > 2
 
   - debug:
