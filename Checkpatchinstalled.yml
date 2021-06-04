@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  vars_prompt:
+  - name: patch_number
+    prompt: What is the patch number?
+    private: no
+
+  - name: Check if Patch installed
+    ansible.windows.win_command: powershell.exe -
+    args:
+      stdin: Get-Hotfix {{ patch_number }}
+    register: result_patch_installed
+
+  - debug:
+      msg: " {{ result_patch_installed }} "
+
+  - debug:
+      msg: " Patch is installed - yipee "
+    when: result_patch_installed == true
+
+  - debug:
+      msg: " Patch is not installed - boo hoo "
+    when: result_patch_installed != true
