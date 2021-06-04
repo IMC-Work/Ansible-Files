@@ -14,19 +14,16 @@
     register: result_patch_installed
     ignore_errors: true
 
-  - debug:
-      msg:
-        - " {{ result_patch_installed }} "
-        - " stdout_lines is {{ result_patch_installed.stdout_lines[0] }} "
-        - " stderr_lines is {{ result_patch_installed.stderr_lines[0] }} "
+  - name: set the fact
+    set_fact: patch1={{ result_patch_installed.stdout_lines }}
 
   - debug:
-      msg: " Patch is installed - yipee "
-    when: result_patch_installed == true
+      msg: " {{ patch_number1 }} is installed - yipee "
+    when: patch1|length > 2
 
   - debug:
-      msg: " Patch is not installed - boo hoo "
-    when: result_patch_installed != true
+      msg: " {{ patch_number1 }} is not installed - boo hoo "
+    when: patch1|length < 1
 
 #   check if patch number2 = 0 - if so stop, else check patch 2 as avove
 #  also need to try and get the server name on ths file
