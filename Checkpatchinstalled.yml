@@ -12,9 +12,14 @@
     args:
       stdin: Get-Hotfix {{ patch_number1 }}
     register: result_patch_installed
+    ignore_errors: true
 
-  - debug:
-      msg: " {{ result_patch_installed }} "
+  - debug: Info
+      msg:
+        - " {{ result_patch_installed }} "
+        - " server is {{ item }}"
+        - " stdout_lines is {{ stdout_lines[0] }}"
+        - " stderr_lines is {{ stderr_lines[0] }}"
 
   - debug:
       msg: " Patch is installed - yipee "
