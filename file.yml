@@ -3,10 +3,17 @@
   gather_facts: false
   tasks:
 
-  - name: write to file
-    ansible.builtin.lineinfile:
-      path: /etc/hosts
-      line: 127.0.0.1 localhost
-      owner: root
-      group: root
-      mode: '0644'
+#  - name: write to file
+#    ansible.builtin.lineinfile:
+#      path: tmp/test
+#      line: '127.0.0.1 localhost'
+#      owner: root
+#      group: root
+#      mode: '0644'
+
+  - name: copy file from windows to centos
+      #     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
+    fetch:
+        src: C:/temp/ian.txt
+        dest: /home/ian/files/
+        remote_src: yes
