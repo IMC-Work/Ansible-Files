@@ -5,7 +5,8 @@
 
   - name: write to file
     ansible.builtin.lineinfile:
-      path: /anisble/ian
-      line: is installed on this file
-      create: yes
-      state: present
+      path: /etc/hosts
+      line: 127.0.0.1 localhost
+      owner: root
+      group: root
+      mode: '0644'
