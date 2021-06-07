@@ -35,7 +35,7 @@
 
   - name: pause tasks for 30 seconds
     ansible.builtin.pause:
-      seconds: 30
+      seconds: 3
       prompt: Waiting for taskkill command, please wait!
 
   - name: Re-Check WUAUSERV
