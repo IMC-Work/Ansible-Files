@@ -6,7 +6,6 @@
   - name: write to file
     ansible.builtin.lineinfile:
       path: /anisble/ian
-      line: is installed on
+      line: is installed on this file
       create: yes
       state: present
-      
