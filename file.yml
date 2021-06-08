@@ -5,15 +5,14 @@
 
 #  - name: write to file
 #    ansible.builtin.lineinfile:
-#      path: tmp/test
-#      line: '127.0.0.1 localhost'
+#      path: ~/ansible/tmp/test
+#      line: failed
 #      owner: root
 #      group: root
 #      mode: '0644'
 
-  - name: copy file from windows to centos
-      #     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
+  - name: attempt2
     fetch:
-        src: C:/temp/ian.txt
-        dest: /home/ian/files/
-        remote_src: yes
+      src: c:/temp/ian.txt
+      dest: /etc
+      mode: 0774
