@@ -1,0 +1,47 @@
+
+---
+- name: Kill Service
+- hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: Check WUAUSERV
+      ansible.windows.win_service:
+        name: wuauserv
+        state: started
+      register: status
+
+    - debug:
+        msg: " Windows Update service is running "
+      when: status.failed == false
+
+    - name: stop playbook as service is running
+      meta: end_host
+      when:
+        - status.failed == false
+
+    - name: kill process of service
+      ansible.windows.win_command: cmd.exe -
+      args:
+        stdin: taskkill /FI "SERVICES eq wuauserv" /F
+      register: result_service_kill
+
+    - name: pause tasks for 30 seconds
+      ansible.builtin.pause:
+        seconds: 30
+        prompt: Waiting for taskkill command, please wait!
+
+    - name: Re-Check WUAUSERV
+      ansible.windows.win_service:
+        name: wuauserv
+        state: started
+      register: status2
+
+    - debug:
+        msg: " Windows Update service is running "
+      when: status2.failed == false
+
+    - debug:
+        msg: " Windows Update service is stopped and didnt restart - please investigate "
+      when: status2.failed == true
