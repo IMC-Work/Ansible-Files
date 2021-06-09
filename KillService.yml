@@ -5,9 +5,9 @@
   gather_facts: false
   tasks:
 
-    - name: Check WUAUSERV
+    - name: Check spooler
       ansible.windows.win_service:
-        name: wuauserv
+        name: spooler
         state: started
       register: status
 
@@ -23,7 +23,7 @@
     - name: kill process of service
       ansible.windows.win_command: cmd.exe -
       args:
-        stdin: taskkill /FI "SERVICES eq wuauserv" /F
+        stdin: taskkill /FI "SERVICES eq spooler" /F
       register: result_service_kill
 
     - name: pause tasks for 30 seconds
@@ -31,9 +31,9 @@
         seconds: 30
         prompt: Waiting for taskkill command, please wait!
 
-    - name: Re-Check WUAUSERV
+    - name: Re-Check spooler
       ansible.windows.win_service:
-        name: wuauserv
+        name: spooler
         state: started
       register: status2
 
