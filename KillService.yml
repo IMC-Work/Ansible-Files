@@ -1,6 +1,5 @@
 
 ---
-- name: Kill Service
 - hosts: all
   connection: local
   gather_facts: false
