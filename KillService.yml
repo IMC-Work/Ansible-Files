@@ -4,43 +4,42 @@
   connection: local
   gather_facts: false
   tasks:
+    - block:
 
-    - name: Check spooler
-      ansible.windows.win_service:
-        name: spooler
-        state: started
-      register: status
+        - name: Check Service is running - if not , start it
+          ansible.windows.win_service:
+            name: spooler
+            state: started
+          register: status
 
-    - debug:
-        msg: " Windows Update service is running "
-      when: status.failed == false
+        - debug:
+            msg: " Windows Update service is running "
+          when: status.failed == false
 
-#    - name: stop playbook as service is running
-#      meta: end_host
-#      when:
-#        - status.failed == false
+      rescue:
+        - debug:
+            msg: " Windows Update service is stopped and didn't restart "
 
-    - name: kill process of service
-      ansible.windows.win_command: cmd.exe -
-      args:
-        stdin: taskkill /FI "SERVICES eq spooler" /F
-      register: result_service_kill
+        - name: kill process of service
+          win_command: taskkill /FI "SERVICES eq spooler" /F
+          register: result_process_kill
 
-    - name: pause tasks for 30 seconds
-      ansible.builtin.pause:
-        seconds: 30
-        prompt: Waiting for taskkill command, please wait!
+        - name: pause tasks for 20 seconds
+          ansible.builtin.pause:
+            seconds: 20
+            prompt: Waiting for taskkill command, please wait!
+          when: result_process_kill == true
 
-    - name: Re-Check spooler
-      ansible.windows.win_service:
-        name: spooler
-        state: started
-      register: status2
+        - name: Re-Check spooler
+          ansible.windows.win_service:
+            name: spooler
+            state: started
+          register: status
 
-    - debug:
-        msg: " Windows Update service is running "
-      when: status2.failed == false
+        - debug:
+            msg: " Windows Update service is running "
+          when: status.failed == false
 
-    - debug:
-        msg: " Windows Update service is stopped and didnt restart - please investigate "
-      when: status2.failed == true
+        - debug:
+            msg: " Windows Update service is stopped and didnt restart - please investigate "
+          when: status2.failed == true
