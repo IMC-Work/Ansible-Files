@@ -21,7 +21,7 @@
       - name: stop message
         ansible.builtin.debug:
         msg: "all services are now started"
-        when: data1 == "" or data1|length <2
+        when: data1 == "" or data1|length < 2
 
     rescue:
       - name: Service Status
