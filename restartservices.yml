@@ -10,10 +10,10 @@
   - name: remove everything apart from service name
     set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
-#  - name: stop message
-#    ansible.builtin.debug:
-#      msg: "all services are now started"
-#    when: data1 == "" or data1|length < 2
+  - name: stop message
+    ansible.builtin.debug:
+      msg: "all services are now started"
+    when: data1 == "" or data1|length < 2
 
   - name: Restart the services
     block:
