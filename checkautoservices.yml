@@ -33,7 +33,7 @@
 
   - name: stop message
     ansible.builtin.debug:
-      msg: "all services are started after the reboot"
+      msg: "all services are started after the reboot  ,data1 is {{ data1 }}"
     when: data1 == "" or data1|length <2
 
   - name: write entry to the windows event log
