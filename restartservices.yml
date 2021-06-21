@@ -11,7 +11,7 @@
     set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
   - block:
-      - name: "restart the {{ data1 }} service"
+      - name: restart the {{ data1 }} service
         ansible.windows.win_service:
           name: "{{ data1 }}"
           state: started
