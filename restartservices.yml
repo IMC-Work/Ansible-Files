@@ -12,10 +12,6 @@
       - name: remove everything apart from service name
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
-      - name: fail the playbook if no more services to start
-        set_fact: data1="xxxxxx"
-        when: data1 == "" or data1|length <2
-
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
           name: "{{ data1 }}"
@@ -35,9 +31,4 @@
           message: "{{ data1 }} has been successfully started via Ansible"
         when: result.state == "running"
 
-    #when: data1 != "" or data1|length > 1
-
-    rescue:
-    - name: stop message
-      ansible.builtin.debug:
-        msg: "all services are now started"
+    when: data1 != "" or data1|length > 1
