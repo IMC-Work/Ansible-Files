@@ -32,8 +32,7 @@
         when: result.state == "running"
     when: data1 != "" or data1|length > 1
 
-    rescue:
-      - name: stop message
-        ansible.builtin.debug:
-          msg: "all services are now started"
-        when: data1 == "" or data1|length < 2
+  - name: stop message
+    ansible.builtin.debug:
+      msg: "all services are now started"
+    when: data1 == "" or data1|length < 2
