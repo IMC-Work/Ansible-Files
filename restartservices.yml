@@ -21,9 +21,7 @@
           name: "{{ data1 }}"
           state: started
         register: result
-        when: data1 != "" or data1|length > 1
 
-    rescue:
       - name: Service Status
         ansible.builtin.debug:
           msg: "Service {{ data1 }} has now started"
@@ -36,3 +34,5 @@
           event_id: 1971
           message: "{{ data1 }} has been successfully started via Ansible"
         when: result.state == "running"
+
+      when: data1 != "" or data1|length > 1
