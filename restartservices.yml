@@ -15,7 +15,7 @@
       msg: "all services are now started"
     when: data1 == "" or data1|length < 2
 
-  - block:
+    block:
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
           name: "{{ data1 }}"
@@ -34,5 +34,4 @@
           event_id: 1971
           message: "{{ data1 }} has been successfully started via Ansible"
         when: result.state == "running"
-
-      when: data1 != "" or data1|length > 1
+    when: data1 != "" or data1|length > 1
