@@ -12,6 +12,10 @@
       - name: remove everything apart from service name
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
+      - name: set fact
+        set_fact: = data1=xxxx
+        when: data1 == "" or data1|length < 2
+
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
           name: "{{ data1 }}"
