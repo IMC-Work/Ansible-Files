@@ -15,6 +15,7 @@
 #      msg: "all services are now started"
 #    when: data1 == "" or data1|length < 2
 
+  - name: Restart the services
     block:
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
