@@ -13,7 +13,7 @@
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
       - name: set fact
-        set_fact: data1 = xxxxxxx
+        set_fact: data1 = "xxxxxxx"
         when: data1 == "" or data1|length < 2
 
       - name: restart the {{ data1 }} service
