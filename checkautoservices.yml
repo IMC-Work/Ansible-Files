@@ -54,8 +54,3 @@
       path: C:\temp\autoservices.txt
       line: All Auto Services are started after reboot
     when: data1 == "" or data1|length < 2
-
-#  - name: perform task to restart services
-#    include_tasks: restartservices.yml
-#    loop: "{{ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }}"
-#    when: data1|length > 2
