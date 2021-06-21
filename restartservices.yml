@@ -32,3 +32,7 @@
         when: result.state == "running"
 
     when: data1 != "" or data1|length > 1
+
+    rescue:
+      - debug:
+          msg: " All automatic services are now started "

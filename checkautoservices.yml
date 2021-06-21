@@ -34,7 +34,7 @@
   - name: stop message
     ansible.builtin.debug:
       msg: "all services are started after the reboot"
-    when: data1 == "" or data1|length <2
+    when: data1 == "" or data1|length < 2
 
   - name: write entry to the windows event log
     win_eventlog_entry:
@@ -42,13 +42,13 @@
       source: Ansible
       event_id: 1971
       message: All AUTO Services are started after rebooted
-    when: data1 == "" or data1|length <2
+    when: data1 == "" or data1|length < 2
 
   - name: write entry to file on server
     community.windows.win_lineinfile:
       path: C:\temp\autoservices.txt
       line: All Auto Services are started after reboot
-    when: data1 == "" or data1|length <2
+    when: data1 == "" or data1|length < 2
 
   - name: perform task to restart services
     include_tasks: restartservices.yml
