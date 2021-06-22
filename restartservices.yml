@@ -7,8 +7,7 @@
         register: service
 
       - name: read file, copy data to service
-    #    set_fact: service={{ service.stdout_lines [item] }}
-        set_fact: service={{ service.stdout_lines [index] }}
+        set_fact: service={{ service.stdout_lines [item] }}
 
       - name: remove everything apart from service name
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
@@ -36,5 +35,6 @@
       - name: stop loop message
         set_fact:
           task_status: "ERROR"
+          item: 10
 
     when: task_status == "OK"

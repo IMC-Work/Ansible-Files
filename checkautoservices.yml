@@ -3,10 +3,7 @@
   gather_facts: false
   vars:
     filepath: c:\temp\autoservices.txt
-    iteration:
-     - 1
-     - 2
-     - 3
+
   tasks:
   - set_fact:
       task_status: "OK"
@@ -39,15 +36,12 @@
 
   - name: perform task to restart services if required
     include_tasks: restartservices.yml
-    # loop: "{{ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }}"
-    until: task_status = "ERROR"
-    retries: 5
+    loop: "{{ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }}"
     when: data1|length > 2
 
-  - name: stop message
+  - name: all services are now started
     ansible.builtin.debug:
       msg: "all AUTO services are started after the reboot"
-    when: data1 == "" or data1|length < 2
 
   - name: write entry to the windows event log
     win_eventlog_entry:
@@ -55,10 +49,8 @@
       source: Ansible
       event_id: 1971
       message: All AUTO Services are started after rebooted
-    when: data1 == "" or data1|length < 2
 
   - name: write entry to file on server
     community.windows.win_lineinfile:
       path: C:\temp\autoservices.txt
       line: All Auto Services are started after reboot
-    when: data1 == "" or data1|length < 2
