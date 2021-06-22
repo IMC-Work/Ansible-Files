@@ -19,7 +19,7 @@
       msg: "number = {{ num }}"
 
   - name: read file, copy data to service
-    set_fact: service={{ service.stdout_lines [ {{ num}} ] }}
+    set_fact: service={{ service.stdout_lines [num] }}
 
   - name: debug for number 1
     ansible.builtin.debug:
