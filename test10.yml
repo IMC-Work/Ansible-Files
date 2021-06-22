@@ -4,13 +4,15 @@
   vars:
     num: 0
   tasks:
-    
-  - name: first loop - get data
-    include_tasks: test12.yml
-    loop:
-      - { name: '*', number: {{[1,2,3]}}
 
-  - name: Second loop - use the data from above
-    include_tasks: test13.yml
-    loop: "{{ [1,2,3,4,5,6,7,8,9,10] }}"
-      
+  - name: copy text
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
+    register: service
+
+  - name: read file, copy data to service
+    set_fact: service={{ service.stdout_lines [1] }}
+
+  - name: debug
+    ansible.builtin.debug:
+      msg: "service = {{ service }} "  
