@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-    num: 1
+    num: 2
   tasks:
 
   - name: copy text
