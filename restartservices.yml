@@ -12,9 +12,9 @@
       - name: remove everything apart from service name
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
-      - name: set_fact
-        set_fact: data1 = xx
-        when: data! == "" or data1|length < 3
+    #  - name: set fact
+    #    set_fact: end = true
+    #    when: data1 == "" or data1|length < 2
 
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
@@ -35,7 +35,8 @@
           message: "{{ data1 }} has been successfully started via Ansible"
         when: result.state == "running"
 
-    when: data1 != "" or data1|length > 1
+    #when: data1 != "" or data1|length > 1
+    #when: end != "true"
 
     rescue:
       - debug:
