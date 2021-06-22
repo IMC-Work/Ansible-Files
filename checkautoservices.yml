@@ -9,7 +9,7 @@
      - 3
   tasks:
   - set_fact:
-    task_status: "OK"
+      task_status: "OK"
 
   - name: copy PS1 files from Ansible node to host temp folder
     ansible.windows.win_copy:
