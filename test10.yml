@@ -18,12 +18,7 @@
       msg: "service = {{ service }} "
 
   - name: set fact
-    set_fact: num = 2
-
-  - name: copy text
-    ansible.windows.win_shell:
-      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
-    register: service
+    set_fact: num = "2"
 
   - name: read file, copy data to service
     set_fact: service={{ service.stdout_lines [num] }}
