@@ -11,7 +11,8 @@
     register: service
 
   - name: set fact
-    set_fact: num:"1"
+    set_fact:
+      num: "1"
 
   - name: debug1a
     ansible.builtin.debug:
