@@ -13,9 +13,12 @@
   - name: read file, copy data to service
     set_fact: service={{ service.stdout_lines [num] }}
 
-  - name: debug
+  - name: debug for number 1
     ansible.builtin.debug:
       msg: "service = {{ service }} "
+
+  - name: set fact
+    set_fact: num = 2
 
   - name: copy text
     ansible.windows.win_shell:
@@ -25,6 +28,6 @@
   - name: read file, copy data to service
     set_fact: service={{ service.stdout_lines [num] }}
 
-  - name: debug
+  - name: debug for number 2
     ansible.builtin.debug:
       msg: "service = {{ service }} "
