@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-    num: 0
+    num: 1
   tasks:
 
   - name: copy text
@@ -11,8 +11,8 @@
     register: service
 
   - name: read file, copy data to service
-    set_fact: service={{ service.stdout_lines [1] }}
+    set_fact: service={{ service.stdout_lines [num] }}
 
   - name: debug
     ansible.builtin.debug:
-      msg: "service = {{ service }} "  
+      msg: "service = {{ service }} "
