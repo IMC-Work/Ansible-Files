@@ -39,5 +39,6 @@
     #when: end != "true"
 
     rescue:
-      - debug:
+      - nane: stop loop message
+        ansible.builtin.debug:
           msg: " Windows Update service is stopped and didn't restart "
