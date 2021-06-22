@@ -12,6 +12,11 @@
       - name: remove everything apart from service name
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
+      - name: stop playbook as all services started
+        set_fact:
+          task_status: "ERROR"
+        when: data1 = "" or when: data1|length < 2
+
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
           name: "{{ data1 }}"
