@@ -22,7 +22,7 @@
       msg: "service = {{ service }} "
 
   - name: set fact
-    set_fact: num = "2"
+    set_fact: num="2"
 
   - name: debug2a
     ansible.builtin.debug:
