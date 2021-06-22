@@ -7,14 +7,11 @@
         register: service
 
       - name: read file, copy data to service
-        set_fact: service={{ service.stdout_lines [item] }}
+    #    set_fact: service={{ service.stdout_lines [item] }}
+        set_fact: service={{ service.stdout_lines [index] }}
 
       - name: remove everything apart from service name
         set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
-
-    #  - name: set fact
-    #    set_fact: end = true
-    #    when: data1 == "" or data1|length < 2
 
       - name: restart the {{ data1 }} service
         ansible.windows.win_service:
@@ -37,7 +34,7 @@
 
     rescue:
       - name: stop loop message
-        ansible.builtin.debug:
-          msg: " Windows Update service is stopped and didn't restart "
+        set_fact:
+          task_status: "ERROR"
 
-    #when: data1 != "" or data1|length > 1
+    when: task_status == "OK"
