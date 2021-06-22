@@ -2,13 +2,16 @@
 - hosts: all
   gather_facts: false
   vars:
-    num: 1
+    num: 0
   tasks:
 
   - name: copy text
     ansible.windows.win_shell:
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
+
+  - name: set fact
+    set_fact: num="1"
 
   - name: debug1a
     ansible.builtin.debug:
@@ -32,7 +35,7 @@
     ansible.windows.win_shell:
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
-    
+
   - name: read file, copy data to service
     set_fact: service={{ service.stdout_lines [num] }}
 
