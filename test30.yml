@@ -35,21 +35,10 @@
   - name: remove everything apart from loop number
     set_fact: loop={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
 
-  - name: all services are now started
-    ansible.builtin.debug:
-      msg: "number of times to loop {{ loop }}"
+  - name: Restart the Services Module
+    include_tasks: task31.yml
+    when: loop > "1"
 
-  - name: perform 1 task
-    include_tasks: test31.yml
-    loop: "{{ [1] }}"
-    when: loop == "1"
-
-  - name: perform 2 task
-    include_tasks: test31.yml
-    loop: "{{ [1, 2] }}"
-    when: loop == "2"
-
-  - name: perform 3 task
-    include_tasks: test31.yml
-    loop: "{{ [1, 2, 3] }}"
-    when: loop == "3"
+  - name: information
+    debug:
+      msg: "All Auto Services are now started"
