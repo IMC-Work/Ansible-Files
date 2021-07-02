@@ -38,3 +38,18 @@
   - name: all services are now started
     ansible.builtin.debug:
       msg: "number of times to loop {{ loop }}"
+
+  - name: perform 1 task
+    include_tasks: restartservices.yml
+    loop: "{{ [1] }}"
+    when: loop == "1"
+
+  - name: perform 2 task
+    include_tasks: restartservices.yml
+    loop: "{{ [1, 2] }}"
+    when: loop == "2"
+
+  - name: perform 3 task
+    include_tasks: restartservices.yml
+    loop: "{{ [1, 2, 3] }}"
+    when: loop == "3"
