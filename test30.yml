@@ -30,7 +30,7 @@
     register: loop
 
   - name: read file, copy data to service
-    set_fact: service={{ loop.stdout_lines | int }}
+    set_fact: service={{ loop.stdout_lines }}
 
   - name: all services are now started
     ansible.builtin.debug:
