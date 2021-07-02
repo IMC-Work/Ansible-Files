@@ -36,7 +36,7 @@
     set_fact: loop={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
 
   - name: Restart the Services Module
-    include_tasks: task31.yml
+    include_tasks: test31.yml
     when: loop > "1"
 
   - name: information
