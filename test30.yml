@@ -32,6 +32,9 @@
   - name: read file, copy data to service
     set_fact: service={{ loop.stdout_lines }}
 
+  - name: remove everything apart from loop number
+    set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
+
   - name: all services are now started
     ansible.builtin.debug:
-      msg: "number of times to loop {{ service }}"
+      msg: "number of times to loop {{ data1 }}"
