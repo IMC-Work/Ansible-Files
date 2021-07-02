@@ -29,9 +29,9 @@
       Select-String -Path C:\temp\autoservices.txt -pattern "Lines="
     register: loop
 
-#  - name: read file
-#    set_fact: loops={{ service.stdout_lines }}
+  - name: read file, copy data to service
+    set_fact: service={{ loop.stdout_lines }}
 
   - name: all services are now started
     ansible.builtin.debug:
-      msg: "number of times to loop {{ loop }}"
+      msg: "number of times to loop {{ service }}"
