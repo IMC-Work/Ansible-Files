@@ -30,7 +30,7 @@
     register: slurped_data
 
   - name: debug data
-    debug: msg="the number of lines is {{ slurped_data}}"
+    debug: msg="the number of lines is {{ slurped_data }}"
 #    with_lines: C:\temp\AutoServicesNumber.txt
 
 #  - name: read file
