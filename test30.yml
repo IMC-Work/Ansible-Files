@@ -12,6 +12,8 @@
   vars:
     filepath: c:\temp\autoservices.txt
 
+   tasks:
+
 #  - name: copy PS1 files from Ansible node to host temp folder
 #    ansible.windows.win_copy:
 #      src: \\VBOXsvr\VM_Shared_Folder\PS_Scripts
