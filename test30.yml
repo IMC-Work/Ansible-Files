@@ -12,7 +12,7 @@
   vars:
     filepath: c:\temp\autoservices.txt
 
-   tasks:
+  tasks:
 
 #  - name: copy PS1 files from Ansible node to host temp folder
 #    ansible.windows.win_copy:
@@ -24,14 +24,14 @@
 #  - name: run PS_Script
 #    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
 
-   - name: copy text
-     ansible.windows.win_shell:
+  - name: copy text
+    ansible.windows.win_shell:
        Select-String -Path C:\temp\autoservicesNumber.txt
-     register: loops
+    register: loops
 
-   - name: read file
-     set_fact: loops={{ service.stdout_lines }}
+  - name: read file
+    set_fact: loops={{ service.stdout_lines }}
 
-   - name: all services are now started
-     ansible.builtin.debug:
-       msg: "number of times to loop {{ loops }}"
+  - name: all services are now started
+    ansible.builtin.debug:
+      msg: "number of times to loop {{ loops }}"
