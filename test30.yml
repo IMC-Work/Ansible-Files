@@ -10,7 +10,7 @@
 - hosts: all
   gather_facts: false
   vars:
-    filepath: c:\temp\autoservices.txt
+    filepath: c:\temp\autoservicesnumber.txt
 
   tasks:
 
@@ -26,7 +26,7 @@
 
   - name: load data
     slurp:
-      src: "c:\temp\autoservicesnumber.txt"
+      src: "{{ filepath }}"
     register: slurped_data
 
   - name: debug data
