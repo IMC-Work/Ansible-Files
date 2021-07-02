@@ -1,12 +1,4 @@
-#   create files
-#   read file
-#
-#   if set to zero - nothing
-#   if set to one - do once
-#   if set to two - do twice - etc
-#
-
----
+h---
 - hosts: all
   gather_facts: false
   vars:

@@ -4,17 +4,17 @@
     loop: "{{ [1] }}"
     when: loop == "1"
 
-  - name: perform 2 itteration
+  - name: perform 2 itterations
     include_tasks: test32.yml
     loop: "{{ [1, 2] }}"
     when: loop == "2"
 
-  - name: perform 3 itteration
+  - name: perform 3 itterations
     include_tasks: test32.yml
     loop: "{{ [1, 2, 3] }}"
     when: loop == "3"
 
-  - name: perform 4 itteration
+  - name: perform 4 itterations
     include_tasks: test32.yml
     loop: "{{ [1, 2, 3 ,4] }}"
     when: loop == "4"
