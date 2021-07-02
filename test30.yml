@@ -25,8 +25,8 @@
 #    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
 
   - name: read file
-    debug: msg=" {{ item }} is the number of lines"
-    with_lines: C:\temp\AutoServicesNumber.txt
+    debug: msg="the number of lines {{lookup('c:\temp\AutoServicesNumber.txt')}}"
+#    with_lines: C:\temp\AutoServicesNumber.txt
 
 #  - name: read file
 #    set_fact: loops={{ service.stdout_lines }}
