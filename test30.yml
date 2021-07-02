@@ -26,11 +26,11 @@
 
   - name: copy text
     ansible.windows.win_shell:
-      Select-String -Path C:\temp\autoservices.txt -pattern "Lines="
+      Select-String -Path C:\temp\autoservicesnumber.txt -pattern "Lines="
     register: loop
 
   - name: read file, copy data to service
-    set_fact: service={{ loop.stdout_lines }}
+    set_fact: service={{ loop.stdout_lines | int }}
 
   - name: all services are now started
     ansible.builtin.debug:
