@@ -22,7 +22,7 @@
 
   - name: blah
     set_fact:
-     uptime_above_limit:
+     DiskSpace:
        "{{ (data1 | int) >= (DiskThreshold | int) }}"
 
 #  - debug: debug
@@ -31,4 +31,4 @@
 
   - debug:
       msg: "Server has only {{ data1 }}GB free on the C Drive"
-    when: uptime_above_limit is true
+    when: DiskSpace is true
