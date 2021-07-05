@@ -20,11 +20,11 @@
   - name: trim rubbish
     set_fact: data1={{ freediskspace | regex_replace('.*=') | regex_replace ("'.*") }}
 
- - name: blah
-   set_fact:
-    uptime_above_limit:
-      "{{ data1 | int) >= (disk_threshold | int) }}"
+  - name: blah
+    set_fact:
+     uptime_above_limit:
+       "{{ data1 | int) >= (disk_threshold | int) }}"
 
-  - debug:
-      msg: " Server only has {{ data1 }}GB free on the C Drive - Please delete some file "
-    when: uptime_above_limit is false 
+   - debug:
+       msg: " Server only has {{ data1 }}GB free on the C Drive - Please delete some file "
+     when: uptime_above_limit is false
