@@ -8,7 +8,7 @@
 
   - name: copy text
     ansible.windows.win_shell:
-      Select-String -Path C:\temp\autoservices.txt -pattern "@{FreeSpace="
+      Select-String -Path C:\temp\FreeSpace.txt -pattern "@{FreeSpace="
     register: freespace
 
   - name: read file, copy data to service
