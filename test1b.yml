@@ -14,5 +14,8 @@
   - name: read file, copy data to service
     set_fact: freediskspace={{ freespace.stdout_lines }}
 
+  - name: trim rubbish
+    set_fact: data1={{ freediskspace | regex_replace('.*=') | regex_replace ("'.*") }}
+
   - debug:
-      msg: " free disk on server {{ freediskspace }} "
+      msg: " free disk on server {{ data1 }} "
