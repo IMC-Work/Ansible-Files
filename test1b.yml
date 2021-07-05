@@ -15,4 +15,4 @@
     set_fact: freediskspace={{ freespace.stdout_lines }}
 
   - debug:
-      msg: " free disk on server { freediskspace } "
+      msg: " free disk on server {{ freediskspace }} "
