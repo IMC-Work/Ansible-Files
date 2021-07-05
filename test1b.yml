@@ -30,5 +30,5 @@
 #    when: uptime_above_limit is false
 
   - debug:
-      msg: "Above Uptime_threshold {{ data1 }}- so rebooting the server NOW"
+      msg: "Server has only {{ data1 }}GB free on the C Drive"
     when: uptime_above_limit is true
