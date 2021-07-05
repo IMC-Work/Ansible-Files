@@ -26,5 +26,5 @@
        "{{ data1 | int) >= (disk_threshold | int) }}"
 
   - debug: debug
-     msg: " Server only has {{ data1 }}GB free on the C Drive Please delete some file "
-   when: uptime_above_limit is false
+      msg: " Server only has {{ data1 }}GB free on the C Drive Please delete some file "
+    when: uptime_above_limit is false
