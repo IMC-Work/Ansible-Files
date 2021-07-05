@@ -4,5 +4,5 @@
   tasks:
 
    - name: get the affected windows host's uptime
-     win_shell: "Get-CimInstance-Class CIM_Logicaldisk | Select-Object {$..freespace/1gb}, DeviceID | Where-Object DeviceID -EQ 'C:'"
+     win_shell: "Get-CimInstance-Class CIM_Logicaldisk | Select-Object {$_.freespace/1gb}, DeviceID | Where-Object DeviceID -EQ 'C:'"
      register: freespace
