@@ -23,7 +23,8 @@
   - name: blah
     set_fact:
      DiskSpace:
-       "{{ (data1 | int) >= (DiskThreshold | int) }}"
+#       "{{ (data1 | int) >= (DiskThreshold | int) }}"
+       "{{ (DiskThreshold | int) >= (Data1 | int) }}"
 
   - name: Information
     debug:
