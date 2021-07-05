@@ -3,6 +3,16 @@
   gather_facts: false
   tasks:
 
-   - name: get the affected windows host's uptime
-     win_shell: "Get-CimInstance-Class CIM_Logicaldisk | Select-Object {$_.freespace/1gb}, DeviceID | Where-Object DeviceID -EQ 'C:'"
-     register: freespace
+  - name: run PS_Script
+    ansible.windows.win_shell: C:\temp\PS_Scripts\FreeSpace.ps1
+
+  - name: copy text
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\autoservices.txt -pattern "@{FreeSpace="
+    register: freespace
+
+  - name: read file, copy data to service
+    set_fact: freediskspace={{ freespace.stdout_lines }}
+
+  - debug:
+      msg: " free disk on server { freediskspace } "
