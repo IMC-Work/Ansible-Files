@@ -5,7 +5,9 @@
      DiskThreshold: 5
 
   tasks:
-
+#
+#   want to add the server name to the report as well - can i use the inventory?
+#
   - name: run PS_Script
     ansible.windows.win_shell: C:\temp\PS_Scripts\FreeSpace.ps1
 
@@ -25,9 +27,20 @@
      DiskSpace:
        "{{ (DiskThreshold | int) >= (data1 | int) }}"
 
+  - name: copy text
+    ansible.windows.win_shell:
+       Select-String -Path C:\temp\Servername.txt -pattern "Server="
+    register: servername
+
+  - name: read file, copy data to service
+    set_fact: servername1={{ servername.stdout_lines }}
+
+  - name: trim rubbish
+    set_fact: name={{ servername1 | regex_replace('.*=') | regex_replace ("'.*") }}
+
   - name: Information
     debug:
       msg:
-        - "Server has only {{ data1 }}GB free on the C Drive"
+        - "{{ name }} has only {{ data1 }}GB free on the C Drive"
         - "Free up some Space on the C Drive before patching commences"
     when: DiskSpace is true
