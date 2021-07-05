@@ -30,5 +30,5 @@
 #    when: uptime_above_limit is false
 
   - debug:
-      msg: "Above Uptime_threshold - so rebooting the server NOW"
+      msg: "Above Uptime_threshold {{ data1 }}- so rebooting the server NOW"
     when: uptime_above_limit is true
