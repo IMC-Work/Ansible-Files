@@ -23,7 +23,7 @@
   - name: blah
     set_fact:
      uptime_above_limit:
-       "{{ data1 | int) >= (disk_threshold | int) }}"
+       "{{ data1 | int) }} >= (disk_threshold | int)"
 
   - debug: debug
       msg: "Server only has {{ data1 }} GB free on the C Drive Please delete some file"
