@@ -25,10 +25,9 @@
      DiskSpace:
        "{{ (data1 | int) >= (DiskThreshold | int) }}"
 
-#  - debug: debug
-#      msg: "Server only has GB free on the C Drive Please delete some file"
-#    when: uptime_above_limit is false
-
-  - debug:
-      msg: "Server has only {{ data1 }}GB free on the C Drive"
+  - name: Information
+    debug:
+      msg:
+        - "Server has only {{ data1 }}GB free on the C Drive"
+        - "Free up some Space on the C Drive before patching commences"
     when: DiskSpace is true
