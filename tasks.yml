@@ -25,10 +25,10 @@
 
   - set_fact:
       num: 1
-      req_num: 3
+#      req_num: 3
 
   - debug:
-      msg: "req_num is {{ req_num }}"    
+      msg: "req_num is {{ req_num }}"
 
 #  - set_fact: req_num={{ loopyloop }}
 
