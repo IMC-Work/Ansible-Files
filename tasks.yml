@@ -20,7 +20,10 @@
   - name:
     set_fact: req_num={{ string3 | str }}
 
-  - name:  
+  - debug:
+      msg: "reg_num is {{ req_num }}"  
+
+  - name:
     set_fact: num=1
 
 #  - set_fact: req_num={{ loopyloop }}
