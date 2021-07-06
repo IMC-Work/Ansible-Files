@@ -25,7 +25,7 @@
     set_fact: patch_installed={{ patch.stdout_lines }}
 
   - debug:
-      msg: "patch_installed is set to {{ patch2 }}"
+      msg: "patch_installed is set to {{ patch_installed }}"
 
   - debug:
       msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
