@@ -26,22 +26,17 @@
   - name: Restart the services
 
     block:
-      - name: copy servername text from file
-        ansible.windows.win_shell:
-           Select-String -Path C:\temp\Servername.txt -pattern "Server="
+      - name: Get server name
+        ansible.windows.win_command: powershell.exe -
+        args:
+          stdin: hostname
         register: servername
-
-      - name: read file to get server name
-        set_fact: servername1={{ servername.stdout_lines }}
-
-      - name: trim file to get servername value
-        set_fact: name={{ servername1 | regex_replace('.*=') | regex_replace ("'.*") }}
 
       - name: Disk Space Information
         debug:
           msg:
             - "***********************************************************"
-            - "{{ name }} has only {{ data1 }}GB free on the C Drive"
+            - "{{ servername }} has only {{ data1 }}GB free on the C Drive"
             - "Free up some Space on the C Drive before patching commences"
             - "***********************************************************"
     when: DiskSpace is true
