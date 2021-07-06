@@ -27,8 +27,19 @@
   - debug:
       msg: "patch_installed is set to {{ patch_installed }}"
 
+  - name: copy disk space information from file
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\PatcesInstalled.txt -pattern "Installed="
+    register: install_date
+
+  - name: read file to get free disk space
+    set_fact: installed_on={{ install_date.stdout_lines }}
+
+  - name: trim file to get free disk space value
+    set_fact: date={{ installed_on | regex_replace('.*=') | regex_replace ("'.*") }}
+
   - debug:
-      msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
+      msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} on {{ date }}"
     when: patch_installed|length > 2
 
   - debug:
