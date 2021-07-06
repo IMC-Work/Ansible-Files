@@ -41,4 +41,4 @@
       msg: "req_num is {{ req_num }}"
 
   - include_tasks: tasks1.yml
-    loop: "{{ range(num, string3 + 1) | list }}"
+    loop: "{{ range(num, req_num + 1) | list }}"
