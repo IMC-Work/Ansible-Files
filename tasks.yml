@@ -16,7 +16,7 @@
 
   - name: remove everything apart from loop number
     set_fact: string3={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
-    set_fact: req-num={{ string3 |  str }}
+    set_fact: req_num={{ string3 | str }}
     set_fact: num=1
 
 #  - set_fact: req_num={{ loopyloop }}
