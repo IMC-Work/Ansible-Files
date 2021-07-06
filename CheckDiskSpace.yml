@@ -30,13 +30,13 @@
         ansible.windows.win_command: powershell.exe -
         args:
           stdin: hostname
-        register: servername
+        register: server_name
 
       - name: Disk Space Information
         debug:
           msg:
             - "***********************************************************"
-            - "{{ servername }} has only {{ data1 }}GB free on the C Drive"
+            - "{{ server_name }} has only {{ data1 }}GB free on the C Drive"
             - "Free up some Space on the C Drive before patching commences"
             - "***********************************************************"
     when: DiskSpace is true
