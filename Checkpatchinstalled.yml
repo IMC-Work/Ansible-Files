@@ -23,16 +23,16 @@
 #  - name: set the fact
 #    set_fact: patch={{ result_patch_installed.stdout_lines }}
 
-- name: copy disk space information from file
-  ansible.windows.win_shell:
-    Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number}}"
-  register: patch1
+  - name: copy disk space information from file
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number}}"
+    register: patch1
 
-- name: read file to get free disk space
-  set_fact: patch2={{ patch1.stdout_lines }}
+  - name: read file to get free disk space
+    set_fact: patch2={{ patch1.stdout_lines }}
 
-- name: trim file to get free disk space value
-  set_fact: patch={{ patch2 | regex_replace('.*=') | regex_replace ("'.*") }}
+  - name: trim file to get free disk space value
+    set_fact: patch={{ patch2 | regex_replace('.*=') | regex_replace ("'.*") }}
 
   - debug:
       msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
