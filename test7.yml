@@ -16,13 +16,13 @@
   - name: search file to see if the patch has been installed
     ansible.windows.win_shell:
       Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number}}"
-    register: patch_installed
+    register: patch
 
 #  - debug:
 #      msg: "patch1 is set to {{ patch1 }}"
 #
-#  - name: read file to get free disk space
-#    set_fact: patch2={{ patch1.stdout_lines }}
+  - name: read file to get free disk space
+    set_fact: patch_installed={{ patch.stdout_lines }}
 #
 #  - debug:
 #      msg: "patch2 is set to {{ patch2 }}"
