@@ -25,18 +25,24 @@
        "{{ (DiskThreshold | int) >= (data1 | int) }}"
   - name: Restart the services
 
-    block:
-      - name: Get server name
-        ansible.windows.win_command: powershell.exe -
-        args:
-          stdin: hostname
-        register: server_name
+  - name: Get server name
+    ansible.windows.win_command: powershell.exe -
+    args:
+      stdin: hostname
+    register: server_name
 
-      - name: Disk Space Information
-        debug:
-          msg:
-            - "***********************************************************"
-            - "{{ server_name.stdout_lines[0] }} has only {{ data1 }}GB free on the C Drive"
-            - "Free up some Space on the C Drive before patching commences"
-            - "***********************************************************"
+  - name: Disk Space below threshold server Information
+    debug:
+      msg:
+        - "***********************************************************"
+        - "{{ server_name.stdout_lines[0] }} has only {{ data1 }}GB free on the C Drive"
+        - "Free up some Space on the C Drive before patching commences"
+        - "***********************************************************"
     when: DiskSpace is true
+
+  - name: Disk Space below threshold server Information
+    debug:
+      msg:
+        - "{{ server_name.stdout_lines[0] }} has {{ data1 }}GB free on the C Drive"
+        - "Patching can commence when the server is scheduled to be updated"
+    when: DiskSpace is false
