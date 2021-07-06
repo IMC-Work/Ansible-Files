@@ -29,7 +29,7 @@
 
     - name: search file to see when the patch was installed
       ansible.windows.win_shell:
-        Select-String -Path C:\temp\PatchesInstalled.txt -pattern "Installed="
+        Select-String -Path C:\temp\PatchesInstalled.txt -pattern "InstalledOn="
       register: install_date
 
     - name: read file to copy installed patch date
