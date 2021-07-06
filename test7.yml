@@ -25,9 +25,6 @@
   - name: read file to get information on patch installed
     set_fact: patch_installed={{ patch.stdout_lines }}
 
-  - debug:
-      msg: "patch installed {{ patch_installed }}"
-
   - block:
 
     - name: search file to see when the patch was installed
