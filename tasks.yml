@@ -19,7 +19,7 @@
 
   - name:
     set_fact:
-      req_num: "{{ string3 }}"
+      req_num: "{{ string3 | string }}"
 
   - debug:
       msg: "req_num is {{ req_num }}"
