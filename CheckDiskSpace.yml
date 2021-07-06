@@ -36,7 +36,7 @@
         debug:
           msg:
             - "***********************************************************"
-            - "{{ server_name }} has only {{ data1 }}GB free on the C Drive"
+            - "{{ server_name.stdout_lines[0] }} has only {{ data1 }}GB free on the C Drive"
             - "Free up some Space on the C Drive before patching commences"
             - "***********************************************************"
     when: DiskSpace is true
