@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-     DiskThreshold: 5
+     DiskThreshold: 450
 
   tasks:
   - name: run PS_Script
