@@ -37,16 +37,16 @@
   - debug:
       msg: "patch2 is set to {{ patch2 }}"
 
-  - name: trim file to get free disk space value
-    set_fact: patch={{ patch2 | regex_replace('.*=') | regex_replace ("'.*") }}
+#  - name: trim file to get free disk space value
+#    set_fact: patch={{ patch2 | regex_replace('.*=') | regex_replace ("'.*") }}
+#
+#  - debug:
+#      msg: "patch is set to {{ patch }}"
 
   - debug:
-      msg: "patch is set to {{ patch }}"
-    
-  - debug:
       msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
-    when: patch|length > 2
+    when: patch2|length > 2
 
   - debug:
       msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
-    when: patch|length < 1
+    when: patch2|length < 1
