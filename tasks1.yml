@@ -1,2 +1,2 @@
 - debug:
-  msg "Run {{ item }}"
+    msg: "Run {{ item }}"
