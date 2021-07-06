@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    filepath: c:\temp\autoservicesnumber.txt
+
+  tasks:
+
+  - set_fact:
+      num: 1
+      req_num: 4
+  - include_tasks: task1.yml
+    loop: "{{ range(num, req_num + 1) | list }}"
