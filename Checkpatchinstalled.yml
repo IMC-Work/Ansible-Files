@@ -16,29 +16,14 @@
   - name: Check if Patch installed
     ansible.windows.win_command: powershell.exe -
     args:
-      stdin: Get-Hotfix
-#      stdin: Get-Hotfix {{ patch_number }}
-    register: patch1
+      stdin: Get-Hotfix {{ patch_number }}
+    register: patch_installed
     ignore_errors: true
 
-#  - name: copy disk space information from file
-#    ansible.windows.win_shell:
-#      Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number}}"
-#    register: patch1
-
   - debug:
-      msg: "patch1 is set to {{ patch1 }}"
-
-  - name: read file to get free disk space
-    set_fact: patch2={{ patch1.stdout_lines }}
-
-  - debug:
-      msg: "patch2 is set to {{ patch2 }}"
-
-  - debug:
-      msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
+      msg: " {{ patch_installed }} is installed on {{ server_name.stdout_lines[0] }} "
     when: patch2|length > 2
 
   - debug:
-      msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
+      msg: " {{ patch_installed }} is not installed on {{ server_name.stdout_lines[0] }}"
     when: patch2|length < 1
