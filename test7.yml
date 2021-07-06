@@ -26,13 +26,13 @@
     set_fact: patch_installed={{ patch.stdout_lines }}
 
   - debug:
-      msg: "patch installed {{ patch_installed }}"  
+      msg: "patch installed {{ patch_installed }}"
 
   - block:
 
     - name: search file to see when the patch was installed
       ansible.windows.win_shell:
-        Select-String -Path C:\temp\PatchesInstalled.txt -pattern "InstalledOn="
+        Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number }} InstalledOn="
       register: install_date
 
     - name: read file to copy installed patch date
