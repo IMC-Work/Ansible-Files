@@ -17,16 +17,16 @@
   - name: remove everything apart from loop number
     set_fact: string3={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
 
-  - name:
-    set_fact:
-      req_num: "{{ string3|string }}"
+#  - name:
+#    set_fact:
+#      req_num: "{{ string3|string }}"
 
-  - debug:
-      msg: "req_num is {{ req_num }}"
+#  - debug:
+#      msg: "req_num is {{ req_num }}"
 
   - set_fact:
       num: 1
-#      req_num: 3
+      req_num: 3
 
   - debug:
       msg: "req_num is {{ req_num }}"

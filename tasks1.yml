@@ -28,3 +28,6 @@
       event_id: 1971
       message: "{{ data1 }} has been successfully started via Ansible"
     when: result.state == "running"
+
+  - set_fact:
+      req_num: 3
