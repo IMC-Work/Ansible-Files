@@ -11,7 +11,7 @@
 
   - name: perform 3 itterations
     include_tasks: test32.yml
-    loop: "{{ [1, 2, 3] }}"
+#    loop: "{{ [1, 2, 3] }}"
     until: loop == "0"
 
 #  - name: perform 4 itterations
