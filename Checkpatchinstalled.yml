@@ -17,13 +17,13 @@
     ansible.windows.win_command: powershell.exe -
     args:
       stdin: Get-Hotfix {{ patch_number }}
-    register: patch_installed
+    register: patch
     ignore_errors: true
 
   - debug:
-      msg: " {{ patch_installed }} is installed on {{ server_name.stdout_lines[0] }} "
-    when: patch2|length > 2
+      msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
+    when: patch|length > 2
 
   - debug:
-      msg: " {{ patch_installed }} is not installed on {{ server_name.stdout_lines[0] }}"
-    when: patch2|length < 1
+      msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
+    when: patch|length < 1
