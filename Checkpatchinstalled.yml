@@ -30,10 +30,3 @@
   - debug:
       msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
     when: patch|length < 1
-
-  - name: write to file
-    lineinfile:
-      dest: /ansible/ian
-      line: "is installed on"
-      create: yes
-      state: present
