@@ -9,5 +9,20 @@
   - set_fact:
       num: 1
       req_num: 2
+
+  - name: copy text
+    ansible.windows.win_shell:
+     Select-String -Path C:\temp\autoservicesnumber.txt -pattern "Lines="
+    register: string1
+
+  - name: read file, copy data to service
+    set_fact: string2={{ string1.stdout_lines }}
+
+  - name: remove everything apart from loop number
+    set_fact: loopyloop={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
+
+  - debug:
+      msg: "loopy {{ loopyloop }} times"
+      
   - include_tasks: tasks1.yml
     loop: "{{ range(num, req_num + 1) | list }}"
