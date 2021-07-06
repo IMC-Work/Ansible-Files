@@ -28,3 +28,6 @@
       event_id: 1971
       message: "{{ data1 }} has been successfully started via Ansible"
     when: result.state == "running"
+
+  - name: read file, copy data to service
+    set_fact: loop="0"
