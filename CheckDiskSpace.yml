@@ -23,7 +23,6 @@
     set_fact:
      DiskSpace:
        "{{ (DiskThreshold | int) >= (data1 | int) }}"
-  - name: Restart the services
 
   - name: Get server name
     ansible.windows.win_command: powershell.exe -
