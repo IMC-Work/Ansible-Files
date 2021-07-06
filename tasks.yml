@@ -23,7 +23,7 @@
   - debug:
       msg: "req_num is {{ req_num | string }}"
 
-    set_fact:
+  - set_fact:
       num: 1
       req_num: 3
 
