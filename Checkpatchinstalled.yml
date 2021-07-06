@@ -28,12 +28,21 @@
       Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number}}"
     register: patch1
 
+  - debug:
+      msg: "patch1 is set to {{ patch1 }}"
+
   - name: read file to get free disk space
     set_fact: patch2={{ patch1.stdout_lines }}
+
+  - debug:
+      msg: "patch2 is set to {{ patch2 }}"
 
   - name: trim file to get free disk space value
     set_fact: patch={{ patch2 | regex_replace('.*=') | regex_replace ("'.*") }}
 
+  - debug:
+      msg: "patch is set to {{ patch }}"
+    
   - debug:
       msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
     when: patch|length > 2
