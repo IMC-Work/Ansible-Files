@@ -1,2 +1,30 @@
-- debug:
-    msg: "Run {{ item }}"
+---
+  - name: copy text
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
+    register: service
+
+  - name: read file, copy data to service
+    set_fact: service={{ service.stdout_lines [item] }}
+
+  - name: remove everything apart from service name
+    set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
+
+  - name: restart the {{ data1 }} service
+    ansible.windows.win_service:
+      name: "{{ data1 }}"
+      state: started
+    register: result
+
+  - name: Service Status
+    ansible.builtin.debug:
+      msg: "Service {{ data1 }} has now started"
+    when: result.state == "running"
+
+  - name: Write entry to the windows event log
+    win_eventlog_entry:
+      log: Application
+      source: Ansible
+      event_id: 1971
+      message: "{{ data1 }} has been successfully started via Ansible"
+    when: result.state == "running"
