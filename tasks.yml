@@ -6,10 +6,6 @@
 
   tasks:
 
-  - set_fact:
-      num: 1
-      req_num: 2
-
   - name: copy text
     ansible.windows.win_shell:
      Select-String -Path C:\temp\autoservicesnumber.txt -pattern "Lines="
@@ -23,6 +19,10 @@
 
   - debug:
       msg: "loopy {{ loopyloop }} times"
-      
+
+  - set_fact:
+      num: 1
+      req_num: loopyloop
+
   - include_tasks: tasks1.yml
     loop: "{{ range(num, req_num + 1) | list }}"
