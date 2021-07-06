@@ -7,6 +7,10 @@
     private: no
 
   tasks:
+
+  - name: run PS_Script
+    ansible.windows.win_shell: C:\temp\PS_Scripts\PatchInstalled.ps1
+
   - name: Get server name
     ansible.windows.win_command: powershell.exe -
     args:
@@ -39,6 +43,6 @@
       set_fact: date={{ installed_on | regex_replace('.*=') | regex_replace ("'.*") }}
 
     - debug:
-        msg: " {{ patch_number }} was installed on {{ server_name.stdout_lines[0] }} on {{ date }}"
-        
+        msg: "{{ patch_number }} was installed on {{ server_name.stdout_lines[0] }} on {{ date }}"
+
     when: patch_installed|length > 2
