@@ -22,7 +22,8 @@
 
   - set_fact:
       num: 1
-      req_num: loopyloop
+
+  - set_fact: req_num=loopyloop    
 
   - include_tasks: tasks1.yml
     loop: "{{ range(num, req_num + 1) | list }}"
