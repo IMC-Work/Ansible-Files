@@ -23,9 +23,9 @@
 #
   - name: read file to get free disk space
     set_fact: patch_installed={{ patch.stdout_lines }}
-#
-#  - debug:
-#      msg: "patch2 is set to {{ patch2 }}"
+
+  - debug:
+      msg: "patch_installed is set to {{ patch2 }}"
 
   - debug:
       msg: " {{ patch_number }} is installed on {{ server_name.stdout_lines[0] }} "
