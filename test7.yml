@@ -43,6 +43,6 @@
 
     when: patch_installed|length > 2
 
-    - debug:
-        msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
-      when: patch_installed|length < 1
+  - debug:
+      msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
+    when: patch_installed|length < 1
