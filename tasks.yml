@@ -27,7 +27,7 @@
       msg: "string3 = {{ string3 }}"
 
   - set_fact:
-      req_num: "{{ string3 }}"
+      req_num: "{{ string3 | int }}"
 
 #  - name:
 #    set_fact:
