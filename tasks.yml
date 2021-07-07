@@ -32,7 +32,7 @@
   - name: Get length of file
     ansible.windows.win_command: powershell.exe -
     args:
-      stdin: (Get-Content C:\temp\autoservicesnumber.txt).Length
+      stdin: (Get-Content C:\temp\autoservices.txt).Length
     register: server_name
 
   - debug:
