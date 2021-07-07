@@ -36,7 +36,7 @@
     register: server_name
 
   - debug:
-      msg: "length = {{ server_name }}"    
+      msg: "length = {{ server_name.stdout_lines[0] }}"    
 
 #  - name:
 #    set_fact:
