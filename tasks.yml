@@ -11,19 +11,22 @@
      Select-String -Path C:\temp\autoservicesnumber.txt -pattern "Lines="
     register: string1
 
-  - debug: string1
+  - debug:
       msg: "string 1 = {{ string1 }}"
 
   - name: read file, copy data to service
     set_fact: string2={{ string1.stdout_lines }}
 
-  - debug: string2
+  - debug:
       msg: "string2 = {{ string2 }}"
 
   - name: remove everything apart from loop number
     set_fact: string3={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
 
-  - set_fact: req_num
+  - debug:
+      msg: "string3 = {{ string3 }}"
+
+  - set_fact:
       req_num: req_num = {{ string3 | int }}"
 
 #  - name:
