@@ -6,47 +6,14 @@
 
   tasks:
 
-  - name: copy text
-    ansible.windows.win_shell:
-     Select-String -Path C:\temp\autoservicesnumber.txt -pattern "Lines="
-    register: string1
-
-  - debug:
-      msg: "string 1 = {{ string1 }}"
-
-  - name: read file, copy data to service
-    set_fact: string2={{ string1.stdout_lines }}
-
-  - debug:
-      msg: "string2 = {{ string2 }}"
-
-  - name: remove everything apart from loop number
-    set_fact: string3={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
-
-  - debug:
-      msg: "string3 = {{ string3 }}"
-
-  - set_fact:
-      req_num: "{{ string3 }}"
-
-  - name: Get length of file
+  - name: Get number of services to restart
     ansible.windows.win_command: powershell.exe -
     args:
       stdin: (Get-Content C:\temp\autoservices.txt).Length
-    register: server_name
-
-  - debug:
-      msg: "length = {{ server_name.stdout_lines[0] }}"
+    register: restart_number
 
   - set_fact:
-      req_num: "{{ server_name.stdout_lines[0] }}"
-
-#  - name:
-#    set_fact:
-#      req_num: "{{ string3|string }}"
-
-#  - debug:
-#      msg: "req_num is {{ req_num }}"
+      req_num: "{{ restart_number.stdout_lines[0] }}"
 
   - set_fact:
       num: 1
