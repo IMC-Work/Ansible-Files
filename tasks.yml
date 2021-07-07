@@ -39,7 +39,7 @@
       msg: "length = {{ server_name.stdout_lines[0] }}"
 
   - set_fact:
-      req_num: "{{ length }}"
+      req_num: "{{ server_name.stdout_lines[0] }}"
 
 #  - name:
 #    set_fact:
