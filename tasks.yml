@@ -12,11 +12,15 @@
       stdin: (Get-Content C:\temp\autoservices.txt).Length
     register: restart_number
 
-  - set_fact:
+#  - set_fact:
+#      req_num: "{{ restart_number.stdout_lines[0] }}"
+
+  - name: do something
+    include_vars:
       req_num: "{{ restart_number.stdout_lines[0] }}"
 
-  - set_fact:
-      num: 1
+#  - set_fact:
+#      num: 1
 #      req_num: 3
 
   - debug:

@@ -5,6 +5,9 @@
      DiskThreshold: 5
 
   tasks:
+#
+#   code to copy FREESPACE.PS1 to C:\TEMP on server
+#
   - name: run PS_Script
     ansible.windows.win_shell: C:\temp\PS_Scripts\FreeSpace.ps1
 
