@@ -5,9 +5,11 @@
     patch_number: KB3192137
 
   tasks:
-
+#
+#   copy the file CHECKPATCHINSTALLED.PS1 to c:\temp\PS_SCRIPTS on the server
+#
   - name: run PS_Script
-    ansible.windows.win_shell: C:\temp\PS_Scripts\PatchInstalled.ps1
+    ansible.windows.win_shell: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
 
   - name: Get server name
     ansible.windows.win_command: powershell.exe -
@@ -17,7 +19,7 @@
 
   - name: search file to see if the patch has been installed
     ansible.windows.win_shell:
-      Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number }}"
+      Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }}"
     register: patch
 
   - name: read file to get information on patch installed
@@ -27,7 +29,7 @@
 
     - name: search file to see when the patch was installed
       ansible.windows.win_shell:
-        Select-String -Path C:\temp\PatchesInstalled.txt -pattern "{{ patch_number }} InstalledOn="
+        Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }} InstalledOn="
       register: install_date
 
     - name: read file to copy installed patch date
