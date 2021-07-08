@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-    patch_number: KB312892
+    patch_number: KB3192137
 
   tasks:
 
