@@ -13,7 +13,7 @@
 #  - set_fact:
 #      req_num: "{{ restart_number.stdout_lines[0] }}"
 
-    vars:
+  - vars:
       req_num: 3
 #      req_num: "{{ restart_number.stdout_lines[0] }}"
 
