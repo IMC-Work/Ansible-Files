@@ -1,10 +1,8 @@
 ---
 - hosts: all
   gather_facts: false
-  vars_prompt:
-  - name: patch_number
-    prompt: What is the patch number?
-    private: no
+  vars:
+    patch_number: KB312892
 
   tasks:
 
