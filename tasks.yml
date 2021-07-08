@@ -1,8 +1,6 @@
 ---
 - hosts: all
   gather_facts: false
-  vars:
-    filepath: c:\temp\autoservicesnumber.txt
 
   tasks:
 
@@ -15,8 +13,8 @@
 #  - set_fact:
 #      req_num: "{{ restart_number.stdout_lines[0] }}"
 
-  - name: do something
-    include_vars:
+#  - name: do something
+    vars:
       req_num: "{{ restart_number.stdout_lines[0] }}"
 
 #  - set_fact:
