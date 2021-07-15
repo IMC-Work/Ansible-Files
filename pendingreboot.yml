@@ -16,11 +16,11 @@
 
   - debug:
       msg: "needs a reboot"
-    when: rebootrequired == true 
+    when: rebootrequired.exists == true
 
   - debug:
       msg: "no reboot needed"
-    when: rebootrequired == false
+    when: rebootrequired.exists == false
 
 
 # check if file exists - reboot needed
