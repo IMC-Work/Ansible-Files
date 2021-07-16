@@ -10,21 +10,17 @@
       path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Auto Update
       name: RebootRequired
     register: rebootrequired
-#    ignore_errors: true
+
+  - name: Get server name
+    ansible.windows.win_command: powershell.exe -
+    args:
+      stdin: hostname
+    register: server_name
 
   - debug:
-      msg: "reboot required is {{ rebootrequired }}"
-
-  - debug:
-      msg: "needs a reboot"
+      msg: "{{ server_name }} is going to be rebooted"
     when: rebootrequired == true
 
   - debug:
-      msg: "no reboot needed"
-    when: rebootrequired != true
-
-
-# check if file exists - reboot needed
-# check if file does not exist - reboot not reuired
-
-# if it exists - then do a reboot
+      msg: "no reboot required on {{ server_name }}"
+    when: rebootrequired == false
