@@ -8,7 +8,7 @@
   - name: get registry key from server to determine whether a reboot is required
     ansible.windows.win_reg_stat:
       path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Auto Update\RebootRequired
-  #    name: RebootRequired
+      name: ' '
     register: rebootrequired
 
   - debug:
