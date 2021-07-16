@@ -11,6 +11,9 @@
       name: RebootRequired
     register: rebootrequired
 
+  - debug:
+      msg: "reboot required = {{ rebootrequired }}"
+
   - name: Get server name
     ansible.windows.win_command: powershell.exe -
     args:
@@ -18,13 +21,13 @@
     register: server_name
 
   - debug:
-      msg: "no reboot required on {{ server_name.stdout_lines[0] }}"
+      msg: "no reboot required on {{ server_name.stdout_lines[0] }} prior to patching"
     when: rebootrequired.exists == false
 
   - name: reboot the server as it's pending a rebooted
     block:
       - debug:
-          msg: "{{ server_name.stdout_lines[0] }} is going to be rebooted"
+          msg: "*** {{ server_name.stdout_lines[0] }} is going to be rebooted prior to patching ***"
 
 #      - name: Reboot server
 #        ansible.windows.win_reboot:
