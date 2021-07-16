@@ -20,7 +20,7 @@
 
   - set_fact:
       num: 1
-      req_num: {{ req_num3 }}
+      req_num: "{{ req_num3 }}"
 
 #  - debug:
 #      msg: "req_num2 is {{ req_num3 }}"
