@@ -19,8 +19,8 @@
 
   - debug:
       msg: "{{ server_name }} is going to be rebooted"
-    when: rebootrequired == true
+    when: rebootrequired.exists == true
 
   - debug:
       msg: "no reboot required on {{ server_name }}"
-    when: rebootrequired == false
+    when: rebootrequired.exists == false
