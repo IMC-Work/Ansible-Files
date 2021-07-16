@@ -19,13 +19,13 @@
 
   - set_fact:
       num: 1
- #     req_num: 3
+      req_num: 3
 
   - debug:
       msg: "req_num2 is {{ req_num2 }}"
 
   - include_tasks: tasks1.yml
-    loop: "{{ range(num, req_num2) | list }}"
+    loop: "{{ range(num, req_num) | list }}"
 #  loop: "{{ range(num, {{ req_num2 }} ) | list }}"
 
 
