@@ -27,7 +27,7 @@
 
   - include_tasks: tasks1.yml
 #    loop: "{{ range(num, req_num3 + 1) | list }}"
-    loop: "{{ range(num, req_num ) | list }}"
+    loop: "{{ range(num, req_num ) }}"
 
 
 #    {"msg": "template error while templating string: expected token ':', got '}'
