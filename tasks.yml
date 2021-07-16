@@ -15,8 +15,8 @@
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
   - name: set_fact again
-    set_fact: req_num2="{{ req_num }} + 1"
-    
+    set_fact: req_num2={{ req_num }}
+
   - set_fact:
       num: 1
  #     req_num: 3
@@ -25,7 +25,7 @@
       msg: "req_num2 is {{ req_num2 }}"
 
   - include_tasks: tasks1.yml
-    loop: "{{ range(num, req_num2) | list }}"
+    loop: "{{ range(num, {{ req_num2}}) | list }}"
 #  loop: "{{ range(num, {{ req_num2 }} ) | list }}"
 
 
