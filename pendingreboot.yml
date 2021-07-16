@@ -18,9 +18,9 @@
     register: server_name
 
   - debug:
-      msg: "{{ server_name }} is going to be rebooted"
-    when: rebootrequired.exists == true
+      msg: "no reboot required on {{ server_name.stdout_lines[0] }}"
+    when: rebootrequired.exists == false
 
   - debug:
-      msg: "no reboot required on {{ server_name }}"
-    when: rebootrequired.exists == false
+      msg: "{{ server_name.stdout_lines[0] }} is going to be rebooted"
+    when: rebootrequired.exists == true
