@@ -15,7 +15,7 @@
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
   - name: set_fact again
-    set_fact: req_num3={{ req_num2 | int}}
+    set_fact: req_num3={{ req_num2 }}
 #      req_num2="{{ req_num }}"
 
   - set_fact:
@@ -27,7 +27,7 @@
 
   - include_tasks: tasks1.yml
 #    loop: "{{ range(num, req_num3 + 1) | list }}"
-    loop: "{{ range(num, req_num ) }}"
+    loop: "{{ range(num, req_num3 ) }}"
 
 
 #    {"msg": "template error while templating string: expected token ':', got '}'
