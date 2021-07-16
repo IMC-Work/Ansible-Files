@@ -10,6 +10,7 @@
       path: HKLM\Software\Microsoft\Windows\CurrentVersion\Auto Update
       name: RebootRequired
     register: rebootrequired
+    ignore_errors: true 
 
   - debug:
       msg: "reboot required is {{ rebootrequired }}"
