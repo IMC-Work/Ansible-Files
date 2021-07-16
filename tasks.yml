@@ -21,9 +21,10 @@
   - set_fact:
       num: 1
       req_num: 3
+      req_num4: "range(1,{{ req_num3 }})"
 
-#  - debug:
-#      msg: "req_num2 is {{ req_num3 }}"
+  - debug:
+      msg: "req_num4 is {{ req_num4 }}"
 
   - include_tasks: tasks1.yml
 #    loop: "{{ range(num, req_num + 1) | list }}"
