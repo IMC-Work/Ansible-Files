@@ -11,7 +11,7 @@
     register: restart_number
 
   - name: set_fact
-    set_fact: req_num2={{ restart_number.stdout_lines[0] }}
+    set_fact: req_num2={{ restart_number.stdout_lines[0] | int }}
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
   - name: set_fact again
@@ -28,7 +28,7 @@
 
   - include_tasks: tasks1.yml
 #    loop: "{{ range(num, req_num3 + 1) | list }}"
-    loop: "{{ range(1, req_num3) | list }}"
+    loop: "{{ range(1, req_num2) | list }}"
 #    loop: "{{ req_num4 }}|list"
 
 
