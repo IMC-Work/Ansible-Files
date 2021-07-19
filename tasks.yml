@@ -21,7 +21,7 @@
   - set_fact:
       num: 1
       req_num: 3
-      req_num4: "range(1,{{ req_num3 }})"
+      req_num4: "range(1,{{ req_num3 }}|list)"
 
   - debug:
       msg: "req_num4 is {{ req_num4 }}"
