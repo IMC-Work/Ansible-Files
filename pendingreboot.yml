@@ -8,7 +8,6 @@
   - name: get registry key from server to determine whether a reboot is required
     ansible.windows.win_reg_stat:
       path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired
-#      name: RebootRequired
     register: rebootrequired
 
   - debug:
@@ -29,10 +28,10 @@
       - debug:
           msg: "*** {{ server_name.stdout_lines[0] }} is going to be rebooted prior to patching ***"
 
-#      - name: Reboot server
-#        ansible.windows.win_reboot:
-#        reboot_timeout: 100
-#        register: reboot_status
+      - name: Reboot server
+        ansible.windows.win_reboot:
+        reboot_timeout: 100
+        register: reboot_status
 
       - name: Write entry to the windows event log
         win_eventlog_entry:
