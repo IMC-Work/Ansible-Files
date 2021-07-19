@@ -9,7 +9,7 @@
     rescue:
       - fail:
           msg: ended after x tries
-         when: count|int == 3
+        when: count|int == 3
 
 
 
