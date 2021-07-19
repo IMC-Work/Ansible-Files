@@ -10,8 +10,8 @@
           msg: "count is {{ count }}"
 
     rescue:
-      - fail:
-          msg: ended after x tries
+      - name: fail it
+          msg: "ended after x tries"
         when: count|int >= 2
 
 
