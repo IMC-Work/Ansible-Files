@@ -18,8 +18,8 @@
       num: 1
       req_num: 3
 
-  - debug:
-      msg: "req_num3 is {{ req_num3 }}"
+#  - debug:
+#      msg: "req_num3 is {{ req_num3 }}"
 
   - include_tasks: tasks1b.yml
     loop: "{{ range(num, req_num + 1) | list }}"
