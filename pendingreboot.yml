@@ -27,7 +27,7 @@
 
       - name: Reboot server
         ansible.windows.win_reboot:
-        reboot_timeout: 100
+          reboot_timeout: 100
         register: reboot_status
 
       - name: Write entry to the windows event log
