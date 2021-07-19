@@ -8,7 +8,7 @@
 
     rescue:
       - fail:
-          msg:" ended after x tries"
+          msg: ended after x tries
          when: count|int == 3
 
 
