@@ -11,6 +11,7 @@
 
     rescue:
       - name: fail it
+        debug::
           msg: "ended after x tries"
         when: count|int >= 2
 
