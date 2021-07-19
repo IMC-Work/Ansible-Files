@@ -19,7 +19,7 @@
 
   - name: set_fact again
     set_fact:
-      req_num3: "{{ req_num2 | int + 1  }} "
+      req_num3: "{{ req_num2 | int + 1 }} "
 #      req_num2="{{ req_num }}"
 
   - set_fact:
