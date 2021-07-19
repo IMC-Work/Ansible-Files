@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-
+    RebootRequired
   tasks:
 
   - name: get registry key from server to determine whether a reboot is required
