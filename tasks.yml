@@ -14,25 +14,16 @@
     set_fact: req_num2={{ restart_number.stdout_lines[0] }}
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
-  - debug:
-      var: req_num3|int
-
-  - name: set_fact again
-    set_fact:
-      req_num3: "{{ req_num2 | int + 1 }} "
-#      req_num2="{{ req_num }}"
-
   - set_fact:
       num: 1
       req_num: 3
-      req_num4: "range(1,{{ req_num3 }})"
 
   - debug:
       msg: "req_num3 is {{ req_num3 }}"
 
-  - include_tasks: tasks1.yml
-#    loop: "{{ range(num, req_num3 + 1) | list }}"
-    loop: "{{ range(1, req_num3) | list }}"
+  - include_tasks: tasks1b.yml
+    loop: "{{ range(num, req_num + 1) | list }}"
+#    loop: "{{ range(1, req_num3) | list }}"
 #    loop: "{{ req_num4 }}|list"
 
 
