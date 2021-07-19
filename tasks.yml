@@ -14,6 +14,8 @@
     set_fact: req_num2={{ restart_number.stdout_lines[0] }}
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
+  - debug:
+    var: req_num3|int
 
   - name: set_fact again
     set_fact:
