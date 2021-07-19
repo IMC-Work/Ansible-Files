@@ -10,9 +10,6 @@
       path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired
     register: rebootrequired
 
-  - debug:
-      msg: "reboot required = {{ rebootrequired.exists }}"
-
   - name: Get server name
     ansible.windows.win_command: powershell.exe -
     args:
