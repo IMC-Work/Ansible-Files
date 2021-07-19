@@ -15,7 +15,7 @@
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
   - debug:
-    var: req_num3|int
+      var: req_num3|int
 
   - name: set_fact again
     set_fact:
