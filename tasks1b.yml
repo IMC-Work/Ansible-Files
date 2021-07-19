@@ -4,12 +4,15 @@
 
       - name: set the count
         set_fact:
-          count: "{{count|int+1}}"
+          count: "{{1 if count is undefined else count|int+1}}"
+
+      - debug:
+          msg: "count is {{ count }}"
 
     rescue:
       - fail:
           msg: ended after x tries
-        when: count|int == 2
+        when: count|int >= 2
 
 
 
