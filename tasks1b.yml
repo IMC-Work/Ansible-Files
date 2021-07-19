@@ -4,7 +4,7 @@
 
       - name: set the count
         set_fact:
-          count: "{{ 0 if count is undefined else count|int+1}}"
+          count: "{{count|int+1}}"
 
     rescue:
       - fail:
