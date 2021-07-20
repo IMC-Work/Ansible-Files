@@ -13,15 +13,15 @@
     register: restart_number
 
   - name: set_fact
-    set_fact: req_num4="{{ restart_number.stdout_lines[0] + 1 }}"
+    set_fact: req_num4={{ restart_number.stdout_lines[0] }}
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
   - set_fact:
       num: 1
       req_num: 3
 
-#  - debug:
-#      msg: "req_num3 is {{ req_num3 }}"
+  - debug:
+      msg: "req_num4 is {{ req_num4 }}"
 
 #  - include_tasks: tasks1c.yml
 #    loop: "{{ range(num, req_num5 + 1) | list }}"
