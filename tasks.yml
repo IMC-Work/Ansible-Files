@@ -24,7 +24,7 @@
       msg: "req_num4 is {{ req_num4 }}"
 
   - set_fact:
-      req_num5: "{{ req_num4 + 1 }}"
+      req_num5: {{ req_num4 + 1 }}
 
   - debug:
       msg: "req_num5 is {{ req_num5 }}"
