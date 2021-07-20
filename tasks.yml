@@ -30,5 +30,5 @@
 #    loop: "{{ req_num4 }}|list"
 
   - include_tasks: tasks1c.yml
-    with_sequence: start=1 end="{{ req_num5 }} + 1"
+    with_sequence: start=1 end="{{ req_num5 }}" | list
 #    when: "item|int < {{ req_num5 }} "
