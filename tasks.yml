@@ -23,9 +23,10 @@
 
   - include_tasks: tasks1c.yml
 #    loop: "{{ range(num, req_num + 1) | list }}"
-    loop: "{{ range(1,10) | list }}" 
+    loop: "{{ range(1,10) | list }}"
 #    loop: "{{ range(1, req_num3) | list }}"
 #    loop: "{{ req_num4 }}|list"
+    when: stop == false
 
 
 #    {"msg": "template error while templating string: expected token ':', got '}'
