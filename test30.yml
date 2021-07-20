@@ -16,16 +16,14 @@
 #  - name: run PS_Script
 #    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
 
-  - name: copy text
-    ansible.windows.win_shell:
-      Select-String -Path C:\temp\autoservicesnumber.txt -pattern "Lines="
-    register: string1
+  - name: Get number of services to restart
+    ansible.windows.win_command: powershell.exe -
+    args:
+      stdin: (Get-Content C:\temp\autoservices.txt).Length
+    register: restart_number
 
-  - name: read file, copy data to service
-    set_fact: string2={{ string1.stdout_lines }}
-
-  - name: remove everything apart from loop number
-    set_fact: loop={{ string2 | regex_replace('.*=') | regex_replace ("'.*") }}
+  - name: set_fact
+      set_fact: loop={{ restart_number.stdout_lines[0] }}
 
   - name: Restart the Services Module
     include_tasks: test31.yml
