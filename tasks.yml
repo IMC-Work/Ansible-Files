@@ -25,9 +25,9 @@
   - debug:
       msg: "req_num6 is {{ req_num6 }}"
 
-  - vars:
-    num: 1
-    
+  - name: set_fact again
+    set_fact: num=1
+
   - include_tasks: tasks1c.yml
     loop: "{{ range(num, req_num6) | list }}"
 #    loop: "{{ range(1,10) | list }}"
