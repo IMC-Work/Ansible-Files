@@ -1,0 +1,27 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+
+  tasks:
+
+  - name: get registry key from server to determine whether a reboot is required
+    ansible.windows.win_reg_stat:
+      path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired
+    register: rebootrequired
+
+  - name: Get server name
+    ansible.windows.win_command: powershell.exe -
+    args:
+      stdin: hostname
+    register: server_name
+
+  - debug:
+      msg: "no reboot required on {{ server_name.stdout_lines[0] }} prior to patching"
+    when: rebootrequired.exists == false
+
+  - name: server requires a reboot prior to patching
+    block:
+      - debug:
+          msg: "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
+    when: rebootrequired.exists == true
