@@ -23,6 +23,12 @@
   - debug:
       msg: "req_num4 is {{ req_num4 }}"
 
+  - set_fact:
+      req_num5: "{{ req_num4 }} + 1 | int"
+
+  - debug:
+      msg: "req_num5 is {{ req_num5 }}"        
+
 #  - include_tasks: tasks1c.yml
 #    loop: "{{ range(num, req_num5 + 1) | list }}"
 #    loop: "{{ range(1,10) | list }}"
