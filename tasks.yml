@@ -24,7 +24,7 @@
       msg: "req_num4 is {{ req_num4 }}"
 
   - name: powershell add 1 to total
-    win_shell: "{{ req_num4 }} + 1"
+    win_shell: "{{ restart_number.stdout_lines[0] }} + 1"
     register: req_num5
 
   - debug:
