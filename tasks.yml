@@ -15,8 +15,8 @@
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
 
-    vars:
-      req_num5: {{ req_num2 }}
+  - vars:
+      req_num5: "{{ req_num2 }}"
 
   - set_fact:
       num: 1
