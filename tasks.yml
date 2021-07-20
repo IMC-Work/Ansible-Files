@@ -23,12 +23,11 @@
 #  - debug:
 #      msg: "req_num3 is {{ req_num3 }}"
 
-  - include_tasks: tasks1c.yml
-    loop: "{{ range(num, req_num5 + 1) | list }}"
+#  - include_tasks: tasks1c.yml
+#    loop: "{{ range(num, req_num5 + 1) | list }}"
 #    loop: "{{ range(1,10) | list }}"
 #    loop: "{{ range(1, {{req_num3) | list }}"
 #    loop: "{{ req_num4 }}|list"
 
-
-#    {"msg": "template error while templating string: expected token ':', got '}'
-#    . String: {{ range(num, {{ req_num2 }} + 1 ) | list }}"}
+  - include_tasks: task1c.yml
+    with_sequence: start=1 end=2
