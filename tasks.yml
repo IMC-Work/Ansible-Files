@@ -27,6 +27,9 @@
     win_shell: "{{ restart_number.stdout_lines[0] }} + 1"
     register: req_num5
 
+  - name: set_fact
+    set_fact: req_num5={{ restart_number.stdout_lines[0] }}  
+
   - debug:
       msg: "req_num5 is {{ req_num5 }}"
 
