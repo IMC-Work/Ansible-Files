@@ -23,7 +23,7 @@
     register: restart_number
 
   - name: set_fact
-      set_fact: loop={{ restart_number.stdout_lines[0] }}
+    set_fact: loop={{ restart_number.stdout_lines[0] }}
 
   - name: Restart the Services Module
     include_tasks: test31.yml
