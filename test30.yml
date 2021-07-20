@@ -33,4 +33,4 @@
 
   - name: information
     debug:
-      msg: "All Auto Services are now started {{ loop }}"
+      msg: "All Auto Services are now started {{ loop }} hhh"
