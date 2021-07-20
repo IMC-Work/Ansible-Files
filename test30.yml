@@ -29,7 +29,7 @@
 
   - name: Restart the Services Module
     include_tasks: test31.yml
-    when: loop >= "1"
+    when: loop gt "1"
 
   - name: information
     debug:
