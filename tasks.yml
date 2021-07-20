@@ -20,7 +20,10 @@
       num: 1
       req_num: 3
 
-  - name: powershell get total hours
+  - debug:
+      msg: "req_num4 is {{ req_num4 }}"
+
+  - name: powershell add 1 to total
     win_shell: "{{ req_num4 }} + 1"
     register: req_num5
 
