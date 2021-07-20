@@ -30,4 +30,5 @@
 #    loop: "{{ req_num4 }}|list"
 
   - include_tasks: tasks1c.yml
-    with_sequence: start=1 end=2
+    with_sequence: start=1 end=5
+    when: "{{ item }} < 3"
