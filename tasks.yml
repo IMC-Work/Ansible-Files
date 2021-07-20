@@ -13,7 +13,7 @@
     register: restart_number
 
   - name: set_fact
-    set_fact: req_num4={{ restart_number.stdout_lines[0] + 1 }}
+    set_fact: req_num4="{{ restart_number.stdout_lines[0] + 1 }}"
   #    req_num= "{{ restart_number.stdout_lines[0] }}"
 
   - set_fact:
