@@ -28,10 +28,10 @@
     register: req_num5
 
   - name: set_fact
-    set_fact: req_num5={{ restart_number.stdout_lines[0] }}  
+    set_fact: req_num6={{ req_num5.stdout_lines[0] }}  
 
   - debug:
-      msg: "req_num5 is {{ req_num5 }}"
+      msg: "req_num6 is {{ req_num6 }}"
 
 #  - include_tasks: tasks1c.yml
 #    loop: "{{ range(num, req_num5 + 1) | list }}"
