@@ -7,8 +7,11 @@
   - debug:
       msg: "item is {{ item }}"
 
+  - name: set_factsss
+    set_fact: bob=1|int
+
   - name: read file copy data to service
-    set_fact: service={{ service.stdout_lines[item] }}
+    set_fact: service={{ service.stdout_lines[bob] }}
 
   - name: remove everything apart from service name
     set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
