@@ -26,7 +26,7 @@
       msg: "req_num6 is {{ req_num6 }}"
 
   - include_tasks: tasks1c.yml
-    loop: "{{ range(1, req_num6) | list }}"
+    loop: "{{ range(int(string))(1, req_num6) | list }}"
 #    loop: "{{ range(1,10) | list }}"
 #    loop: "{{ range(1, {{req_num3) | list }}"
 #    loop: "{{ req_num4 }}|list"
