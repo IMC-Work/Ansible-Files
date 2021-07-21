@@ -20,7 +20,7 @@
     register: req_num5
 
   - name: set_fact
-    set_fact: req_num6={{ req_num5.stdout_lines[0] | int}}
+    set_fact: req_num6={{ req_num5.stdout_lines[0]|int}}
 
   - debug:
       msg: "req_num6 is {{ req_num6 }}"
