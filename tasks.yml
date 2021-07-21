@@ -13,7 +13,7 @@
     register: restart_number
 
   - name: set_fact
-    set_fact: req_num4={{ restart_number.stdout_lines[0] }}
+    set_fact: req_num4={{ restart_number.stdout_lines[0] | int }}
 
   - name: powershell add 1 to total
     win_shell: "{{ restart_number.stdout_lines[0] }} + 1"
@@ -35,7 +35,7 @@
 #    loop: "{{ req_num4 }}|list"
 
   - include_tasks: tasks1c.yml
-    with_sequence: start=1 end="{{ req_num5 + 1 }}"
+    with_sequence: start=1 end="{{ req_num4 + 1 }}"
 #    vars:
 #      - end_at: "{{ req_num6 }}"
 
