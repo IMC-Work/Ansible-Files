@@ -4,13 +4,6 @@
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
 
-    vars:
-      mylist:
-        - 1
-        - 2
-        - 3
-        - 4
-
   - name: read file copy data to service
     set_fact: service={{ service.stdout_lines[item] }}
 
