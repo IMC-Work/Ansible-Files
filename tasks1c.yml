@@ -4,7 +4,7 @@
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
 
-  - vars:
+    vars:
       mylist:
         - 1
         - 2
