@@ -1,18 +1,18 @@
 ---
-    vars:
+  - name: copy text
+    ansible.windows.win_shell:
+      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
+    register: service
+
+  - vars:
       mylist:
         - 1
         - 2
         - 3
         - 4
 
-  - name: copy text
-    ansible.windows.win_shell:
-      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
-    register: service
-
   - name: read file copy data to service
-    set_fact: service={{ service.stdout_lines{{mylist[item]}} }}
+    set_fact: service={{ service.stdout_lines[0] }}
 
   - name: remove everything apart from service name
     set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
