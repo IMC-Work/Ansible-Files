@@ -8,7 +8,7 @@
       msg: "item is {{ item }}"
 
   - name: set_factsss
-    set_fact: bob="1"|str
+    set_fact: bob={{"1" | list}}
 
   - debug:
       msg: "bob is {{ bob }}"
