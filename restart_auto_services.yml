@@ -17,6 +17,7 @@
           name: "{{ service_name }}"
           state: started
         register: result
+        ignore_errors: true 
 
       - name: Check Service Status
         ansible.builtin.debug:
