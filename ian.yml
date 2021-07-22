@@ -18,22 +18,15 @@
     ansible.windows.win_command: powershell.exe -
     args:
       stdin: (Get-Content C:\temp\autoservices.txt).Length
-    register: restart_number
-    
-#  - name:
-#    set_fact: req_num4={{ restart_number.stdout_lines[0] }}
+    register: auto_services
 
-  - name: powershell add 1 to total
-    win_shell: "{{ restart_number.stdout_lines[0] }} + 1"
-    register: req_num5
+  - name: user powershell to add "1" to the number of times to run the loop
+    win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
+    register: auto_services_num
 
-  - name: set_fact
-    set_fact: req_num6={{ req_num5.stdout_lines[0]|int}}
+  - name: identify number of times to run the loop
+    set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
 
-  - name: debug
-    ansible.builtin.debug:
-      msg: "do it {{ req_num6 }} times"
-
-#  - name: do a loop
-#    include_tasks: tasks1c.yml
-#    loop: "{{ range(1,(req_num6|int)) | list }}"
+  - name: do a loop
+    include_tasks: tasks1c.yml
+    loop: "{{ range(1,(loop_num|int)) | list }}"
