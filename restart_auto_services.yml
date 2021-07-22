@@ -18,12 +18,12 @@
           state: started
         register: result
 
-      - name: Service Status
+      - name: Check Service Status
         ansible.builtin.debug:
           msg: "Service {{ service_name }} has now started"
         when: result.state == "running"
 
-      - name: Write entry to the windows event log
+      - name: Write entry to the windows event log if restart successful
         win_eventlog_entry:
           log: Application
           source: Ansible
@@ -31,6 +31,9 @@
           message: "{{ service_name }} has been successfully started via Ansible"
         when: result.state == "running"
     rescue:
-      - name: rescue it
+      - name: service failed to restart correctly
         ansible.builtin.debug:
-          msg: "failed to successfully restart the {{ service_name }} service"
+          msg: "failed to successfully restart the {{ service_name }} service, please investigate"
+#
+#   set _fact to all_services_restarted = false
+#
