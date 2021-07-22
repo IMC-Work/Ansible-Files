@@ -27,7 +27,7 @@
 
   - name: do a loop
     include_tasks: tasks1c.yml
-    loop: "{{ range(1,int(req_num6)) | list }}"
+    loop: "{{ range(1,int{{req_num6}} | list }}"
 #    loop: "{{ range(1,10) | list }}"
 #    loop: "{{ range(1, {{req_num3) | list }}"
 #    loop: "{{ req_num4 }}|list"
