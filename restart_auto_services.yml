@@ -1,5 +1,5 @@
 ---
-  - name: read file to get the service to restart
+  - name: read c:\temp\autoserices.txt to get the service to restart
     ansible.windows.win_shell:
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
