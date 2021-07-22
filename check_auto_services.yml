@@ -40,7 +40,7 @@
   - name: all AUTO services are now started after the reboot
     ansible.builtin.debug:
       msg: "all AUTO services are started after the reboot"
-    when: {{ service_failed }} == "True"
+    when: service_failed == "True"
 
   - name: write entry to the windows event log
     win_eventlog_entry:
