@@ -5,8 +5,8 @@
 #
 #   copy the powershell file AutoServices.ps1 to C:\TEMP\ on the server
 #
-#  - name: run PS_Script AUTOSERVICES.PS1
-#    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
+  - name: run PS_Script AUTOSERVICES.PS1
+    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
 
   - name: pause tasks for 5 seconds to allow the script to run
     ansible.builtin.pause:
@@ -32,10 +32,6 @@
   - name: restart all the Auto Services that require to be restarted
     include_tasks: restart_auto_services.yml
     loop: "{{ range(1,(loop_num|int)) | list }}"
-
-  - name:
-    ansible.builtin.debug:
-      msg: "service_failed = {{ service_failed }}"
 
   - name: all AUTO services are now started after the reboot
     ansible.builtin.debug:
