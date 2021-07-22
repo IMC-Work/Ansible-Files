@@ -30,7 +30,7 @@
   - name: do a loop
     include_tasks: tasks1c.yml
     loop: "{{ range(1,(loop_num|int)) | list }}"
-    when: {{ loop_num}} > 1
+    when: loop_num > 1
 
   - name: all AUTO services are now started after the reboot
     ansible.builtin.debug:
