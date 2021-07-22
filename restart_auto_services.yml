@@ -17,7 +17,6 @@
           name: "{{ service_name }}"
           state: started
         register: result
-        ignore_errors: true 
 
       - name: Check Service Status
         ansible.builtin.debug:
@@ -35,6 +34,6 @@
       - name: service failed to restart correctly
         ansible.builtin.debug:
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
-#
-#   set _fact to all_services_restarted = false
-#
+
+      - name: set_fact as a service has failed
+        set_fact: service_failed = true
