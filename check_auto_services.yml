@@ -27,9 +27,9 @@
     set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
 
   - name: set_fact to check if a service has failed to restart
-    set_fact: service_failed="false"
+    set_fact: service_failed="false"|bool
 
-  - name: bob
+  - name: bob - check ansible conditioners
     ansible.builtin.debug:
       msg: "service_failed = {{ service_failed }}"
 
@@ -44,7 +44,7 @@
   - name: all AUTO services are now started after the reboot
     ansible.builtin.debug:
       msg: "all AUTO services are started after the reboot"
-    when: "{{ service_failed }} == False"
+    when: service_failed|bool == "false"
 
   - name: write entry to the windows event log
     win_eventlog_entry:
