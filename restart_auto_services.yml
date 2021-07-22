@@ -36,4 +36,4 @@
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
 
       - name: set_fact as a service has failed
-        set_fact: service_failed = true
+        set_fact: service_failed = "true"
