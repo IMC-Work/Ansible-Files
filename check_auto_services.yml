@@ -36,6 +36,7 @@
   - name: all AUTO services are now started after the reboot
     ansible.builtin.debug:
       msg: "all AUTO services are started after the reboot"
+    when: service_failed == "false"
 
   - name: Check
     ansible.builtin.debug:
