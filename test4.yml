@@ -15,7 +15,7 @@
     when: service_failed == "false" | bool
 
   - name: set_service_failed to TRUE
-    set_fact: service_failed = "true"
+    set_fact: service_failed[0] = "true"
 
   - name: debug3
     ansible.builtin.debug:
