@@ -6,7 +6,7 @@
   tasks:
 
   - name: set_fact to check if a service has failed to restart
-    set_fact: service_failed="false"|bool
+    set_fact: service_failed = "false"
 
   - name: debug1
     ansible.builtin.debug:
@@ -14,5 +14,5 @@
 
   - name: debug2
     ansible.builtin.debug:
-      msg: "this only happens when it's set to FALSE"  
+      msg: "this only happens when it's set to FALSE"
     when: service_failed == "false"
