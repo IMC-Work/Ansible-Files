@@ -12,10 +12,10 @@
   - name: debug2
     ansible.builtin.debug:
       msg: "this only happens when it's set to FALSE"
-    when: service_failed|bool == "false"
+    when: service_failed|bool == false
 
   - name: set_service_failed to TRUE
-    set_fact: service_failed = "true"
+    set_fact: service_failed = true
 
   - name: debug3
     ansible.builtin.debug:
@@ -24,4 +24,4 @@
   - name: debug4
     ansible.builtin.debug:
       msg: "this only happens when it's set to TRUE"
-    when: service_failed|bool == "true"
+    when: service_failed|bool == true
