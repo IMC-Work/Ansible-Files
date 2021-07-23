@@ -2,8 +2,10 @@
 - hosts: all
   gather_facts: false
   vars:
-     service_failed: false
+     service_failed1: false
   tasks:
+  - name: set_service_failed to False
+    set_fact: service_failed = false
 
   - name: debug1
     ansible.builtin.debug:
