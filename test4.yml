@@ -13,3 +13,15 @@
     ansible.builtin.debug:
       msg: "this only happens when it's set to FALSE"
     when: service_failed == "false" | bool
+
+  - name: set_service_failed to TRUE
+    set_fact: service_failed = "true"
+
+  - name: debug3
+    ansible.builtin.debug:
+      msg: "service_failed = {{ service_failed }}"
+
+  - name: debug4
+    ansible.builtin.debug:
+      msg: "this only happens when it's set to TRUE"
+    when: service_failed == "true" | bool
