@@ -2,11 +2,8 @@
 - hosts: all
   gather_facts: false
   vars:
-     number: 0
+     service_failed: false
   tasks:
-
-  - name: set_fact to check if a service has failed to restart
-    set_fact: service_failed = "false"
 
   - name: debug1
     ansible.builtin.debug:
