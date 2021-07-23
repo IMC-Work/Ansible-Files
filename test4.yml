@@ -1,22 +1,18 @@
----   
+---
 - hosts: all
   gather_facts: false
   vars:
      number: 0
-  tasks: 
+  tasks:
 
-  - name: collect facts
-    ansible.windows.win_service_info:
-      name: win*
-    register: info
+  - name: set_fact to check if a service has failed to restart
+    set_fact: service_failed="false"|bool
 
-  - name: Increment
-    set_fact: number = {{ number | int + 1 }}  
-
-  - name: debug
-    debug:
-      msg: " {{info.services[0].name }} "
+  - name: debug1
+    ansible.builtin.debug:
+      msg: "service_failed = {{ service_failed }}"
 
   - name: debug2
-    debug:
-      msg: " {{info.services[1].name}} is set to {{info.services[1].start_mode}}"    
+    ansible.builtin.debug:
+      msg: "this only happens when it's set to FALSE"  
+    when: service_failed == "false"
