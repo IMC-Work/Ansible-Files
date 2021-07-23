@@ -34,6 +34,11 @@
     include_tasks: restart_auto_services.yml
     loop: "{{ range(1,(loop_num|int)) | list }}"
 
+  - name: at least one AUTO service failed to restart
+    ansible.builtin.debug:
+      msg: "at least one AUTO service failed to restart correctly, please investigate"
+    when: service_failed|bool == true
+
   - name: all AUTO services are now started after the reboot
     ansible.builtin.debug:
       msg: "all AUTO services are started after the reboot"
