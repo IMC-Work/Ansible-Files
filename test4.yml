@@ -5,7 +5,8 @@
      service_failed1: false
   tasks:
   - name: set_service_failed to False
-    set_fact: service_failed = false
+    set_fact:
+      service_failed: "false"
 
   - name: debug1
     ansible.builtin.debug:
@@ -17,7 +18,8 @@
     when: service_failed|bool == false
 
   - name: set_service_failed to TRUE
-    set_fact: service_failed = true
+    set_fact:
+      service_failed: "true"
 
   - name: debug3
     ansible.builtin.debug:
