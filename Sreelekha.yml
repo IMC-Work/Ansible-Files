@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+  - name: Restart UCD agent
+    ansible.builtin.service:
+      name: UCDAgent
+      state: restarted
+    become: yes
+    become_user: root
+
+
+
+    
