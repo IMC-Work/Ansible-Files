@@ -5,50 +5,50 @@
 #
 #   copy the powershell file AutoServices.ps1 to C:\TEMP\ on the server
 #
-  - name: run PS_Script AUTOSERVICES.PS1
-    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
+   - name: run PS_Script AUTOSERVICES.PS1
+     ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
 
-  - name: pause tasks for 5 seconds to allow the script to run
-    ansible.builtin.pause:
-      seconds: 5
-      prompt: Waiting for script to run, please wait!
+   - name: pause tasks for 5 seconds to allow the script to run
+     ansible.builtin.pause:
+       seconds: 5
+       prompt: Waiting for script to run, please wait!
 
-  - name: Get number of services to restart
-    ansible.windows.win_command: powershell.exe -
-    args:
-      stdin: (Get-Content C:\temp\autoservices.txt).Length
-    register: auto_services
+   - name: Get number of services to restart
+     ansible.windows.win_command: powershell.exe -
+     args:
+       stdin: (Get-Content C:\temp\autoservices.txt).Length
+     register: auto_services
 
-  - name: user powershell to add "1" to the number of times to run the loop
-    win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
-    register: auto_services_num
+   - name: user powershell to add "1" to the number of times to run the loop
+     win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
+     register: auto_services_num
 
-  - name: identify number of times to run the loop
-    set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
+   - name: identify number of times to run the loop
+     set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
 
-  - name: set "service_failed" variable to false
-    set_fact:
-      service_failed: "false"
+   - name: set "service_failed" variable to false
+     set_fact:
+       service_failed: "false"
 
-  - name: restart all the Auto Services that require to be restarted
+   - name: restart all the Auto Services that require to be restarted
 #    include_tasks: restart_auto_services.yml
-    include_tasks: test32.yml
-    loop: "{{ range(1,(loop_num|int)) | list }}"
+     include_tasks: test32.yml
+     loop: "{{ range(1,(loop_num|int)) | list }}"
 
-  - name: at least one AUTO service failed to restart
-    ansible.builtin.debug:
-      msg: "at least one AUTO service failed to restart correctly, please investigate"
-    when: service_failed|bool == true
+   - name: at least one AUTO service failed to restart
+     ansible.builtin.debug:
+       msg: "at least one AUTO service failed to restart correctly, please investigate"
+     when: service_failed|bool == true
 
-  - name: all AUTO services are now started after the reboot
-    ansible.builtin.debug:
-      msg: "all AUTO services are started after the reboot"
-    when: service_failed|bool == false
+   - name: all AUTO services are now started after the reboot
+     ansible.builtin.debug:
+       msg: "all AUTO services are started after the reboot"
+     when: service_failed|bool == false
 
-  - name: write entry to the windows event log
-    win_eventlog_entry:
-      log: Application
-      source: Ansible
-      event_id: 1971
-      message: All AUTO Services are started after rebooted
-    when: service_failed|bool == false
+   - name: write entry to the windows event log
+     win_eventlog_entry:
+       log: Application
+       source: Ansible
+       event_id: 1971
+       message: All AUTO Services are started after rebooted
+     when: service_failed|bool == false
