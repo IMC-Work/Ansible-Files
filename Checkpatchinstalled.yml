@@ -8,8 +8,8 @@
 #
 #   copy the file CHECKPATCHINSTALLED.PS1 to c:\temp\PS_SCRIPTS on the server
 #
-  - name: run PS_Script
-    command: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
+#  - name: run PS_Script
+#    command: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
 
   - name: Get server name
     command: powershell.exe -
