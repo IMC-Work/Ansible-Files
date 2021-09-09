@@ -12,7 +12,7 @@
     command: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
 #   ansible.windows.win_shell
   - name: Get server name
-    ansible.windows.win_command: powershell.exe -
+    command: powershell.exe -
     args:
       stdin: hostname
     register: server_name
