@@ -10,7 +10,7 @@
 #
   - name: run PS_Script
     command: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
-#   ansible.windows.win_shell
+
   - name: Get server name
     command: powershell.exe -
     args:
@@ -18,7 +18,7 @@
     register: server_name
 
   - name: search file to see if the patch has been installed
-    ansible.windows.win_shell:
+    command:
       Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }}"
     register: patch
 
@@ -28,7 +28,7 @@
   - block:
 
     - name: search file to see when the patch was installed
-      ansible.windows.win_shell:
+      command:
         Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }} InstalledOn="
       register: install_date
 
