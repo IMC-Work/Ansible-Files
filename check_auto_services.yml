@@ -5,8 +5,8 @@
 #
 #   copy the powershell file AutoServices.ps1 to C:\TEMP\ on the server
 #
-#  - name: run PS_Script AUTOSERVICES.PS1
-#    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
+  - name: run PS_Script AUTOSERVICES.PS1
+    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
 
   - name: pause tasks for 5 seconds to allow the script to run
     ansible.builtin.pause:
