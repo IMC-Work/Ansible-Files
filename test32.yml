@@ -1,33 +1,64 @@
 ---
-  - name: copy text
+  - name: read c:\temp\autoservices.txt to get the service to restart
     ansible.windows.win_shell:
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
 
-  - name: read file, copy data to service
-    set_fact: service={{ service.stdout_lines [item] }}
+  - name: set the fact for the service
+    set_fact: service={{ service.stdout_lines[item] }}
 
   - name: remove everything apart from service name
-    set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
+    set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
-  - name: restart the {{ data1 }} service
-    ansible.windows.win_service:
-      name: "{{ data1 }}"
-      state: started
-    register: result
+  - name: restart the Auto service
+    block:
+      - name: restart the {{ service_name }} service
+        ansible.windows.win_service:
+          name: "{{ service_name }}"
+          state: started
+        register: result
 
-  - name: Service Status
-    ansible.builtin.debug:
-      msg: "Service {{ data1 }} has now started"
-    when: result.state == "running"
+      - name: Check Service Status
+        ansible.builtin.debug:
+          msg: "Service {{ service_name }} has now started"
+        when: result.state == "running"
 
-  - name: Write entry to the windows event log
-    win_eventlog_entry:
-      log: Application
-      source: Ansible
-      event_id: 1971
-      message: "{{ data1 }} has been successfully started via Ansible"
-    when: result.state == "running"
+      - name: Write entry to the windows event log if restart successful
+        win_eventlog_entry:
+          log: Application
+          source: Ansible
+          event_id: 1971
+          message: "{{ service_name }} has been successfully started via Ansible"
+        when: result.state == "running"
+    rescue:
+      - name: kill process of service
+        ansible.windows.win_command: cmd.exe -
+          args:
+            stdin: taskkill /FI "SERVICES eq {{ service_name }}" /F
+          register: result_service_kill
 
-  - name: read file, copy data to service
-    set_fact: loop="0"
+      - name: pause tasks for 30 seconds to allow service to be stopped
+        ansible.builtin.pause:
+          seconds: 30
+          prompt: Waiting for taskkill command, please wait!
+
+      - name: restart the {{ service_name }} service again 
+        ansible.windows.win_service:
+          name: "{{ service_name }}"
+            state: started
+        register: result
+
+      - name: Check Service Status
+        ansible.builtin.debug:
+          msg: "Service {{ service_name }} has now started"
+        when: result.state == "running"
+
+      - name: service failed to restart correctly
+        ansible.builtin.debug:
+          msg: "failed to successfully restart the {{ service_name }} service, please investigate"
+        when: result.state != "running"
+
+      - name: set "service_failed" variable to TRUE
+        set_fact:
+          service_failed: "true"
+        when: result.state != "running"
