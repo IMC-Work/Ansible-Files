@@ -33,7 +33,7 @@
     rescue:
       - name: cheet
         set_fact:
-          service_name2: "wuauserv"
+          service_name2: "wuauserv2"
 
   #    - name: kill process of service
   #      ansible.windows.win_command: cmd.exe -
@@ -60,9 +60,9 @@
       - name: service failed to restart correctly
         ansible.builtin.debug:
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
-        when: result.state != "running"
+        when: result2.state != "running"
 
       - name: set "service_failed" variable to TRUE
         set_fact:
           service_failed: "true"
-        when: result.state != "running"
+        when: result2.state != "running"
