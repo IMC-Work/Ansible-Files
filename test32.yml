@@ -37,9 +37,9 @@
 
       - name: kill process of service
         ansible.windows.win_command: cmd.exe -
-          args:
-            stdin: taskkill /FI "SERVICES eq {{ service_name2 }}" /F
-          register: result_service_kill
+        args:
+          stdin: taskkill /FI "SERVICES eq {{ service_name2 }}" /F
+        register: result_service_kill
 
       - name: pause tasks for 30 seconds to allow service to be stopped
         ansible.builtin.pause:
