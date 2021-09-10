@@ -45,7 +45,7 @@
       - name: restart the {{ service_name }} service again
         ansible.windows.win_service:
           name: "wuauserv"
-            state: started
+          state: started
         register: result2
 #
 #      - name: Check Service Status
