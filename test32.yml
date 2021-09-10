@@ -33,7 +33,7 @@
     rescue:
       - name: cheet
         set_fact:
-          service_name2: "wuauserv2"
+          service_name2: "spooler"
 
   #    - name: kill process of service
   #      ansible.windows.win_command: cmd.exe -
