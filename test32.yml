@@ -31,6 +31,9 @@
           message: "{{ service_name }} has been successfully started via Ansible"
         when: result.state == "running"
     rescue:
+      - name: cheet
+        set_fact: service_name2 = "wuauserv"
+
   #    - name: kill process of service
   #      ansible.windows.win_command: cmd.exe -
   #        args:
@@ -42,16 +45,16 @@
           seconds: 1
           prompt: Waiting for taskkill command, please wait!
 
-      - name: restart the {{ service_name }} service again
+      - name: restart the {{ service_name2 }} service again
         ansible.windows.win_service:
-          name: "{{ service_name }}"
+          name: "{{ service_name2 }}"
           state: started
         register: result2
-#
-#      - name: Check Service Status
-#        ansible.builtin.debug:
-#          msg: "Service {{ service_name }} has now started"
-#        when: result2.state == "running"
+
+      - name: Check Service Status
+        ansible.builtin.debug:
+          msg: "Service {{ service_name2 }} has now started"
+        when: result2.state == "running"
 #
 #      - name: service failed to restart correctly
 #        ansible.builtin.debug:
