@@ -32,7 +32,8 @@
         when: result.state == "running"
     rescue:
       - name: cheet
-        set_fact: service_name2 = "wuauserv"
+        set_fact:
+          service_name2: "wuauserv"
 
   #    - name: kill process of service
   #      ansible.windows.win_command: cmd.exe -
