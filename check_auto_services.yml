@@ -31,8 +31,7 @@
       service_failed: "false"
 
   - name: restart all the Auto Services that require to be restarted
-#    include_tasks: restart_auto_services.yml
-    include_tasks: test32.yml
+    include_tasks: restart_auto_services.yml
     loop: "{{ range(1,(loop_num|int)) | list }}"
 
   - name: at least one AUTO service failed to restart
