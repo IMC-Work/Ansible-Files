@@ -56,13 +56,13 @@
         ansible.builtin.debug:
           msg: "Service {{ service_name2 }} has now started"
         when: result2.state == "running"
-#
-#      - name: service failed to restart correctly
-#        ansible.builtin.debug:
-#          msg: "failed to successfully restart the {{ service_name }} service, please investigate"
-#        when: result2.state != "running"
-#
-#      - name: set "service_failed" variable to TRUE
-#        set_fact:
-#          service_failed: "true"
-#        when: result2.state != "running"
+
+      - name: service failed to restart correctly
+        ansible.builtin.debug:
+          msg: "failed to successfully restart the {{ service_name }} service, please investigate"
+        when: result.state != "running"
+
+      - name: set "service_failed" variable to TRUE
+        set_fact:
+          service_failed: "true"
+        when: result.state != "running"
