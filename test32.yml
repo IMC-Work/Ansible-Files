@@ -42,7 +42,7 @@
           seconds: 30
           prompt: Waiting for taskkill command, please wait!
 
-      - name: restart the {{ service_name }} service again 
+      - name: restart the {{ service_name }} service again
         ansible.windows.win_service:
           name: "{{ service_name }}"
             state: started

@@ -8,41 +8,41 @@
 #
 #   copy the file CHECKPATCHINSTALLED.PS1 to c:\temp\PS_SCRIPTS on the server
 #
-  - name: run PS_Script
-    ansible.windows.win_shell: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
+#  - name: run PS_Script
+#    command: C:\temp\PS_Scripts\CheckPatchInstalled.ps1
 
-  - name: Get server name
-    ansible.windows.win_command: powershell.exe -
-    args:
-      stdin: hostname
-    register: server_name
+   - name: Get server name
+     command: powershell.exe -
+     args:
+       stdin: hostname
+     register: server_name
 
-  - name: search file to see if the patch has been installed
-    ansible.windows.win_shell:
-      Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }}"
-    register: patch
+   - name: search file to see if the patch has been installed
+     command:
+       Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }}"
+     register: patch
 
-  - name: read file to get information on patch installed
-    set_fact: patch_installed={{ patch.stdout_lines }}
+   - name: read file to get information on patch installed
+     set_fact: patch_installed={{ patch.stdout_lines }}
 
-  - block:
+   - block:
 
-    - name: search file to see when the patch was installed
-      ansible.windows.win_shell:
-        Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }} InstalledOn="
-      register: install_date
+     - name: search file to see when the patch was installed
+       command:
+         Select-String -Path C:\temp\CheckPatchInstalled.txt -pattern "{{ patch_number }} InstalledOn="
+       register: install_date
 
-    - name: read file to copy installed patch date
-      set_fact: installed_on={{ install_date.stdout_lines }}
+     - name: read file to copy installed patch date
+       set_fact: installed_on={{ install_date.stdout_lines }}
 
-    - name: trim file to get patch installed date
-      set_fact: date={{ installed_on | regex_replace('.*=') | regex_replace ("'.*") }}
+     - name: trim file to get patch installed date
+       set_fact: date={{ installed_on | regex_replace('.*=') | regex_replace ("'.*") }}
 
-    - debug:
-        msg: "{{ patch_number }} was installed on {{ server_name.stdout_lines[0] }} on {{ date }}"
+     - debug:
+         msg: "{{ patch_number }} was installed on {{ server_name.stdout_lines[0] }} on {{ date }}"
 
-    when: patch_installed|length > 2
+     when: patch_installed|length > 2
 
-  - debug:
-      msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
-    when: patch_installed|length < 1
+   - debug:
+       msg: " {{ patch_number }} is not installed on {{ server_name.stdout_lines[0] }}"
+     when: patch_installed|length < 1
