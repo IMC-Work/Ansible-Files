@@ -24,8 +24,8 @@
     debug:
       msg:
         - "The current_version is {{ current_version }}"
-        - "The common files dir is {{ common_files_dir }}"
-        - "The current_version_default is {{ current_version_default.value }}"
+        - "The common files dir is {{ common_files_dir.value }}"
+        - "The current_version_default is {{ current_version_default }}"
 
   - name: Amend/Add new key to the registry
     win_regedit:
