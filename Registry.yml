@@ -13,15 +13,15 @@
       name: CommonFilesDir
     register: common_files_dir
 
-    - name: Obtain Information about registry key (default)
-      ansible.windows.win_reg_stat:
-        path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
-        name: ' '
-      register: current_version_default
+  - name: Obtain Information about registry key (default)
+    ansible.windows.win_reg_stat:
+      path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
+      name: ' '
+    register: current_version_default
 
-    - name: information
-      debug:
-        msg:
-          - "The current_version is {{ current_version }}"
-          - "The common files dir is {{ common_files_dir }}"
-          - "The current_version_default is {{ current_version_default }}"
+  - name: information
+    debug:
+      msg:
+        - "The current_version is {{ current_version }}"
+        - "The common files dir is {{ common_files_dir }}"
+        - "The current_version_default is {{ current_version_default }}"
