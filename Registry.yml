@@ -3,18 +3,18 @@
   tasks:
 
   - name: Obtain Information about registry key (short form)
-    ansible.windows.win_reg_stat:
+    win_reg_stat:
       path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
     register: current_version
 
   - name: Obtain Information about registry key property
-    ansible.windows.win_reg_stat:
+    win_reg_stat:
       path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
       name: CommonFilesDir
     register: common_files_dir
 
   - name: Obtain Information about registry key (default)
-    ansible.windows.win_reg_stat:
+    win_reg_stat:
       path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
       name: ' '
     register: current_version_default
