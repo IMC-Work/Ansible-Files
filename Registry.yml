@@ -26,3 +26,9 @@
         - "The current_version is {{ current_version }}"
         - "The common files dir is {{ common_files_dir }}"
         - "The current_version_default is {{ current_version_default }}"
+
+  - name: Obtain Information about registry key (default)
+    win_regedit:
+      path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
+      name: NewEntry
+      data: "hello"
