@@ -36,6 +36,6 @@
   - name: Amend/Add new key to the registry
     win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
-      name: NewStringEntry
-      data: "161171"
-      type: string
+      name: NewDwordEntry
+      data: "this is deword"
+      type: dword
