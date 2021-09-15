@@ -31,4 +31,11 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
       name: NewEntry
-      data: "hello again"
+      data: "hello"
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
+      name: NewStringEntry
+      data: "161171"
+      type: string
