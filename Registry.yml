@@ -23,6 +23,6 @@
   - name: information
     debug:
       msg:
-        - "The current_version is {{ current_version }}"
+        - "The current_version is {{ current_version.programfilesdir }}"
         - "The common files dir is {{ common_files_dir }}"
         - "The current_version_default is {{ current_version_default }}"
