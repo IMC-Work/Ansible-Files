@@ -37,5 +37,5 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows\currentVersion
       name: NewDwordEntry
-      data: "this is deword"
+      data: "161171"
       type: dword
