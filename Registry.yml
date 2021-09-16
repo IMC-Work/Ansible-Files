@@ -39,3 +39,9 @@
       name: NewDwordEntry
       data: "161171"
       type: dword
+
+  - name: Set maximum policy age
+    win_security_policy:
+      section: System Access
+      key: MaximumPasswordAge
+      value: 99    
