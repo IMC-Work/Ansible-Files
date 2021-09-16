@@ -50,4 +50,4 @@
     win_security_policy:
       section: Registry Values
       key: MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount
-      value: "1,10"
+      value: 1,"10"
