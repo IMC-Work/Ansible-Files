@@ -48,6 +48,6 @@
 
   - name: AmendCachedLogonCounts from 10
     win_security_policy:
-      section: Registry
+      section: Registry Values
       key: MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount
       value: 11
