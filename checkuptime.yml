@@ -26,14 +26,14 @@
 
    - debug:
        msg: "Above Uptime_threshold - so rebooting the server NOW"
-     when: uptime_above_limit is true
+     when: uptime_above_limit == true
 
    - name: Reboot server
      win_reboot:
       reboot_timeout: 100
      register: reboot_status
-     when: uptime_above_limit is true
+     when: uptime_above_limit == true
 
    - debug:
        msg: "Server was rebooted"
-     when: uptime_above_limit is true
+     when: uptime_above_limit == true
