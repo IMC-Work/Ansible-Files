@@ -35,7 +35,10 @@
     when: rebootrequired.exists == false or uptime_above_limit == false
 
   - debug:
-      msg: "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
+      msg:
+        - "***********************************************************************************************"
+        - "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
+        - "***********************************************************************************************"
     when: rebootrequired.exists == true or uptime_above_limit == true
 
   #
@@ -75,3 +78,10 @@
         - "Free up some Space on the C Drive before patching commences"
         - "***********************************************************"
     when: LowDiskSpace == true
+
+  - debug:
+      msg:
+        - "**********************************************************************************"
+        - "*** server {{ server_name.stdout_lines[0] }} has passed the -5 day pre-checks  ***"
+        - "**********************************************************************************"
+    when: rebootrequired.exists == false ans uptime_above_limit == false and LowDiskSpace == false  
