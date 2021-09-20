@@ -21,7 +21,7 @@
         "{{ (uptime_raw.stdout_lines[0] | int) >= (uptime_threshold | int) }}"
 
    - debug:
-       msg: "Below Uptime_threshold - No reboot required "
+       msg: "Below Uptime_threshold - No reboot required {{ uptime_raw.stdout_lines[0] }}"
      when: uptime_above_limit == false
 
    - debug:
