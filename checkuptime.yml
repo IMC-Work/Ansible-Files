@@ -22,7 +22,7 @@
 
    - debug:
        msg: "Below Uptime_threshold - No reboot required "
-     when: uptime_above_limit is false
+     when: uptime_above_limit == false
 
    - debug:
        msg: "Above Uptime_threshold - so rebooting the server NOW"
