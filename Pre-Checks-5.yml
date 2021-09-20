@@ -32,7 +32,7 @@
 
   - debug:
       msg: "no reboot required on {{ server_name.stdout_lines[0] }} prior to patching"
-    when: rebootrequired.exists == false or uptime_above_limit == false
+    when: rebootrequired.exists == false and uptime_above_limit == false
 
   - debug:
       msg:
