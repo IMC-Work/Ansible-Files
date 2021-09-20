@@ -1,88 +1,91 @@
 ---
-- hosts: all
-  gather_facts: false
-  vars:
+vars:
+  source: https://10.177.57.227:8081/repository/lbg/temp/patching/freespace.PS1
+  target: c:\temp
 
-  tasks:
+- name: download avecto defendpoint install file from bds server
+  win_get_url:
+    url: "{{ source }}"
+    dest: "{{ target }}"
+    validate_certs: no
+  register: file_copy
 
-  - name: get registry key from server to determine whether a reboot is required
-    win_reg_stat:
-      path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired
-    register: rebootrequired
+- name: download failed
+  fail:
+    msg: " ### Freespace.ps1 file download failed - please investigate *** "
+  when: file_copy.failed == true
 
-  - name: Get server name
-    win_command: powershell.exe -
-    args:
-      stdin: hostname
-    register: server_name
+- name: run PS_Script FREESPACE.PS1
+  win_shell: C:\temp\FreeSpace.ps1
 
-  - name: get the affected windows host's uptime
-    win_shell: "[convert]::ToInt32(($(Get-Date) - $(Get-WmiObject
-       Win32_OperatingSystem).ConvertToDateTime($(Get-WmiObject
-       Win32_OperatingSystem).LastBootUpTime)).TotalDays);"
-    register: uptime_raw
-    changed_when: false
-    ignore_errors: true
+- name: copy disk space information from file
+  win_shell:
+    Select-String -Path C:\temp\FreeSpace.txt -pattern "@{FreeSpace="
+  register: freespace
 
-  - name: Save Uptime related variables
-    set_fact:
-     uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
-     uptime_above_limit:
-       "{{ (uptime_raw.stdout_lines[0] | int) >= 60 }}"
+- name: read file to get free disk space
+  set_fact: freediskspace={{ freespace.stdout_lines }}
 
-  - debug:
-      msg: "no reboot required on {{ server_name.stdout_lines[0] }} prior to patching"
-    when: rebootrequired.exists == false and uptime_above_limit == false
+- name: trim file to get free disk space value
+  set_fact: data1={{ freediskspace | regex_replace('.*=') | regex_replace ("'.*") }}
 
-  - debug:
-      msg:
-        - "********************************************************************************"
-        - "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
-        - "*** As it's either pending a reboot, or it's been over 60 days since last reboot ***"
-        - "********************************************************************************"
-    when: rebootrequired.exists == true or uptime_above_limit == true
+- name: check if disk space above threshold of 5GB
+  set_fact:
+   LowDiskSpace:
+     "{{ (data1 | int) <= 5 }}"
 
-  #
-  #   code to copy FREESPACE.PS1 to C:\TEMP on server
-  #
+- name: Get server name
+  win_command: powershell.exe -
+  args:
+    stdin: hostname
+  register: server_name
 
-  - name: run PS_Script
-    win_shell: C:\temp\FreeSpace.ps1
+- name: Disk Space below threshold server Information
+  debug:
+    msg:
+      - "***********************************************************"
+      - "{{ server_name.stdout_lines[0] }} has only {{ data1 }}GB free on the C Drive"
+      - "Free up some Space on the C Drive before patching commences"
+      - "***********************************************************"
+  when: LowDiskSpace == true
 
-  - name: copy disk space information from file
-    win_shell:
-      Select-String -Path C:\temp\FreeSpace.txt -pattern "@{FreeSpace="
-    register: freespace
+- name: get registry key from server to determine whether a reboot is required
+  win_reg_stat:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired
+  register: rebootrequired
 
-  - name: read file to get free disk space
-    set_fact: freediskspace={{ freespace.stdout_lines }}
+- name: Get server name
+  win_command: powershell.exe -
+  args:
+    stdin: hostname
+  register: server_name
 
-  - name: trim file to get free disk space value
-    set_fact: data1={{ freediskspace | regex_replace('.*=') | regex_replace ("'.*") }}
+- name: get the affected windows host's uptime
+  win_shell: "[convert]::ToInt32(($(Get-Date) - $(Get-WmiObject
+     Win32_OperatingSystem).ConvertToDateTime($(Get-WmiObject
+     Win32_OperatingSystem).LastBootUpTime)).TotalDays);"
+  register: uptime_raw
+  changed_when: false
+  ignore_errors: true
 
-  - name: check if disk space above threshold
-    set_fact:
-     LowDiskSpace:
-       "{{ (data1 | int) <= 5 }}"
+- name: Checks if server been up for more than 60 days
+  set_fact:
+   uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
+   uptime_above_limit:
+     "{{ (uptime_raw.stdout_lines[0] | int) >= 60 }}"
 
-  - name: Get server name
-    win_command: powershell.exe -
-    args:
-      stdin: hostname
-    register: server_name
+- debug:
+    msg: "no reboot required on {{ server_name.stdout_lines[0] }} prior to patching"
+  when: rebootrequired.exists == false and uptime_above_limit == false
 
-  - name: Disk Space below threshold server Information
-    debug:
-      msg:
-        - "***********************************************************"
-        - "{{ server_name.stdout_lines[0] }} has only {{ data1 }}GB free on the C Drive"
-        - "Free up some Space on the C Drive before patching commences"
-        - "***********************************************************"
-    when: LowDiskSpace == true
+- debug:
+    msg:
+      - "********************************************************************************"
+      - "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
+      - "*** As it's either pending a reboot, or it's been over 60 days since last reboot ***"
+      - "********************************************************************************"
+  when: rebootrequired.exists == true or uptime_above_limit == true
 
-  - debug:
-      msg:
-        - "*******************************************************************"
-        - "*** server {{ server_name.stdout_lines[0] }} has passed the -5 day pre-checks  ***"
-        - "*******************************************************************"
-    when: rebootrequired.exists == false and uptime_above_limit == false and LowDiskSpace == false
+- debug:
+    msg: "server {{ server_name.stdout_lines[0] }} has passed the -5 day pre-checks"
+  when: rebootrequired.exists == false and uptime_above_limit == false and LowDiskSpace == false
