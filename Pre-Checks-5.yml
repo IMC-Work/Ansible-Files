@@ -38,6 +38,7 @@
       msg:
         - "********************************************************************************"
         - "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
+        - "*** As it's either in a pending reboot state, or it's been over 60 days since last reboot ***"
         - "********************************************************************************"
     when: rebootrequired.exists == true or uptime_above_limit == true
 
