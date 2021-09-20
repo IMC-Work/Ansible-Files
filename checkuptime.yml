@@ -9,7 +9,7 @@
    - name: get the affected windows host's uptime
      win_shell: "[convert]::ToInt32(($(Get-Date) - $(Get-WmiObject
         Win32_OperatingSystem).ConvertToDateTime($(Get-WmiObject
-        Win32_OperatingSystem).LastBootUpTime)).TotalMInutes);"
+        Win32_OperatingSystem).LastBootUpTime)).TotalDays);"
      register: uptime_raw
      changed_when: false
      ignore_errors: true
