@@ -28,7 +28,7 @@
     set_fact:
      uptime_mins: "{{ uptime_raw.stdout_lines[0] | int }}"
      uptime_above_limit:
-       "{{ (uptime_raw.stdout_lines[0] | int) >= 60 }}"
+       "{{ (uptime_raw.stdout_lines[0] | int) >= 0 }}"
 
   - debug:
       msg: "no reboot required on {{ server_name.stdout_lines[0] }} prior to patching"
@@ -36,9 +36,9 @@
 
   - debug:
       msg:
-        - "***********************************************************************************************"
+        - "********************************************************************************"
         - "*** Please schedule a reboot of server {{ server_name.stdout_lines[0] }} prior to patching  ***"
-        - "***********************************************************************************************"
+        - "********************************************************************************"
     when: rebootrequired.exists == true or uptime_above_limit == true
 
   #
@@ -62,7 +62,7 @@
   - name: check if disk space above threshold
     set_fact:
      LowDiskSpace:
-       "{{ (data1 | int) <= 5 }}"
+       "{{ (data1 | int) >= 5 }}"
 
   - name: Get server name
     win_command: powershell.exe -
@@ -81,7 +81,7 @@
 
   - debug:
       msg:
-        - "**********************************************************************************"
+        - "*******************************************************************"
         - "*** server {{ server_name.stdout_lines[0] }} has passed the -5 day pre-checks  ***"
-        - "**********************************************************************************"
-    when: rebootrequired.exists == false and uptime_above_limit == false and LowDiskSpace == false  
+        - "*******************************************************************"
+    when: rebootrequired.exists == false and uptime_above_limit == false and LowDiskSpace == false
