@@ -84,4 +84,4 @@
         - "**********************************************************************************"
         - "*** server {{ server_name.stdout_lines[0] }} has passed the -5 day pre-checks  ***"
         - "**********************************************************************************"
-    when: rebootrequired.exists == false ans uptime_above_limit == false and LowDiskSpace == false  
+    when: rebootrequired.exists == false and uptime_above_limit == false and LowDiskSpace == false  
