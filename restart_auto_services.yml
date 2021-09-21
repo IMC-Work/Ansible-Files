@@ -54,12 +54,13 @@
           msg: "Service {{ service_name }} has now started"
         when: result2.state == "running"
         ignore_errors: true
-        
+
       - name: service failed to restart correctly
         debug:
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
         when: result2.state != "running"
-
+        ignore_errors: true
+        
       - name: set "service_failed" variable to TRUE
         set_fact:
           service_failed: "true"
