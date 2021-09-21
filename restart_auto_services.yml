@@ -53,7 +53,6 @@
         debug:
           msg: "Service {{ service_name }} has now started"
         when: result2.state == "running"
-        ignore_errors: true
 
       - name: service failed to restart correctly
         debug:
