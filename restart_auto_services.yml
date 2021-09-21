@@ -48,12 +48,13 @@
           state: started
         register: result2
         ignore_errors: true
-          
+
       - name: Check Service Status
         debug:
           msg: "Service {{ service_name }} has now started"
         when: result2.state == "running"
-
+        ignore_errors: true
+        
       - name: service failed to restart correctly
         debug:
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
