@@ -60,8 +60,9 @@
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
         when: result2.state != "running"
         ignore_errors: true
-        
+
       - name: set "service_failed" variable to TRUE
         set_fact:
           service_failed: "true"
         when: result2.state != "running"
+        ignore_errors: true
