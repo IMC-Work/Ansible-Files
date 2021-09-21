@@ -39,7 +39,7 @@
 
       - name: pause tasks for 30 seconds to allow service to be stopped
         pause:
-          seconds: 30
+          seconds: 3
           prompt: Waiting for taskkill command, please wait!
 
       - name: restart the {{ service_name }} service again
@@ -47,7 +47,8 @@
           name: "{{ service_name }}"
           state: started
         register: result2
-
+        ignore_errors: true
+          
       - name: Check Service Status
         debug:
           msg: "Service {{ service_name }} has now started"
