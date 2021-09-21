@@ -1,6 +1,6 @@
 ---
   - name: read c:\temp\autoservices.txt to get the service to restart
-    ansible.windows.win_shell:
+    win_shell:
       Select-String -Path C:\temp\autoservices.txt -pattern "Service="
     register: service
 
@@ -13,13 +13,13 @@
   - name: restart the Auto service
     block:
       - name: restart the {{ service_name }} service
-        ansible.windows.win_service:
+        win_service:
           name: "{{ service_name }}"
           state: started
         register: result
 
       - name: Check Service Status
-        ansible.builtin.debug:
+        debug:
           msg: "Service {{ service_name }} has now started"
         when: result.state == "running"
 
@@ -32,29 +32,29 @@
         when: result.state == "running"
     rescue:
       - name: kill process of service
-        ansible.windows.win_command: cmd.exe -
+        win_command: cmd.exe -
         args:
           stdin: taskkill /FI "SERVICES eq {{ service_name }}" /F
         register: result_service_kill
 
       - name: pause tasks for 30 seconds to allow service to be stopped
-        ansible.builtin.pause:
+        pause:
           seconds: 30
           prompt: Waiting for taskkill command, please wait!
 
       - name: restart the {{ service_name }} service again
-        ansible.windows.win_service:
+        win_service:
           name: "{{ service_name }}"
           state: started
         register: result2
 
       - name: Check Service Status
-        ansible.builtin.debug:
+        debug:
           msg: "Service {{ service_name }} has now started"
         when: result2.state == "running"
 
       - name: service failed to restart correctly
-        ansible.builtin.debug:
+        debug:
           msg: "failed to successfully restart the {{ service_name }} service, please investigate"
         when: result2.state != "running"
 

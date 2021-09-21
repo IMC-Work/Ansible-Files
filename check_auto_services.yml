@@ -5,16 +5,16 @@
 #
 #   copy the powershell file AutoServices.ps1 to C:\TEMP\ on the server
 #
-  - name: run PS_Script AUTOSERVICES.PS1
-    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
-
-  - name: pause tasks for 15 seconds to allow the script to run
-    ansible.builtin.pause:
-      seconds: 15
-      prompt: Waiting for script to run, please wait!
+#  - name: run PS_Script AUTOSERVICES.PS1
+#    win_shell: C:\temp\PS_Scripts\AutoServices.ps1
+#
+#  - name: pause tasks for 15 seconds to allow the script to run
+#    pause:
+#      seconds: 15
+#      prompt: Waiting for script to run, please wait!
 
   - name: Get number of services to restart
-    ansible.windows.win_command: powershell.exe -
+    win_command: powershell.exe -
     args:
       stdin: (Get-Content C:\temp\autoservices.txt).Length
     register: auto_services
@@ -35,12 +35,12 @@
     loop: "{{ range(1,(loop_num|int)) | list }}"
 
   - name: at least one AUTO service failed to restart
-    ansible.builtin.debug:
+    debug:
       msg: "at least one AUTO service failed to restart correctly, please investigate"
     when: service_failed|bool == true
 
   - name: all AUTO services are now started after the reboot
-    ansible.builtin.debug:
+    debug:
       msg: "all AUTO services are started after the reboot"
     when: service_failed|bool == false
 
