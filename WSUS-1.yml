@@ -1,0 +1,97 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+
+#
+#  code to check if the registry key area exists or not
+#
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+      name: UseWUServer
+      data: "1"
+      type: dword
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: WUServer
+      data: "http://IFWQTC0100.TEST01GLOBAL.LLOYDSTSB.COM:8530"
+      type: string
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: WUStatusServer
+      data: "http://IFWQTC0100.TEST01GLOBAL.LLOYDSTSB.COM:8530"
+      type: string
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroupEnabled
+      data: "1"
+      type: dword
+#
+#   something to identify the operating system on the server
+#
+#   Server_2016 or Server_2012 or Server_2019 or Unassigned Computers
+#
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroup
+      data: "Server_2016"
+      type: string
+
+  - name: Obtain Information about registry key property
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: WUServer
+    register: WUServer
+
+  - name: Obtain Information about registry key property
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: WUStatusServer
+    register: WUStatusServer
+
+  - name: Obtain Information about registry key property
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroupEnabled
+    register: TargetGroupEnabled
+
+  - name: Obtain Information about registry key property
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroup
+    register: TargetGroup
+
+  - name: Obtain Information about registry key property
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+      name: UseWUServer
+    register: UseWUServer
+
+  - name: information
+    debug:
+      msg:
+        - "The WUServer is {{ WUServer }}"
+        - "The WUStatusServer is {{ WUStatusServer }}"
+        - "The TargetGroupEnabled is {{ TargetGroupEnabled }}"
+        - "The TargetGroup is {{ TargetGroup }}"
+        - "The UseWUServer is {{ UseWUServer }}"
+
+  - name: restart the windows update service
+    win_service:
+      name: wuauserv
+      state: restarted
+    register: result
+
+  - name: debug1
+    ansible.builtin.debug:
+      msg: "Windows Update service has been restarted"
+    when: result.changed == true

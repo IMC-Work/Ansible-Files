@@ -1,12 +1,8 @@
 ---
-vars:
-  source: https://10.177.57.227:8081/repository/lbg/temp/patching/freespace.PS1
-  target: c:\temp
-
-- name: download avecto defendpoint install file from bds server
+- name: download Freespace.ps1 file from bds server
   win_get_url:
-    url: "{{ source }}"
-    dest: "{{ target }}"
+    url: https://10.177.57.227:8081/repository/lbg/temp/patching/freespace.PS1
+    dest: c:\temp
     validate_certs: no
   register: file_copy
 
