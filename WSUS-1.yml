@@ -43,16 +43,28 @@
       name: TargetGroupEnabled
       data: "1"
       type: dword
+#
+#    need to check registry key to find os - copy
+#
+  - name: set default TargetGroup
+    set_fact:
+      TargetGroup: "Unassigned Computers"
 
-  - name: set value to 2019
+  - name: set value to 2012 if Server 2012
+    set_fact:
+      TargetGroup: "Server_2012"
+    when: os.find("2012") != -1
+
+  - name: set value to 2016 if Server 2016
+    set_fact:
+      TargetGroup: "Server_2016"
+    when: os.find("2016") != -1
+
+  - name: set value to 2019 if Server 2019
     set_fact:
       TargetGroup: "Server_2019"
-    when: os.find("2016") != -1
-#
-#   something to identify the operating system on the server
-#
-#   Server_2016 or Server_2012 or Server_2019 or Unassigned Computers
-#
+    when: os.find("2019") != -1
+
   - name: Amend/Add new key to the registry
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
