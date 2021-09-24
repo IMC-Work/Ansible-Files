@@ -43,6 +43,12 @@
       name: TargetGroupEnabled
       data: "1"
       type: dword
+
+  - name: Obtain Information about the Operating System
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+      name: ProductName
+    register: os
 #
 #    need to check registry key to find os - copy
 #
@@ -53,17 +59,17 @@
   - name: set value to 2012 if Server 2012
     set_fact:
       TargetGroup: "Server_2012"
-    when: os.find("2012") != -1
+    when: os.value.find("2012") != -1
 
   - name: set value to 2016 if Server 2016
     set_fact:
       TargetGroup: "Server_2016"
-    when: os.find("2016") != -1
+    when: os.value.find("2016") != -1
 
   - name: set value to 2019 if Server 2019
     set_fact:
       TargetGroup: "Server_2019"
-    when: os.find("2019") != -1
+    when: os.value.find("2019") != -1
 
   - name: Amend/Add new key to the registry
     win_regedit:
