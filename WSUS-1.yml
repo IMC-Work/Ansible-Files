@@ -85,11 +85,11 @@
   - name: information
     debug:
       msg:
-        - "The WUServer is {{ WUServer }}"
-        - "The WUStatusServer is {{ WUStatusServer }}"
-        - "The TargetGroupEnabled is {{ TargetGroupEnabled }}"
-        - "The TargetGroup is {{ TargetGroup }}"
-        - "The UseWUServer is {{ UseWUServer }}"
+        - "The WUServer is {{ WUServer.value }}"
+        - "The WUStatusServer is {{ WUStatusServer.value }}"
+        - "The TargetGroupEnabled is {{ TargetGroupEnabled.value }}"
+        - "The TargetGroup is {{ TargetGroup.value }}"
+        - "The UseWUServer is {{ UseWUServer.value }}"
 
   - name: restart the windows update service
     win_service:
