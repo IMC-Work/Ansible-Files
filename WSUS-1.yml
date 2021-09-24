@@ -45,8 +45,8 @@
       type: dword
 
   - name: set value to 2019
-      set_fact:
-        TargetGroup: "Server_2019"
+    set_fact:
+      TargetGroup: "Server_2019"
     when: os.find("2016") != -1
 #
 #   something to identify the operating system on the server
