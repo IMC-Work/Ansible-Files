@@ -11,7 +11,7 @@
   - name: Create registry key if it does not exist
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\Ian
-    when: AU_exists == false
+    when: AU.exists == false
 
   - name: Amend/Add new key to the registry
     win_regedit:
