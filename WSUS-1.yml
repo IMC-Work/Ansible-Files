@@ -1,6 +1,9 @@
 ---
 - hosts: all
   gather_facts: false
+  vars:
+    os: "Serrver 2016"
+
   tasks:
 
   - name: Check if Registry key exists
@@ -40,6 +43,11 @@
       name: TargetGroupEnabled
       data: "1"
       type: dword
+
+  - name: set value to 2019
+      set_fact:
+        TargetGroup: "Server_2019"
+    when: os.find("2016") != -1
 #
 #   something to identify the operating system on the server
 #
@@ -49,7 +57,7 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
       name: TargetGroup
-      data: "Server_2016"
+      data: {{ TargetGroup }}
       type: string
 
   - name: Obtain Information about registry key property
