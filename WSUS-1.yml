@@ -1,9 +1,6 @@
 ---
 - hosts: all
   gather_facts: false
-  vars:
-    os: "Serrver 2016"
-
   tasks:
 
   - name: Check if Registry key exists
@@ -49,9 +46,7 @@
       path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
       name: ProductName
     register: os
-#
-#    need to check registry key to find os - copy
-#
+
   - name: set default TargetGroup
     set_fact:
       TargetGroup: "Unassigned Computers"
