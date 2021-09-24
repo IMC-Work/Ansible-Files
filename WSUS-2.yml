@@ -23,8 +23,8 @@
   - name: Amend UseWUServer to "1"
     win_security_policy:
       section: Registry Values
-      key: MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU\UseWUServer
-      value: 1
+      key: MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU\UseWUServer2
+      value: 1,"1"
 
   - name: Amend/Add new key to the registry
     win_regedit:
