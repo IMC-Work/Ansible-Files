@@ -57,7 +57,7 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
       name: TargetGroup
-      data: {{ TargetGroup }}
+      data: "{{ TargetGroup }}"
       type: string
 
   - name: Obtain Information about registry key property
