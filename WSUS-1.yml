@@ -3,9 +3,15 @@
   gather_facts: false
   tasks:
 
-#
-#  code to check if the registry key area exists or not
-#
+  - name: Check if Registry key exists
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\Ian
+    register: AU
+
+  - name: Create registry key if it does not exist
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\Ian
+    when: AU_exists == false
 
   - name: Amend/Add new key to the registry
     win_regedit:
