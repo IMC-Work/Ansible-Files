@@ -10,8 +10,8 @@
   tasks:
 
   - name: nslookup the default gateway
-#    shell: 'nsloopkp "{{ default_ipv4.gateway }}"'
-    shell: 'nslookup "192.168.1.254"'
+    shell: 'nsloopkp "{{ default_ipv4.gateway }}"'
+#    shell: 'nslookup "192.168.1.254"'
     register: nslookup_results
     ignore_errors: True
     args:
