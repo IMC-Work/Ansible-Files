@@ -21,15 +21,15 @@
 
   - name: set fact on host on the best location
     set_fact:
-      WSUS_Server1: {{ LON02-1 }}
-      WSUS_Server2: {{ LON02-2 }}
+      WSUS_Server1: "{{ LON02-1 }}"
+      WSUS_Server2: "{{ LON02-2 }}"
       cacheable: yes
     when: nslookup_results.stdout.find("nothing") != -1
 
   - name: set fact on host on the best location
     set_fact:
-      WSUS_Server1: {{ LON06-1 }}
-      WSUS_Server2: {{ LON06-2 }}
+      WSUS_Server1: "{{ LON06-1 }}"
+      WSUS_Server2: "{{ LON06-2 }}"
       cacheable: yes
     when: nslookup_results.stdout.find("asus") != -1
 
