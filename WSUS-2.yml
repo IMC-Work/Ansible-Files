@@ -9,6 +9,7 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
       name: UseWUServer
+      state: absent
       delete_key: yes
 
   - name: Amend/Add new key to the registry
@@ -42,7 +43,7 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
       name: TargetGroup
-      data: "{{ TargetGroup }}"
+      data: "Server_2016"
       type: string
 
   - name: restart the windows update service
