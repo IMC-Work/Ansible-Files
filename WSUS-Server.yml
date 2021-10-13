@@ -2,10 +2,10 @@
 - hosts: all
   gather_facts: True
   vars:
-    lon02-1: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon02-2: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon06-1: http://IFWQTV0200.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon06-2: http://IFWQTV0201.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    lon02a: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    lon02b: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    lon06a: http://IFWQTV0200.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    lon06b: http://IFWQTV0201.TEST01GLOBAL.LLOYDSTSB.COM:8530
 
   tasks:
 
@@ -21,15 +21,15 @@
 
   - name: set fact on host on the best location
     set_fact:
-      WSUS_Server1: "{{ lon02-1 }}"
-      WSUS_Server2: "{{ lon02-2 }}"
+      WSUS_Server1: "{{ lon02a }}"
+      WSUS_Server2: "{{ lon02b }}"
       cacheable: yes
     when: nslookup_results.stdout.find("nothing") != -1
 
   - name: set fact on host on the best location
     set_fact:
-      WSUS_Server1: "{{ lon06-1 }}"
-      WSUS_Server2: "{{ lon06-2 }}"
+      WSUS_Server1: "{{ lon06a }}"
+      WSUS_Server2: "{{ lon06b }}"
       cacheable: yes
     when: nslookup_results.stdout.find("asus") != -1
 
