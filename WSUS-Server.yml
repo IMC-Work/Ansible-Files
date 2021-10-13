@@ -10,7 +10,7 @@
   tasks:
 
   - name: nslookup the default gateway
-    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
+    shell: 'nslookup "{{ default_ipv4.gateway }}"'
     register: nslookup_results
     ignore_errors: True
     args:
