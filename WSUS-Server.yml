@@ -11,8 +11,8 @@
 
   - name: nslookup the default gateway
 #    shell: 'nslookup "{{ default_ipv4.gateway }}"'
-#    command: 'nslookup "192.168.1.254"'
-    win_command: nslookup 192.168.1.254
+    win_command: nslookup {{ default_ipv4.gateway }}"'
+#    win_command: nslookup 192.168.1.254
     register: nslookup_results
     ignore_errors: True
     args:
@@ -20,7 +20,6 @@
 
   - name: print
     debug:
-#      msg: "{{ nslookup_results.stdout }}"
       msg: "{{ nslookup_results.stdout }}"
 
   - name: set fact on host on the best location
