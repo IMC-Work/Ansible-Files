@@ -15,9 +15,10 @@
     ignore_errors: True
     args:
       warn: false
-  - name: print
-    debug:
-      msg: "{{ nslookup_results.stdout }}"
+
+#  - name: print
+#    debug:
+#      msg: "{{ nslookup_results.stdout }}"
 
   - name: set fact on host on the best location
     set_fact:
