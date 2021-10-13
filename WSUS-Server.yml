@@ -12,7 +12,7 @@
   - name: nslookup the default gateway
 #    shell: 'nslookup "{{ default_ipv4.gateway }}"'
 #    command: 'nslookup "192.168.1.254"'
-    windows.win_command: nslookup 192.168.1.254
+    win_command: nslookup 192.168.1.254
     register: nslookup_results
     ignore_errors: True
     args:
