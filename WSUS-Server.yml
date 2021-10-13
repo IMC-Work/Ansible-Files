@@ -21,7 +21,7 @@
   - name: print
     debug:
 #      msg: "{{ nslookup_results.stdout }}"
-      msg: "{{ nslookup_results }}"
+      msg: "{{ nslookup_results.stdout }}"
 
   - name: set fact on host on the best location
     set_fact:
