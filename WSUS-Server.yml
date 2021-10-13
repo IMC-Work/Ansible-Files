@@ -35,7 +35,7 @@
       WSUS_Server1: "{{ lon06a }}"
       WSUS_Server2: "{{ lon06b }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("asus") != -1
+    when: nslookup_results.stdout.find("eehub") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:
