@@ -12,8 +12,8 @@
   tasks:
 
   - name: nslookup the default gateway
-    shell: 'nslookup "{{ anisble_default_ipv4.gateway }}"'
-#    win_command: nslookup hostname
+#    shell: 'nslookup "{{ anisble_default_ipv4.gateway }}"'
+    win_command: nslookup hostname
     register: nslookup_results
     ignore_errors: True
     args:
