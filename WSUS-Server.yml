@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  gather_facts: True
+  gather_facts: true
   vars:
     prelivepri: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
     prelivealt: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
@@ -9,6 +9,7 @@
     rk2pri: http://IFWLGV0107.GLOBAL.LLOYDSTSB.COM:8530
     pb1pri: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
     alt: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
+    ansible_default_ipv4
   tasks:
 
   - name: nslookup the default gateway
