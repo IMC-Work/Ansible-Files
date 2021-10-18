@@ -37,7 +37,7 @@
     debug:
       msg:
         - "***********************************************************"
-        - "{{ server_name.stdout_lines[0] }} has only {{ data1 }}GB free on the C Drive"
+        - "{{ inventory_hostname }} has only {{ data1 }}GB free on the C Drive"
         - "Free up some Space on the C Drive before patching commences"
         - "***********************************************************"
     when: DiskSpace == true
@@ -45,6 +45,6 @@
   - name: Disk Space below threshold server Information
     debug:
       msg:
-        - "{{ server_name.stdout_lines[0] }} has {{ data1 }}GB free on the C Drive"
+        - "{{ inventory_hostname }} has {{ data1 }}GB free on the C Drive"
         - "Patching can commence when the server is scheduled to be updated"
     when: DiskSpace == false
