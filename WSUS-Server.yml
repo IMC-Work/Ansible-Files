@@ -9,8 +9,10 @@
     rk2pri: http://IFWLGV0107.GLOBAL.LLOYDSTSB.COM:8530
     pb1pri: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
     alt: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
-    ansible_default_ipv4:
   tasks:
+    
+  - debug:
+      var: ansible_default_ipv4.gateway
 
   - name: nslookup the default gateway
     shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
