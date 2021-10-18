@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: True
   vars:
-    pre-live-pri: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    prelivepri: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
     pre-live-alt: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
     lon02-pri: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
     lon06-pri: http://IFWLGV0106.GLOBAL.LLOYDSTSB.COM:8530
