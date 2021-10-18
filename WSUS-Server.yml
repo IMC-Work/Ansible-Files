@@ -85,3 +85,66 @@
       name: UpdateServiceURLAlternative
       data: "{{ WSUS_Server2 }}"
       type: string
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroupEnabled
+      data: "1"
+      type: dword
+
+  - name: Obtain Information about the Operating System
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+      name: ProductName
+    register: os
+
+  - name: set default TargetGroup
+    set_fact:
+      TargetGroup: "Unassigned Computers"
+
+  - name: set value to 2012 if Server 2012
+    set_fact:
+      TargetGroup: "Server_2012"
+    when: os.value.find("2012") != -1
+
+  - name: set value to 2016 if Server 2016
+    set_fact:
+      TargetGroup: "Server_2016"
+    when: os.value.find("2016") != -1
+
+  - name: set value to 2019 if Server 2019
+    set_fact:
+      TargetGroup: "Server_2019"
+    when: os.value.find("2019") != -1
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: TargetGroup
+      data: "{{ TargetGroup }}"
+      type: string
+
+  - name: Check if Registry key exists
+    win_reg_stat:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+    register: AU
+
+  - name: Create registry key if it does not exist
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+    when: AU.exists == false
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+      name: UseWUServer
+      data: "1"
+      type: dword
+
+  - name: restart the windows update service
+    win_service:
+  #    name: wuauserv
+      name: spooler
+      state: restarted
+    register: result

@@ -17,6 +17,13 @@
       state: absent
       delete_key: yes
 
+  - name: Delete the WindowsUpdate\WUServer registry key
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: UpdateServiceURLAlternative
+      state: absent
+      delete_key: yes
+
   - name: Delete the WindowsUpdate\WUStatusServer registry key
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
@@ -45,7 +52,7 @@
       state: restarted
     register: result
 
-  - name: Message stating all complete  
+  - name: Message stating all complete
     ansible.builtin.debug:
       msg: "All registry keys successfully removed"
     when: result.changed == true
