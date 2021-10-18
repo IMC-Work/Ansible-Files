@@ -2,14 +2,13 @@
 - hosts: all
   gather_facts: True
   vars:
-    lon02a: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon02b: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon06a: http://IFWQTV0200.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon06b: http://IFWQTV0201.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    rk2a: http://IFWQTV0300.TEST01GLOBAL.LLOYDSTSB.COM:8530 
-    rk2b: http://IFWQTV0301.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    pb1a: http://IFWQTV0400.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    pb1b: http://IFWQTV0401.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    PRE-LIVE-PRI: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    PRE-LIVE-ALT: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    LON02-PRI: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
+    LON06-PRI: http://IFWLGV0106.GLOBAL.LLOYDSTSB.COM:8530
+    RK2-PRI: http://IFWLGV0107.GLOBAL.LLOYDSTSB.COM:8530
+    PB1-PRI: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
+    ALT: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
   tasks:
 
   - name: nslookup the default gateway
@@ -24,31 +23,38 @@
     debug:
       msg: "{{ nslookup_results.stdout }}"
 
+  - name: set fact on host on the best location - PRE-LIVE
+    set_fact:
+      WSUS_Server1: "{{ PRE-LIVE-PRI }}"
+      WSUS_Server2: "{{ PRE-LIVE-ALT }}"
+      cacheable: yes
+    when: nslookup_results.stdout.find("anycast") != -1
+
   - name: set fact on host on the best location - LON02
     set_fact:
-      WSUS_Server1: "{{ lon02a }}"
-      WSUS_Server2: "{{ lon02b }}"
+      WSUS_Server1: "{{ LON02-PRI }}"
+      WSUS_Server2: "{{ ALT }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("nothing") != -1
+    when: nslookup_results.stdout.find("lon02") != -1
 
   - name: set fact on host on the best location - LON06
     set_fact:
-      WSUS_Server1: "{{ lon06a }}"
-      WSUS_Server2: "{{ lon06b }}"
+      WSUS_Server1: "{{ LON06-PRI }}"
+      WSUS_Server2: "{{ ALT }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("eehub") != -1
+    when: nslookup_results.stdout.find("lon06") != -1
 
   - name: set fact on host on the best location - RK2
     set_fact:
-      WSUS_Server1: "{{ rk2a }}"
-      WSUS_Server2: "{{ rk2b }}"
+      WSUS_Server1: "{{ RK2-PRI }}"
+      WSUS_Server2: "{{ ALT }}"
       cacheable: yes
     when: nslookup_results.stdout.find("rk2") != -1
 
   - name: set fact on host on the best location - PB1
     set_fact:
-      WSUS_Server1: "{{ pb1a }}"
-      WSUS_Server2: "{{ pb1b }}"
+      WSUS_Server1: "{{ PB1-PRI }}"
+      WSUS_Server2: "{{ ALT }}"
       cacheable: yes
     when: nslookup_results.stdout.find("pb") != -1
 
@@ -56,7 +62,7 @@
     debug:
       msg:
         - "Primary server is {{ WSUS_Server1 }}"
-        - "Secondary server is {{ WSUS_Server2 }}"
+        - "Alternate server is {{ WSUS_Server2 }}"
 
   - name: Amend/Add new key to the registry
     win_regedit:
@@ -69,5 +75,12 @@
     win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
       name: WUStatusServer
+      data: "{{ WSUS_Server1 }}"
+      type: string
+
+  - name: Amend/Add new key to the registry
+    win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+      name: UpdateServiceURLAlternative
       data: "{{ WSUS_Server2 }}"
       type: string

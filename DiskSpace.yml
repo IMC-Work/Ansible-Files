@@ -1,10 +1,10 @@
 ---
 - hosts: all
   gather_facts: false
-  tasks:  
+  tasks:
 
    - name: get disk facts
-     community.windows.win_disk_facts:
+     win_disk_facts:
 
    - name: Output First Disk size
      debug:
