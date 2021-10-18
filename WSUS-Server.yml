@@ -56,7 +56,7 @@
       WSUS_Server1: "{{ PB1-PRI }}"
       WSUS_Server2: "{{ ALT }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("pb") != -1
+    when: nslookup_results.stdout.find("eehub") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:

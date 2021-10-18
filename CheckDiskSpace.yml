@@ -27,11 +27,11 @@
      DiskSpace:
        "{{ (DiskThreshold | int) >= (data1 | int) }}"
 
-  - name: Get server name
-    win_command: powershell.exe -
-    args:
-      stdin: hostname
-    register: server_name
+#  - name: Get server name
+#    win_command: powershell.exe -
+#    args:
+#      stdin: hostname
+#    register: server_name
 
   - name: Disk Space below threshold server Information
     debug:
