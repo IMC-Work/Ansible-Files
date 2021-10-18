@@ -2,13 +2,13 @@
 - hosts: all
   gather_facts: True
   vars:
-    PRE-LIVE-PRI: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    PRE-LIVE-ALT: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    LON02-PRI: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
-    LON06-PRI: http://IFWLGV0106.GLOBAL.LLOYDSTSB.COM:8530
-    RK2-PRI: http://IFWLGV0107.GLOBAL.LLOYDSTSB.COM:8530
-    PB1-PRI: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
-    ALT: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
+    pre-live-pri: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    pre-live-alt: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
+    lon02-pri: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
+    lon06-pri: http://IFWLGV0106.GLOBAL.LLOYDSTSB.COM:8530
+    rk2-pri: http://IFWLGV0107.GLOBAL.LLOYDSTSB.COM:8530
+    pb1-pri: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
+    alt: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
   tasks:
 
   - name: nslookup the default gateway
@@ -25,38 +25,39 @@
 
   - name: set fact on host on the best location - PRE-LIVE
     set_fact:
-      WSUS_Server1: "{{ PRE-LIVE-PRI }}"
-      WSUS_Server2: "{{ PRE-LIVE-ALT }}"
+      WSUS_Server1: "{{ pre-live-pri }}"
+      WSUS_Server2: "{{ pre-live-alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("anycast") != -1
+#    when: nslookup_results.stdout.find("anycast") != -1
+    when: nslookup_results.stdout.find("eehub") != -1
 
   - name: set fact on host on the best location - LON02
     set_fact:
-      WSUS_Server1: "{{ LON02-PRI }}"
-      WSUS_Server2: "{{ ALT }}"
+      WSUS_Server1: "{{ lon02-pri }}"
+      WSUS_Server2: "{{ alt }}"
       cacheable: yes
     when: nslookup_results.stdout.find("lon02") != -1
 
   - name: set fact on host on the best location - LON06
     set_fact:
-      WSUS_Server1: "{{ LON06-PRI }}"
-      WSUS_Server2: "{{ ALT }}"
+      WSUS_Server1: "{{ lon06-pri }}"
+      WSUS_Server2: "{{ alt }}"
       cacheable: yes
     when: nslookup_results.stdout.find("lon06") != -1
 
   - name: set fact on host on the best location - RK2
     set_fact:
-      WSUS_Server1: "{{ RK2-PRI }}"
-      WSUS_Server2: "{{ ALT }}"
+      WSUS_Server1: "{{ rk2-pri }}"
+      WSUS_Server2: "{{ alt }}"
       cacheable: yes
     when: nslookup_results.stdout.find("rk2") != -1
 
   - name: set fact on host on the best location - PB1
     set_fact:
-      WSUS_Server1: "{{ PB1-PRI }}"
-      WSUS_Server2: "{{ ALT }}"
+      WSUS_Server1: "{{ pb1-pri }}"
+      WSUS_Server2: "{{ alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("eehub") != -1
+    when: nslookup_results.stdout.find("pb1") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:
