@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+#
+#   code to copy IMCMerge.PS1 to C:\TEMP on server
+#
+  - name: run PS_Script
+    win_shell: C:\temp\PS_Scripts\IMCMerge.ps1
+
+    - name: copy file from windows to centos
+#     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT?????
+      fetch:
+        src: C:/temp/MergedData.zip
+        dest: /home/ian/files/
+        remote_src: yes
