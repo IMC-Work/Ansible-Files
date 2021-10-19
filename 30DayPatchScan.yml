@@ -8,9 +8,7 @@
   - name: run PS_Script
     win_shell: C:\temp\PS_Scripts\30DayPatchScan.ps1
 #
-#      code to copy the file to the WSUS Server
-#
-#      can I create a variable to call (server-name.csv)
+#      code to copy the file to the WSUS Server (remote server)
 #
 #      need to create another windows server - set up share on it with permissions
 #
