@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+#
+#   code to copy 30DayPatchScan.PS1 to C:\TEMP on server
+#
+  - name: run PS_Script
+    win_shell: C:\temp\PS_Scripts\30DayPatchScan.ps1
+#
+#      code to copy the file to the WSUS Server
+#
+#      can I create a variable to call (server-name.csv)
+#
+  - name: copy file from Windows host to WSUS Server
+    win_copy:
+      src: C:\temp\ian.txt
+      dest: C:\temp\new folder\ian.txt
+      remote_src: yes
