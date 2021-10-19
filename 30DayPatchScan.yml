@@ -15,5 +15,5 @@
   - name: copy file from Windows host to WSUS Server
     win_copy:
       src: C:\temp\{{ inventory_hostname }}.csv
-      dest: \\\\192.168.1.248\\C$\\temp\\new folder\{{ inventory_hostname }}.csv
+      dest: \\192.168.1.248\C$\temp\New folder\{{ inventory_hostname }}.csv
       remote_src: yes
