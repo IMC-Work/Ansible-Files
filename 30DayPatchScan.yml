@@ -14,6 +14,6 @@
 #
   - name: copy file from Windows host to WSUS Server
     win_copy:
-      src: C:\temp\ian.txt
-      dest: C:\temp\new folder\ian.txt
+      src: C:\temp\ian.csv
+      dest: C:\temp\new folder\ian.csv
       remote_src: yes
