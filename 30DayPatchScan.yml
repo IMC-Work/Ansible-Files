@@ -8,12 +8,12 @@
   - name: run PS_Script
     win_shell: C:\temp\PS_Scripts\30DayPatchScan.ps1
 #
-#      code to copy the file to the WSUS Server (remote server)
-#
 #      need to create another windows server - set up share on it with permissions
+#
+#      amend the playbook to copy the file to the other server
 #
   - name: copy file from Windows host to WSUS Server
     win_copy:
       src: C:\temp\{{ inventory_hostname }}.csv
-      dest: \\192.168.1.249\C$\temp\new folder\{{ inventory_hostname }}.csv
+      dest: \\192.168.1.248\C$\temp\new folder\{{ inventory_hostname }}.csv
       remote_src: yes
