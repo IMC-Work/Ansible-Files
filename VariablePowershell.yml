@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+#
+#   code to copy IMCMerge.PS1 to C:\TEMP\PS_Scripts on server
+#
+  - name: run PS_Script
+    win_shell: C:\temp\PS_Scripts\IMCVariable.ps1 20
