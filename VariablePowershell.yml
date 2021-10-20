@@ -5,7 +5,7 @@
      days: 5
   tasks:
 #
-#   code to copy IMCMerge.PS1 to C:\TEMP\PS_Scripts on server
+#   code which runs the powershell script, passing a variable from AT
 #
   - name: run PS_Script
     win_shell: C:\temp\PS_Scripts\IMCVariabledays.ps1 {{ days }}
