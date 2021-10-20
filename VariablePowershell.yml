@@ -1,9 +1,11 @@
 ---
 - hosts: all
   gather_facts: false
+  vars:
+     Days: 5
   tasks:
 #
 #   code to copy IMCMerge.PS1 to C:\TEMP\PS_Scripts on server
 #
   - name: run PS_Script
-    win_shell: C:\temp\PS_Scripts\IMCVariabledays.ps1 20
+    win_shell: C:\temp\PS_Scripts\IMCVariabledays.ps1 {{ days }}
