@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-     Days: 5
+     days: 5
   tasks:
 #
 #   code to copy IMCMerge.PS1 to C:\TEMP\PS_Scripts on server
