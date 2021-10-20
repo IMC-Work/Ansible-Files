@@ -9,7 +9,7 @@
     win_shell: C:\temp\PS_Scripts\IMCMerge.ps1
 
   - name: copy file from windows to centos
-#   copies file to HOME/FILES/192.168.1.249/C:/TEMP/MergedData.zip
+#   copies file to HOME/FILES/192.168.1.249/C:/TEMP/MergedData.zip - overwrites the original
     fetch:
       src: C:/temp/MergedData.zip
       dest: /home/ian/files/
