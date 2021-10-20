@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-     days: 5
+     days: 10
   tasks:
 #
 #   code which runs the powershell script, passing a variable from AT
