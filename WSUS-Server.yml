@@ -11,8 +11,7 @@
     alt: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
   tasks:
 
-  - debug:
-      var: ansible_default_ipv4.gateway
+  - debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
 
   - name: nslookup the default gateway
 #    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
