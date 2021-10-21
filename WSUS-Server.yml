@@ -10,7 +10,7 @@
     pb1pri: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
     WSUS_Server1: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
     WSUS_Server2: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
-    WSUS_Location: "No matching IP, using default WSUS Server"
+    WSUS_Location: "No matching IP, using default WSUS Server"  
   tasks:
 
   - name: nslookup the default gateway
