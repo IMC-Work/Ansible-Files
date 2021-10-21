@@ -5,10 +5,19 @@
     num: 0
   tasks:
 
-  - name: debug
-    debug:
-      msg: "{{ ansible_default_ipv4 }}"
+#  - name: debug
+#    debug:
+#      msg: "{{ ansible_default_ipv4 }}"
 
-  - name: debug2
+#  - name: debug2
+#    debug:
+#      msg: "{{ ansible_ssh_host }}"
+
+  - name: nslookup the default gateway
+  #    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
+    win_command: ipconfig
+    register: ipconfig_results
+
+  - name: print
     debug:
-      msg: "{{ ansible_ssh_host }}"
+      msg: "{{ ipconfig_results.stdout }}"
