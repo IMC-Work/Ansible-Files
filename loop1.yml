@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+
+  - name: run PS_Script ACLDisk1.PS1
+    win_shell: C:\temp\PS_Scripts\ACLDisk1.ps1
+
+  - name: Get number of drives on the sevrer
+    win_command: powershell.exe -
+    args:
+      stdin: (Get-Content C:\temp\disks.txt).Length
+    register: num_drives
+
+  - name: user powershell to add "1" to the number of times to run the loop
+    win_shell: "{{ num_drives.stdout_lines[0] }} + 1"
+    register: drives
+
+  - name: identify number of times to run the loop
+    set_fact: loop_num={{ drives.stdout_lines[0]|int}}
+
+  - name: restart all the Auto Services that require to be restarted
+    include_tasks: loop2.yml
+    loop: "{{ range(1,(loop_num|int)) | list }}"
