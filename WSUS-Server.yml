@@ -15,15 +15,15 @@
 
   - name: nslookup the default gateway
 #    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
-    win_command: nslookup hostname
-    register: nslookup_results
+    win_command: ipconfig
+    register: ipconfig_results
     ignore_errors: True
     args:
       warn: false
 
   - name: print
     debug:
-      msg: "{{ nslookup_results.stdout }}"
+      msg: "{{ ipconfig_results.stdout }}"
 
   - name: set fact on host on the best location - PRE-LIVE
     set_fact:
@@ -31,7 +31,8 @@
       WSUS_Server2: "{{ prelivealt }}"
       WSUS_Location: Pre-Live
       cacheable: yes
-    when: nslookup_results.stdout.find("10.177.0") != -1
+#    when: ipconfig_results.stdout.find("10.177.0") != -1
+    when: ipconfig_results.stdout.find("192.168.1") != -1
 
   - name: set fact on host on the best location - LON02
     set_fact:
@@ -39,7 +40,7 @@
       WSUS_Server2: "{{ alt }}"
       WSUS_Location: LON02
       cacheable: yes
-    when: nslookup_results.stdout.find("10.217.0") != -1
+    when: ipconfig_results.stdout.find("10.217.0") != -1
 
   - name: set fact on host on the best location - LON06
     set_fact:
@@ -47,7 +48,7 @@
       WSUS_Server2: "{{ alt }}"
       WSUS_Location: LON06
       cacheable: yes
-    when: nslookup_results.stdout.find("10.177.128") != -1 or nslookup_results.stdout.find("10.217.128") != -1
+    when: ipconfig_results.stdout.find("10.177.128") != -1 or ipconfig_results.stdout.find("10.217.128") != -1
 
   - name: set fact on host on the best location - RK2
     set_fact:
@@ -55,8 +56,7 @@
       WSUS_Server2: "{{ alt }}"
       WSUS_Location: RK2
       cacheable: yes
-#    when: nslookup_results.stdout.find("10.177.0") != -1 or nslookup_results.stdout.find("10.189.0") != -1
-    when: nslookup_results.stdout.find("192.168.1") != -1 or nslookup_results.stdout.find("10.189.0") != -1
+    when: ipconfig_results.stdout.find("10.177.0") != -1 or ipconfig_results.stdout.find("10.189.0") != -1
 
   - name: set fact on host on the best location - PB1
     set_fact:
@@ -64,7 +64,7 @@
       WSUS_Server2: "{{ alt }}"
       WSUS_Location: PB1
       cacheable: yes
-    when: nslookup_results.stdout.find("10.172.128") != -1 or nslookup_results.stdout.find("10.172.189") != -1
+    when: ipconfig_results.stdout.find("10.172.128") != -1 or ipconfig_results.stdout.find("10.172.189") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:
