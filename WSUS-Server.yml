@@ -1,6 +1,6 @@
 ---
 - hosts: all
-#  gather_facts: true
+  gather_facts: false
   vars:
     prelivepri: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
     prelivealt: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
@@ -11,11 +11,10 @@
     alt: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
   tasks:
 
-  - debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
-
   - name: nslookup the default gateway
 #    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
-    win_command: ipconfig
+#    win_command: ipconfig
+    win_command: ping {{ inventory_hostname }}
     register: ipconfig_results
     ignore_errors: True
     args:
