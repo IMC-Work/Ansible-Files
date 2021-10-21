@@ -38,7 +38,8 @@
       WSUS_Server1: "{{ lon02pri }}"
       WSUS_Server2: "{{ alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("10.217.0") != -1
+#    when: nslookup_results.stdout.find("10.217.0") != -1
+    when: nslookup_results.stdout.find("10.217.0") != -1 or nslookup_results.stdout.find("192.168.1") != -1
 
   - name: set fact on host on the best location - LON06
     set_fact:
