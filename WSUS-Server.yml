@@ -30,6 +30,7 @@
     set_fact:
       WSUS_Server1: "{{ prelivepri }}"
       WSUS_Server2: "{{ prelivealt }}"
+      WSUS_Location: Pre-Live
       cacheable: yes
     when: nslookup_results.stdout.find("10.177.0") != -1
 
@@ -37,6 +38,7 @@
     set_fact:
       WSUS_Server1: "{{ lon02pri }}"
       WSUS_Server2: "{{ alt }}"
+      WSUS_Location: LON02
       cacheable: yes
     when: nslookup_results.stdout.find("10.217.0") != -1
 
@@ -44,6 +46,7 @@
     set_fact:
       WSUS_Server1: "{{ lon06pri }}"
       WSUS_Server2: "{{ alt }}"
+      WSUS_Location: LON06
       cacheable: yes
     when: nslookup_results.stdout.find("10.177.128") != -1 or nslookup_results.stdout.find("10.217.128") != -1
 
@@ -51,6 +54,7 @@
     set_fact:
       WSUS_Server1: "{{ rk2pri }}"
       WSUS_Server2: "{{ alt }}"
+      WSUS_Location: RK2
       cacheable: yes
 #    when: nslookup_results.stdout.find("10.177.0") != -1 or nslookup_results.stdout.find("10.189.0") != -1
     when: nslookup_results.stdout.find("192.168.1") != -1 or nslookup_results.stdout.find("10.189.0") != -1
@@ -59,6 +63,7 @@
     set_fact:
       WSUS_Server1: "{{ pb1pri }}"
       WSUS_Server2: "{{ alt }}"
+      WSUS_Location: PB1
       cacheable: yes
     when: nslookup_results.stdout.find("10.172.128") != -1 or nslookup_results.stdout.find("10.172.189") != -1
 
@@ -67,6 +72,7 @@
       msg:
         - "Primary server is {{ WSUS_Server1 }}"
         - "Alternate server is {{ WSUS_Server2 }}"
+        - "WSUS Server location is {{ WSUS_Location }}"
 
   - name: Amend/Add new key to the registry
     win_regedit:
