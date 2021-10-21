@@ -3,8 +3,8 @@
   gather_facts: false
   tasks:
 
-#  - name: run PS_Script ACLDisk1.PS1
-#    win_shell: C:\temp\PS_Scripts\ACLDisk1.ps1
+  - name: run PS_Script ACLDisk1.PS1
+    win_shell: C:\temp\PS_Scripts\ACLDisk1.ps1
 
   - name: Get number of drives on the sevrer
     win_command: powershell.exe -

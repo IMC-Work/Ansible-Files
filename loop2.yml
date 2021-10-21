@@ -14,5 +14,5 @@
     debug:
       msg: "checking ACL against the {{ disk_name }} drive"
 
-#  - name: run PS_Script
-#    win_shell: C:\temp\PS_Scripts\shell2.ps1 {{ disk_name }}
+  - name: run PS_Script
+    win_shell: C:\temp\PS_Scripts\shell2.ps1 {{ disk_name }}

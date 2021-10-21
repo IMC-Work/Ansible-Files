@@ -15,8 +15,8 @@
       var: ansible_default_ipv4.gateway
 
   - name: nslookup the default gateway
-    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
-#    win_command: nslookup hostname
+#    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
+    win_command: nslookup hostname
     register: nslookup_results
     ignore_errors: True
     args:
@@ -31,36 +31,35 @@
       WSUS_Server1: "{{ prelivepri }}"
       WSUS_Server2: "{{ prelivealt }}"
       cacheable: yes
-#    when: nslookup_results.stdout.find("anycast") != -1
-    when: nslookup_results.stdout.find("eehub") != -1
+    when: nslookup_results.stdout.find("10.177.0") != -1
 
   - name: set fact on host on the best location - LON02
     set_fact:
       WSUS_Server1: "{{ lon02pri }}"
       WSUS_Server2: "{{ alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("lon02") != -1
+    when: nslookup_results.stdout.find("10.217.0") != -1
 
   - name: set fact on host on the best location - LON06
     set_fact:
       WSUS_Server1: "{{ lon06pri }}"
       WSUS_Server2: "{{ alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("lon06") != -1
+    when: nslookup_results.stdout.find("10.177.128") != -1 or nslookup_results.stdout.find("10.217.128") != -1
 
   - name: set fact on host on the best location - RK2
     set_fact:
       WSUS_Server1: "{{ rk2pri }}"
       WSUS_Server2: "{{ alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("rk2") != -1
+    when: nslookup_results.stdout.find("10.177.0") != -1 or nslookup_results.stdout.find("10.189.0") != -1
 
   - name: set fact on host on the best location - PB1
     set_fact:
       WSUS_Server1: "{{ pb1pri }}"
       WSUS_Server2: "{{ alt }}"
       cacheable: yes
-    when: nslookup_results.stdout.find("pb1") != -1
+    when: nslookup_results.stdout.find("10.172.128") != -1 or nslookup_results.stdout.find("10.172.189") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:
