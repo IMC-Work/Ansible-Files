@@ -13,6 +13,9 @@
 
   - debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
 
+  - name: debug
+    msg: "{{ ansible_default_ipv4 }}"
+
   - name: nslookup the default gateway
 #    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
     win_command: nslookup hostname
