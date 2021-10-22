@@ -4,13 +4,7 @@
   vars:
     prelivepri: http://IFWQTV0100.TEST01GLOBAL.LLOYDSTSB.COM:8530
     prelivealt: http://IFWQTV0101.TEST01GLOBAL.LLOYDSTSB.COM:8530
-    lon02pri: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
-    lon06pri: http://IFWLGV0106.GLOBAL.LLOYDSTSB.COM:8530
-    rk2pri: http://IFWLGV0107.GLOBAL.LLOYDSTSB.COM:8530
-    pb1pri: http://IFWLGV0108.GLOBAL.LLOYDSTSB.COM:8530
-    WSUS_Server1: http://IFWLGV0104.GLOBAL.LLOYDSTSB.COM:8530
-    WSUS_Server2: http://IFWLGV0103.GLOBAL.LLOYDSTSB.COM:8530
-    WSUS_Location: "No matching IP, using default WSUS Server"
+    WSUS_Location: "Pre-Live (LON02)"
   tasks:
 
   - name: nslookup the default gateway
@@ -20,10 +14,6 @@
     args:
       warn: false
 
-  - name: print
-    debug:
-      msg: "{{ ping_results.stdout }}"
-
   - name: set fact on host on the best location - PRE-LIVE
     set_fact:
       WSUS_Server1: "{{ prelivepri }}"
@@ -32,34 +22,6 @@
       cacheable: yes
     when: ping_results.stdout.find("10.177.0") != -1
 #    when: ping_results.stdout.find("192.168.1") != -1
-
-  - name: set fact on host on the best location - LON02
-    set_fact:
-      WSUS_Server1: "{{ lon02pri }}"
-      WSUS_Location: LON02
-      cacheable: yes
-    when: ping_results.stdout.find("10.217.0") != -1
-
-  - name: set fact on host on the best location - LON06
-    set_fact:
-      WSUS_Server1: "{{ lon06pri }}"
-      WSUS_Location: LON06
-      cacheable: yes
-    when: ping_results.stdout.find("10.177.128") != -1 or ping_results.stdout.find("10.217.128") != -1
-
-  - name: set fact on host on the best location - RK2
-    set_fact:
-      WSUS_Server1: "{{ rk2pri }}"
-      WSUS_Location: RK2
-      cacheable: yes
-    when: ping_results.stdout.find("10.177.0") != -1 or ping_results.stdout.find("10.189.0") != -1
-
-  - name: set fact on host on the best location - PB1
-    set_fact:
-      WSUS_Server1: "{{ pb1pri }}"
-      WSUS_Location: PB1
-      cacheable: yes
-    when: ping_results.stdout.find("10.172.128") != -1 or ping_results.stdout.find("10.172.189") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:
