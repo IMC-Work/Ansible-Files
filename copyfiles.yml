@@ -21,4 +21,4 @@
       ansible.windows.win_copy:
 #        src: /ansible-files/
         src: /PS_Scripts/InstallPatches.ps1
-        dest: C:\temp\imc\
+        dest: C:\WSUS\
