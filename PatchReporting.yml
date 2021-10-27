@@ -1,0 +1,85 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+     days: 30
+     wsus_location: 192.168.1.249
+  tasks:
+#
+# These 3 sections will create the file to identify what patches are missing from the Server
+# The Powershell code still needs to be written, and the file uploaded to the BDS Server
+#
+#- name: download Missing_Patches.ps1 file from bds server
+#  win_get_url:
+#    url: https://10.177.57.227:8081/repository/lbg/temp/patching/Missing_Patches.PS1
+#    dest: c:\temp
+#    validate_certs: no
+#  register: file_copy1
+
+- name: copy ansible directory from centos to windows
+  win_copy:
+    src: /ansible-files/
+    dest: C:\temp\
+  register: file_copy1
+
+- name: download failed
+  fail:
+    msg: " ### Missing_Patches.ps1 file download failed - please investigate *** "
+  when: file_copy1.failed == true
+
+- name: run PS_Script Missing_Patches.PS1
+  win_shell: C:\temp\Missing_Patches.ps1
+#
+# These 3 sections will create the file to identify what patches are currently installed on the server
+# The Powershell file still needs to be uploaded to the BDS Server
+#
+#- name: download Installed_Patches.ps1 file from bds server
+#  win_get_url:
+#    url: https://10.177.57.227:8081/repository/lbg/temp/patching/Installed_Patches.PS1
+#    dest: c:\temp
+#    validate_certs: no
+#  register: file_copy2
+
+- name: copy ansible directory from centos to windows
+  win_copy:
+    src: /ansible-files/
+    dest: C:\temp\
+  register: file_copy2
+
+- name: download failed
+  fail:
+    msg: " ### Installed_Patches.ps1 file download failed - please investigate *** "
+  when: file_copy2.failed == true
+
+- name: run PS_Script Installed_Patches.PS1
+  win_shell: C:\temp\installed_Patches.ps1
+#
+# These 3 sections will create the file to identify what patches were installed on the server in the last 30 days
+# The Powershell file still needs to be uploaded to the BDS Server
+#
+#- name: download Patch_Extract.ps1 file from bds server
+#  win_get_url:
+#    url: https://10.177.57.227:8081/repository/lbg/temp/patching/Patch_Extract.PS1
+#    dest: c:\temp
+#    validate_certs: no
+#  register: file_copy3
+
+- name: copy ansible directory from centos to windows
+  win_copy:
+    src: /ansible-files/
+    dest: C:\temp\
+  register: file_copy3
+
+- name: download failed
+  fail:
+    msg: " ### Patch_Extract.ps1 file download failed - please investigate *** "
+  when: file_copy3.failed == true
+
+- name: run PS_Script Patch_Extract.ps1
+  win_shell: C:\temp\Patch_Extract.ps1 {{ days }}
+
+- name: copy Patch_Extract file from Windows host to WSUS Server
+  win_copy:
+    src: C:\temp\Patch\{{ inventory_hostname }}.csv
+    dest: \\{{ wsus_location }}\C$\WSUS\Merge\{{ inventory_hostname }}.csv
+    remote_src: yes
