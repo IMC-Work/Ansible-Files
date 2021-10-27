@@ -1,7 +1,7 @@
 ---
   - name: read c:\temp\disks.txt to get the drive letter to check
     win_shell:
-      Select-String -Path C:\temp\disks.txt -pattern "DiskDriveLetter="
+      Select-String -Path C:\temp\disks.txt -pattern "DiskDriveLetter= "
     register: disk_letter
 
   - name: set the fact for the service
@@ -12,7 +12,7 @@
 
   - name: Check Service Status
     debug:
-      msg: "checking ACL against the {{ disk_name }} drive"
+      msg: "checking ACL against the{{ disk_name }} drive"
 
 #  - name: run PS_Script
 #    win_shell: C:\temp\PS_Scripts\shell2.ps1 {{ disk_name }}
