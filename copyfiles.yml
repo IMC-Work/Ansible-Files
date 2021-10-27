@@ -9,15 +9,16 @@
 #        dest: C:\temp\a\ian.txt
 #        remote_src: yes
 
-    - name: copy file from windows to centos
+#    - name: copy file from windows to centos
 #     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
-      fetch:
-        src: C:/temp/imc/Patch_extract.PS1
+#      fetch:
+#        src: C:/temp/imc/Patch_extract.PS1
 #        dest: /home/files/192.168.1.249
-        dest: /home/ian/files/
-        remote_src: yes
+#        dest: /home/ian/files/
+#        remote_src: yes
 
-#    - name: copy ansible directory from centos to windows
-#      ansible.windows.win_copy:
+    - name: copy ansible directory from centos to windows
+      ansible.windows.win_copy:
 #        src: /ansible-files/
-#        dest: C:\temp\ansiblefiles\
+        src: /PS_Scripts/InstallPatches.ps1
+        dest: C:\temp\imc\
