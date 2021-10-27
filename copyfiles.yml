@@ -20,5 +20,5 @@
     - name: copy ansible directory from centos to windows
       win_copy:
 #        src: /ansible-files/
-        src: /home/ian/files/InstallPatches.ps1
+        src: /home/ian/files/InstalledPatches.ps1
         dest: C:\WSUS\
