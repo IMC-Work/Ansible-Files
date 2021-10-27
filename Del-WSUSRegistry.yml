@@ -47,8 +47,7 @@
 
   - name: restart the windows update service
     win_service:
-#      name: wuauserv
-      name: spooler
+      name: wuauserv
       state: restarted
     register: result
 

@@ -7,21 +7,12 @@
     WSUS_Location: "Pre-Live (LON02)"
   tasks:
 
-  - name: nslookup the default gateway
-    win_command: ping {{ inventory_hostname }}
-    register: ping_results
-    ignore_errors: True
-    args:
-      warn: false
-
   - name: set fact on host on the best location - PRE-LIVE
     set_fact:
       WSUS_Server1: "{{ prelivepri }}"
       WSUS_Server2: "{{ prelivealt }}"
       WSUS_Location: Pre-Live
       cacheable: yes
-    when: ping_results.stdout.find("10.177.0") != -1
-#    when: ping_results.stdout.find("192.168.1") != -1
 
   - name: print the WSUS Servers to use for this server
     debug:
@@ -109,7 +100,6 @@
 
   - name: restart the windows update service
     win_service:
-  #    name: wuauserv
-      name: spooler
+      name: wuauserv
       state: restarted
     register: result
