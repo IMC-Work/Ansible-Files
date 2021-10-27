@@ -13,7 +13,8 @@
 #     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
       fetch:
         src: C:/temp/ian.txt
-        dest: /home/files/192.168.1.249
+#        dest: /home/files/192.168.1.249
+        dest: /home/files/
         remote_src: yes
 
 #    - name: copy ansible directory from centos to windows
