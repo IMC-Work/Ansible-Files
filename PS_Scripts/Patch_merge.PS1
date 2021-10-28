@@ -1,8 +1,8 @@
-﻿$directory  = "C:\Temp\WSUS\Merge"
-$mergedfile = "C:\Temp\WSUS\MergedData.csv"
-$zippedfile = "C:\Temp\WSUS\MergedData.zip"
-$renamedzip = "C:\Temp\WSUS\Archive\MergedData"+[datetime]::Now.Tostring("yyyyMMdd-HHmmss")+".zip"
-$archivedir = "C:\Temp\WSUS\Archive"
+﻿$directory  = "C:\WSUS\Merge"
+$mergedfile = "C:\WSUS\MergedData.csv"
+$zippedfile = "C:\WSUS\MergedData.zip"
+$renamedzip = "C:\WSUS\Archive\MergedData"+[datetime]::Now.Tostring("yyyyMMdd-HHmmss")+".zip"
+$archivedir = "C:\WSUS\Archive"
 #
 #  Delete c:\temp\mergeddata.zip file if it exists
 #
@@ -30,4 +30,4 @@ Copy-Item -Path $zippedfile -Destination $renamedzip
 #  now need to delete all the old CSV files in C:\Temp\Merge
 #
 Remove-Item -Path $directory\*.csv
-Remove-Item -Path C:\temp\WSUS\MergedData.csv
+Remove-Item -Path C:\WSUS\MergedData.csv
