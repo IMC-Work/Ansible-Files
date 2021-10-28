@@ -16,20 +16,20 @@
 #    validate_certs: no
 #  register: file_copy1
 
-- name: copy ansible directory from centos to windows
-  win_copy:
-    src: /ansible/loop1.yml
-    dest: C:\temp\loop1.yml
-#    remote_src: yes  
-  register: file_copy1
+  - name: copy ansible directory from centos to windows
+    win_copy:
+      src: /ansible/loop1.yml
+      dest: C:\temp\loop1.yml
+      remote_src: yes
+    register: file_copy1
 
-- name: download failed
-  fail:
-    msg: " ### Missing_Patches.ps1 file download failed - please investigate *** "
-  when: file_copy1.failed == true
+  - name: download failed
+    fail:
+      msg: " ### Missing_Patches.ps1 file download failed - please investigate *** "
+    when: file_copy1.failed == true
 
-- name: run PS_Script Missing_Patches.PS1
-  win_shell: C:\temp\Missing_Patches.ps1
+  - name: run PS_Script Missing_Patches.PS1
+    win_shell: C:\temp\Missing_Patches.ps1
 #
 # These 3 sections will create the file to identify what patches are currently installed on the server
 # The Powershell file still needs to be uploaded to the BDS Server
