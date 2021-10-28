@@ -20,7 +20,7 @@
   win_copy:
     src: /ansible/loop1.yml
     dest: C:\temp\loop1.yml
-  remote_src: yes  
+    remote_src: yes  
   register: file_copy1
 
 - name: download failed
