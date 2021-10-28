@@ -42,8 +42,8 @@
 
 - name: copy ansible directory from centos to windows
   win_copy:
-    src: /ansible-files/
-    dest: C:\temp\
+    src: /ansible/loop2.yml
+    dest: C:\temp\loop2.yml
   register: file_copy2
 
 - name: download failed
