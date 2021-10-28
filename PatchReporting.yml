@@ -81,6 +81,6 @@
   - name: copy Patch_Extract file from Windows host to WSUS Server
     win_copy:
 #      src: C:\temp\Patch\{{ inventory_hostname }}.csv
-      src: C:\temp\Patch\WIN_1D3JCL01N5_30day.csv
+      src: C:\temp\Patch\WIN-1D3JCL01N5_30day.csv
       dest: \\{{ wsus_location }}\C$\WSUS\Merge\{{ inventory_hostname }}.csv
       remote_src: yes
