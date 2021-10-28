@@ -16,12 +16,10 @@
 #    validate_certs: no
 #  register: file_copy1
 
-  - name: copy ansible directory from centos to windows
+  - name: copy Missing_Patches.ps1 from centos to windows
     win_copy:
-      src: /ansible/loop1.yml
-#      src: /Home/files/installedPatches.PS1
-      dest: C:\temp\loop1.yml
-#      remote_src: yes
+      src: /ansible/PS_Scripts/Missing_Patches.PS1
+      dest: C:\temp\IMC\PatchScan\Missing_Patches.ps1
     register: file_copy1
 
   - name: download failed
@@ -30,7 +28,7 @@
     when: file_copy1.failed == true
 
   - name: run PS_Script Missing_Patches.PS1
-    win_shell: C:\temp\Missing_Patches.ps1
+    win_shell: C:\temp\IMC\PatchScan\Missing_Patches.ps1
 #
 # These 3 sections will create the file to identify what patches are currently installed on the server
 # The Powershell file still needs to be uploaded to the BDS Server
@@ -42,10 +40,10 @@
 #    validate_certs: no
 #  register: file_copy2
 
-  - name: copy ansible directory from centos to windows
+  - name: copy Installed_Patches.ps1 from centos to windows
     copy:
-      src: /home/files/installedpatches.ps1
-      dest: C:\temp\installedpatches.ps1
+      src: /ansible/PS_Scripts/Installed_Patches.PS1
+      dest: C:\temp\imc\Patchscan\installed_Patches.ps1
     register: file_copy2
 
   - name: download failed
@@ -54,7 +52,7 @@
     when: file_copy2.failed == true
 
   - name: run PS_Script Installed_Patches.PS1
-    win_shell: C:\temp\installed_Patches.ps1
+    win_shell: C:\temp\imc\patchscan\installed_Patches.ps1
 #
 # These 3 sections will create the file to identify what patches were installed on the server in the last 30 days
 # The Powershell file still needs to be uploaded to the BDS Server
@@ -66,10 +64,10 @@
 #    validate_certs: no
 #  register: file_copy3
 
-  - name: copy ansible directory from centos to windows
+  - name: copy Patch_Extract.ps1 from centos to windows
     copy:
-      src: /ansible-files/
-      dest: C:\temp\
+      src: /ansible/PS_Scripts/Patch_Extract.PS1
+      dest: C:\temp\imc\patchscan\Patch_Extract.PS1
     register: file_copy3
 
   - name: download failed
@@ -78,7 +76,7 @@
     when: file_copy3.failed == true
 
   - name: run PS_Script Patch_Extract.ps1
-    win_shell: C:\temp\Patch_Extract.ps1 {{ days }}
+    win_shell: C:\temp\imc\patchscan\Patch_Extract.ps1 {{ days }}
 
   - name: copy Patch_Extract file from Windows host to WSUS Server
     win_copy:
