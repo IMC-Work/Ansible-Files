@@ -3,7 +3,7 @@
   gather_facts: false
   vars:
      days: 30
-     wsus_location: 192.168.1.249
+     server_location: 192.168.1.249
   tasks:
 #
 # These 3 sections will create the file to identify what patches are missing from the Server
@@ -82,5 +82,5 @@
     win_copy:
 #      src: C:\temp\Patch\{{ inventory_hostname }}.csv
       src: C:\temp\Patch\WIN-1D3KJCL01N5_30day.csv
-      dest: \\{{ wsus_location }}\C$\WSUS\Merge\{{ inventory_hostname }}.csv
+      dest: \\{{ server_location }}\C$\WSUS\Merge\{{ inventory_hostname }}.csv
       remote_src: yes
