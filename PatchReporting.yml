@@ -17,9 +17,9 @@
 #  register: file_copy1
 
 - name: copy ansible directory from centos to windows
-  win_copy:
-    src: /ansible-files/
-    dest: C:\temp\
+  copy:
+    src: /ansible/loop1.yml
+    dest: C:\temp\loop1.yml
   register: file_copy1
 
 - name: download failed
@@ -65,7 +65,7 @@
 #  register: file_copy3
 
 - name: copy ansible directory from centos to windows
-  win_copy:
+  copy:
     src: /ansible-files/
     dest: C:\temp\
   register: file_copy3
