@@ -18,7 +18,7 @@
 
   - name: copy ansible directory from centos to windows
     win_copy:
-      src: /home/files/installedPatches.PS1
+      src: /home/files/192.168.1.249/C:/Temp/MergedData.zip
       dest: C:\temp\installedpatches.ps1
       remote_src: yes
     register: file_copy1
