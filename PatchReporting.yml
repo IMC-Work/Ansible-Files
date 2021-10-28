@@ -18,8 +18,8 @@
 
   - name: copy ansible directory from centos to windows
     win_copy:
-      src: /ansible/loop1.yml
-      dest: C:\temp\loop1.yml
+      src: /home/files/installedpatches.ps1
+      dest: C:\temp\installedpatches.ps1
       remote_src: yes
     register: file_copy1
 
