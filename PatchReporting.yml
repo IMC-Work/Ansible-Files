@@ -43,8 +43,8 @@
 
   - name: copy ansible directory from centos to windows
     copy:
-      src: /ansible/loop2.yml
-      dest: C:\temp\loop2.yml
+      src: /home/files/installedpatches.ps1
+      dest: C:\temp\installedpatches.ps1
     register: file_copy2
 
   - name: download failed
