@@ -41,7 +41,7 @@
 #  register: file_copy2
 
   - name: copy Installed_Patches.ps1 from centos to windows
-    copy:
+    win_copy:
       src: /ansible/PS_Scripts/installed_Patches.PS1
       dest: C:\temp\IMC\PatchScan\installed_Patches.ps1
     register: file_copy2
@@ -65,7 +65,7 @@
 #  register: file_copy3
 
   - name: copy Patch_Extract.ps1 from centos to windows
-    copy:
+    win_copy:
       src: /ansible/PS_Scripts/Patch_Extract.PS1
       dest: C:\temp\IMC\PatchScan\Patch_Extract.PS1
     register: file_copy3
