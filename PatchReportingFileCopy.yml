@@ -5,11 +5,16 @@
 #
 #   code to copy IMCMerge.PS1 to C:\TEMP\PS_Scripts on server
 #
-  - name: download Patch_Merge.ps1 file from bds server
-    win_get_url:
-      url: https://10.177.57.227:8081/repository/lbg/temp/patching/Patch_Merge.PS1
-      dest: c:\temp
-      validate_certs: no
+#  - name: download Patch_Merge.ps1 file from bds server
+#    win_get_url:
+#      url: https://10.177.57.227:8081/repository/lbg/temp/patching/Patch_Merge.PS1
+#      dest: c:\temp
+#      validate_certs: no
+#    register: file_copy
+  - name: copy Patch_Merge.ps1 from centos to windows
+    win_copy:
+      src: /ansible/PS_Scripts/Patch_Merge.PS1
+      dest: C:\temp\IMC\PatchScan\Patch_Merge.ps1
     register: file_copy
 
   - name: download failed
@@ -18,7 +23,7 @@
     when: file_copy.failed == true
 
   - name: run PS_Script Patch_Merge.ps1
-    win_shell: C:\temp\Patch_Merge.ps1
+    win_shell: C:\temp\IMC\PatchScan\Patch_Merge.ps1
 
   - name: copy file from windows to SFS server (in this case, my CENTOS box)
 #   copies file to HOME/FILES/192.168.1.249/C:/TEMP/MergedData.zip - overwrites the original
