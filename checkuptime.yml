@@ -17,18 +17,18 @@
    - name: remove everything apart from service name
      set_fact: Uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
-   - name: Save Uptime1 related variables
+   - name: Set Uptime_Days Variable
      set_fact: uptime_days={{ Uptime | int }}
 
-   - name: Save Uptime_Above_Limit
+   - name: Set Uptime_Above_Limit Variable
      set_fact: uptime_above_limit={{ (uptime_days | int) >= (uptime_threshold | int) }}
 
    - debug:
-       msg: "Below Uptime_threshold - No reboot required"
+       msg: "Below Uptime_threshold - No reboot required on - SERVERNAME "
      when: uptime_above_limit == false
 
    - debug:
-       msg: "Above Uptime_threshold - so rebooting the server NOW"
+       msg: "Above Uptime_threshold - so rebooting server - SERVERNANME - NOW"
      when: uptime_above_limit == true
 
    - name: Reboot server
@@ -38,5 +38,5 @@
      when: uptime_above_limit == true
 
    - debug:
-       msg: "Server was rebooted"
+       msg: "Server - SERVERNAME has been rebooted"
      when: uptime_above_limit == true
