@@ -18,7 +18,7 @@
        msg: "serverUptime = {{ ServerUptime }}"
 
    - name: read file to get free disk space
-     set_fact: Uptime={{ ServerUptime.stdout_lines }}
+     set_fact: Uptime={{ ServerUptime.stdout_lines[0] }}
 
    - debug:
        msg: "Uptime = {{ Uptime }}"
