@@ -11,11 +11,11 @@
 
    - name: copy disk space information from file
      win_shell:
-       Select-String -Path C:\temp\ServerUptime1.txt -pattern "@Uptime="
+       Select-String -Path C:\temp\ServerUptime1.txt -pattern "@{Uptime="
      register: ServerUptime
 
    - debug:
-       msg: "serveruptime = {{ serverUptime }}"
+       msg: "serverUptime = {{ ServerUptime }}"
 
    - name: read file to get free disk space
      set_fact: Uptime={{ ServerUptime.stdout_lines }}
