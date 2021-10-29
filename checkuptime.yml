@@ -17,8 +17,11 @@
    - debug:
        msg: "serverUptime = {{ ServerUptime }}"
 
+   - name: remove everything apart from service name
+     set_fact: Uptime1={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
+
    - name: read file to get free disk space
-     set_fact: Uptime={{ ServerUptime.stdout_lines[0] }}
+     set_fact: Uptime={{ Uptime1.stdout_lines[0] }}
 
    - debug:
        msg: "Uptime = {{ Uptime }}"
