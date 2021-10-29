@@ -11,7 +11,7 @@
 
    - name: copy disk space information from file
      win_shell:
-       Select-String -Path C:\temp\ServerUptime1.txt -pattern "@{Uptime="
+       Select-String -Path C:\temp\ServerUptime1.txt -pattern "Uptime="
      register: ServerUptime
 
    - debug:
