@@ -20,6 +20,9 @@
    - name: remove everything apart from service name
      set_fact: Uptime1={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
+   - debug:
+     msg: "Uptime1 = {{ Uptime1 }}"
+
    - name: read file to get free disk space
      set_fact: Uptime={{ Uptime1.stdout_lines[0] }}
 
