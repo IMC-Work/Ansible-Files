@@ -15,12 +15,13 @@
      register: ServerUptime
 
    - name: remove everything apart from service name
-     set_fact: Uptime_days={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") | int }}
+     set_fact: Uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
-   - name: Save Uptime related variables
-     set_fact:
-#      uptime_days={{ Uptime | int }}
-      uptime_above_limit={{ (uptime_days | int) >= (uptime_threshold | int) }}
+   - name: Save Uptime1 related variables
+     set_fact: uptime_days={{ Uptime | int }}
+
+   - name: Save Uptime_Above_Limit
+     set_fact: uptime_above_limit={{ (uptime_days | int) >= (uptime_threshold | int) }}
 
    - debug:
        msg: "Below Uptime_threshold - No reboot required {{ uptime_raw.stdout_lines[0] }}"
