@@ -24,7 +24,7 @@
      set_fact: uptime_above_limit={{ (uptime_days | int) >= (uptime_threshold | int) }}
 
    - debug:
-       msg: "Below Uptime_threshold - No reboot required {{ uptime_raw.stdout_lines[0] }}"
+       msg: "Below Uptime_threshold - No reboot required"
      when: uptime_above_limit == false
 
    - debug:
