@@ -18,25 +18,16 @@
        msg: "serverUptime = {{ ServerUptime }}"
 
    - name: remove everything apart from service name
-     set_fact: Uptime1={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
-
-   - debug:
-       msg: "Uptime1 = {{ Uptime1 }}"
-
-   - name: read file to get free disk space
-     set_fact: Uptime={{ Uptime1.stdout_lines[0] }}
+     set_fact: Uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
    - debug:
        msg: "Uptime = {{ Uptime }}"
 
-#   - name: trim file to get free disk space value
-#     set_fact: data1={{ freediskspace | regex_replace('.*=') | regex_replace ("'.*") }}
-
    - name: Save Uptime related variables
      set_fact:
-      uptime_mins: "{{ uptime.stdout_lines[0] | int }}"
+      uptime_daye: "{{ uptime | int }}"
       uptime_above_limit:
-        "{{ (uptime.stdout_lines[0] | int) >= (uptime_threshold | int) }}"
+        "{{ (uptime_days | int) >= (uptime_threshold | int) }}"
 
    - debug:
        msg: "Below Uptime_threshold - No reboot required {{ uptime_raw.stdout_lines[0] }}"
