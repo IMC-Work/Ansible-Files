@@ -6,19 +6,13 @@
 
   tasks:
 
-   - name: run PS_Script ServerUptime.ps1
-     win_shell: C:\temp\PS_Scripts\ServerUptime.ps1
-
-   - name: copy disk space information from file
-     win_shell:
-       Select-String -Path C:\temp\ServerUptime.txt -pattern ""
-     register: ServerUptime
-
-   - name: read file to get free disk space
-     set_fact: Uptime={{ ServerUptime.stdout_lines }}
-
-#   - name: trim file to get free disk space value
-#     set_fact: data1={{ freediskspace | regex_replace('.*=') | regex_replace ("'.*") }}
+   - name: get the affected windows host's uptime
+     win_shell: "[convert]::ToInt32(($(Get-Date) - $(Get-WmiObject
+        Win32_OperatingSystem).ConvertToDateTime($(Get-WmiObject
+        Win32_OperatingSystem).LastBootUpTime)).TotalDays);"
+     register: uptime_raw
+     changed_when: false
+     ignore_errors: true
 
    - name: Save Uptime related variables
      set_fact:

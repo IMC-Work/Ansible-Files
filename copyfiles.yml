@@ -14,7 +14,8 @@
       fetch:
         src: C:/temp/ps_scripts/Missing_Patches.PS1
 #        dest: /home/files/192.168.1.249
-        dest: /home/ian/files/
+#        dest: /home/ian/files/
+        dest: /ansible-files/
         remote_src: yes
 
 #    - name: copy ansible directory from centos to windows
