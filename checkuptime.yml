@@ -15,7 +15,7 @@
      register: ServerUptime
 
    - name: remove everything apart from service name
-     set_fact: Uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") | int }}
+     set_fact: Uptime_days={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") | int }}
 
    - name: Save Uptime related variables
      set_fact:
