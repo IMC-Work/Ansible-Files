@@ -30,7 +30,7 @@
    - name: set_fact again
      set_fact:
        uptime_days: "{{ uptime | int }}"
-       uptime_above_limit: {{ (uptime_days | int) >= (uptime_threshold | int) }}
+       uptime_above_limit: "{{ (uptime_days | int) >= (uptime_threshold | int) }}"
 
    - debug:
        msg: "Below Uptime_threshold - No reboot required on - SERVERNAME "
