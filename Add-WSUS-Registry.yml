@@ -122,6 +122,6 @@
     register: result
 
   - name: debug1
-    ansible.builtin.debug:
+    debug:
       msg: "Windows Update service has been restarted"
     when: result.changed == true

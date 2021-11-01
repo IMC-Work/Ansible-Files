@@ -1,8 +1,9 @@
-﻿$directory  = "C:\WSUS\Merge"
-$mergedfile = "C:\WSUS\MergedData.csv"
-$zippedfile = "C:\WSUS\MergedData.zip"
-$renamedzip = "C:\WSUS\Archive\MergedData"+[datetime]::Now.Tostring("yyyyMMdd-HHmmss")+".zip"
-$archivedir = "C:\WSUS\Archive"
+﻿$directory     = "C:\WSUS\Merge"
+$mergedfile    = "C:\WSUS\MergedData.csv"
+$tempmergefile = "C:\WSUS\TempMergedData.csv"
+$zippedfile    = "C:\WSUS\MergedData.zip"
+$renamedzip    = "C:\WSUS\Archive\MergedData"+[datetime]::Now.Tostring("yyyyMMdd-HHmmss")+".zip"
+$archivedir    = "C:\WSUS\Archive"
 #
 #  Delete c:\temp\mergeddata.zip file if it exists
 #
@@ -13,7 +14,8 @@ if (Test-Path $zippedfile)
 #
 #  Merge all the files in c:\temp\merge folder into 1 big file
 #
-(Get-ChildItem -Path $directory -Filter *.csv).FullName | Import-Csv |Export-Csv $mergedfile -NoTypeInformation
+(Get-ChildItem -Path $directory -Filter *.csv).FullName | Import-Csv |Export-Csv $tempmergefile -NoTypeInformation
+import-csv $tempmergefile |sort -Property @{Expression = "device" ; Descending = $false} | Export-Csv -Path $mergedfile -NoTypeInformation
 #
 #  create a zip file of all the merged data - to be sent to the SFS Server (static name to copy to SFS Server)
 #
@@ -30,4 +32,5 @@ Copy-Item -Path $zippedfile -Destination $renamedzip
 #  now need to delete all the old CSV files in C:\Temp\Merge
 #
 Remove-Item -Path $directory\*.csv
+Remove-Item -Path $tempmergefile
 Remove-Item -Path C:\WSUS\MergedData.csv
