@@ -14,14 +14,10 @@
        Select-String -Path C:\temp\ServerUptime1.txt -pattern "Uptime="
      register: ServerUptime
 
-   - name: remove everything apart from service name
+   - name: remove everything apart from the uptime value
      set_fact: uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
-   - name: set uptime fact
-     set_fact:
-       uptime: {{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
-
-   - name: set other facts
+   - name: discover if the server has been up for more than 60 days
      set_fact:
        uptime_days: "{{ uptime | int }}"
        uptime_above_limit: "{{ (uptime_days | int) >= (uptime_threshold | int) }}"
