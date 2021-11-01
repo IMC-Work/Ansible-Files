@@ -17,10 +17,11 @@
    - name: remove everything apart from the uptime value
      set_fact: uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
-   - name: discover if the server has been up for more than 60 days
-     set_fact:
-       uptime_days: "{{ uptime | int }}"
-       uptime_above_limit: "{{ (uptime_days | int) >= (uptime_threshold | int) }}"
+   - name: discover how many days since the last reboot
+     set_fact: uptime_days={{ uptime | int }}
+
+   - name: Check if the server requires a reboot or not
+     set_fact: uptime_above_limit={{ (uptime_days | int) >= (uptime_threshold | int) }}
 
    - debug:
        msg: "Below Uptime_threshold - No reboot required on - SERVERNAME "
