@@ -25,9 +25,9 @@
 
    - name: set_facts
      set_fact:
-        Uptime: {{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
-        uptime_days: {{ Uptime | int }}
-        uptime_above_limit: {{ (uptime_days | int) >= (uptime_threshold | int) }}
+       uptime: {{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
+       uptime_days: {{ uptime | int }}
+       uptime_above_limit: {{ (uptime_days | int) >= (uptime_threshold | int) }}
 
    - debug:
        msg: "Below Uptime_threshold - No reboot required on - SERVERNAME "
