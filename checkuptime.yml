@@ -3,7 +3,7 @@
   gather_facts: false
   vars:
      uptime_threshold: 60
-     uptime_days: 60
+     uptime_days: 1
   tasks:
 
    - name: run PS_Script ServerUptime.ps1
@@ -16,18 +16,12 @@
 
    - name: remove everything apart from service name
      set_fact: uptime={{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
-#
-#   - name: Set Uptime_Days Variable
-#     set_fact: uptime_days={{ Uptime | int }}
-#
-#   - name: Set Uptime_Above_Limit Variable
-#     set_fact: uptime_above_limit={{ (uptime_days | int) >= (uptime_threshold | int) }}
 
-#   - name: set_facts
-#     set_fact:
-#       uptime: {{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
+   - name: set uptime fact
+     set_fact:
+       uptime: {{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
 
-   - name: set_fact again
+   - name: set other facts
      set_fact:
        uptime_days: "{{ uptime | int }}"
        uptime_above_limit: "{{ (uptime_days | int) >= (uptime_threshold | int) }}"
