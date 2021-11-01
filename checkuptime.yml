@@ -26,7 +26,10 @@
    - name: set_facts
      set_fact:
        uptime: {{ ServerUptime | regex_replace('.*=') | regex_replace ("'.*") }}
-       uptime_days: {{ uptime | int }}
+
+   - name: set_fact again
+     set_fact:
+       uptime_days: "{{ uptime | int }}"
        uptime_above_limit: {{ (uptime_days | int) >= (uptime_threshold | int) }}
 
    - debug:
