@@ -34,3 +34,9 @@ Copy-Item -Path $zippedfile -Destination $renamedzip
 Remove-Item -Path $directory\*.csv
 Remove-Item -Path $tempmergefile
 Remove-Item -Path C:\WSUS\MergedData.csv
+
+Get-ChildItem $archivedir -Recurse -Force -ea 0 | ? {!$_.PsIsContainer -and $_.LastWriteTime -lt (Get-Date).AddDays(-180)} |
+ForEach-Object {
+  $_ | del -Force 
+  $_.FullName | Out-File C:\WSUS\delete.log -Append
+ }
