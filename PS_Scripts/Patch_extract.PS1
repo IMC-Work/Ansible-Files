@@ -42,8 +42,8 @@ $all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | ou
 # This code removes the patch "Windows Malicious Software Removal Tool x64" from the file
 #
 $csv = Import-Csv -Path $file
-$file1 = "C:\temp\Patch\"+$hostname+"_30day_temp.csv"
-$file2 ="C:\temp\Patch\"+$hostname+"_30day.csv"
+$file1 = "C:\temp\Patch\"+$hostname+"_Extracted_temp.csv"
+$file2 ="C:\temp\Patch\"+$hostname+"_Extracted.csv"
 $all_updates=@()
 
 foreach($line in $csv)
