@@ -75,10 +75,34 @@
 
   - name: run PS_Script Patch_Extract.ps1
     win_shell: C:\temp\Patch_Extract.ps1 {{ days }}
+#
+# These 3 sections will create the file which will merge the Applicable and Extracted Patches to 1 file
+# ready to be copied to the SFS server
+#
+#- name: download Patching_Merge.ps1 file from bds server
+#  win_get_url:
+#    url: https://10.177.57.227:8081/repository/lbg/temp/patching/Patching_Merge.PS1
+#    dest: c:\temp
+#    validate_certs: no
+#  register: file_copy4
+#
+  - name: copy Patching_Merge.ps1 from centos to windows
+    win_copy:
+      src: /ansible/PS_Scripts/Patching_Merge.PS1
+      dest: C:\temp\Patching_Merge.PS1
+    register: file_copy4
+
+  - name: download failed
+    fail:
+      msg: " ### Patching_Merge.ps1 file download failed - please investigate *** "
+    when: file_copy4.failed == true
+
+  - name: run PS_Script Patching_Merge.ps1
+    win_shell: C:\temp\Patching_Merge.ps1
 
   - name: copy C:\Temp\{{ inventory_hostname}}.csv from Windows host to SFS Server
     win_copy:
 #      src: C:\temp\Patch\{{ inventory_hostname }}.csv
-      src: C:\temp\Patch\WIN-1D3KJCL01N5_30day.csv
+      src: C:\temp\Patch\WIN-1D3KJCL01N5.csv
       dest: \\{{ server_location }}\C$\WSUS\Merge\{{ inventory_hostname }}.csv
       remote_src: yes
