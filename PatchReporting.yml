@@ -15,7 +15,7 @@
 #    validate_certs: no
 #  register: file_copy1
 
-  - name: copy Missing_Patches.ps1 from centos to windows
+  - name: copy Applicable_Patches.ps1 from centos to windows
     win_copy:
       src: /ansible/PS_Scripts/Applicable_Patches.PS1
       dest: C:\temp\Applicable_Patches.ps1

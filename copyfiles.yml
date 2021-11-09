@@ -12,7 +12,7 @@
     - name: copy file from windows to centos
 #     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
       fetch:
-        src: C:/temp/Installed_Patches.ps1
+        src: C:/temp/Patching_Merge.ps1
 #        dest: /home/files/192.168.1.249
         dest: /home/ian/files/
 #        dest: /ansible-files/
