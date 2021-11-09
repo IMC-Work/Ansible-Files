@@ -1,0 +1,1 @@
+﻿copy-item -force -recurse "C:\temp\imc\TestData\192.168.1.249_Applicable.csv" -Destination "C:\Temp\"

@@ -6,8 +6,7 @@
      server_location: 192.168.1.249
   tasks:
 #
-# These 3 sections will create the file to identify what patches are missing from the Server
-# The Powershell code still needs to be written, and the file uploaded to the BDS Server
+# These 3 sections will create the file C:\TEMP\{{sever_name_applicable.csv}} on the server
 #
 #- name: download Missing_Patches.ps1 file from bds server
 #  win_get_url:
@@ -18,20 +17,19 @@
 
   - name: copy Missing_Patches.ps1 from centos to windows
     win_copy:
-      src: /ansible/PS_Scripts/Missing_Patches.PS1
-      dest: C:\temp\Missing_Patches.ps1
+      src: /ansible/PS_Scripts/Applicable_Patches.PS1
+      dest: C:\temp\Applicable_Patches.ps1
     register: file_copy1
 
   - name: download failed
     fail:
-      msg: " ### Missing_Patches.ps1 file download failed - please investigate *** "
+      msg: " ### Applicable_Patches.ps1 file download failed - please investigate *** "
     when: file_copy1.failed == true
 
-  - name: run PS_Script Missing_Patches.PS1
-    win_shell: C:\temp\Missing_Patches.ps1
+  - name: run PS_Script Applicable_Patches.PS1
+    win_shell: C:\temp\Applicable_Patches.ps1
 #
-# These 3 sections will create the file to identify what patches are currently installed on the server
-# The Powershell file still needs to be uploaded to the BDS Server
+# These 3 sections will create the file C:\TEMP\{{sever_name_installed.csv}} on the server - conatains all patches installed
 #
 #- name: download Installed_Patches.ps1 file from bds server
 #  win_get_url:
@@ -55,7 +53,7 @@
     win_shell: C:\temp\installed_Patches.ps1
 #
 # These 3 sections will create the file to identify what patches were installed on the server in the last 30 days
-# The Powershell file still needs to be uploaded to the BDS Server
+# Then it will merge the data with c:\temp\{{serer_name_applicable.csv}}
 #
 #- name: download Patch_Extract.ps1 file from bds server
 #  win_get_url:
@@ -78,7 +76,7 @@
   - name: run PS_Script Patch_Extract.ps1
     win_shell: C:\temp\Patch_Extract.ps1 {{ days }}
 
-  - name: copy Patch_Extract file from Windows host to WSUS Server
+  - name: copy C:\Temp\{{ inventory_hostname}}.csv from Windows host to SFS Server
     win_copy:
 #      src: C:\temp\Patch\{{ inventory_hostname }}.csv
       src: C:\temp\Patch\WIN-1D3KJCL01N5_30day.csv
