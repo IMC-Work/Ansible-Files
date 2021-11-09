@@ -4,8 +4,8 @@ $path = "C:\temp\Patch\$hostname.csv"
 $csv = Import-Csv -Path $path
 $today = Get-Date
 $Vardaysago = $today.adddays(-$days).ToString('yyyy-MM-dd HH:mm:ss')
-$file = "C:\temp\Patch\Temp_"+$hostname+"_30day.txt"
-$file1 = "C:\temp\Patch\"+$hostname+"_30day.csv"
+$file = "C:\temp\Patch\Temp_"+$hostname+"_Extracted.txt"
+$file1 = "C:\temp\Patch\"+$hostname+"_Extracted.csv"
 $all_updates=@()
 
 foreach($line in $csv)
