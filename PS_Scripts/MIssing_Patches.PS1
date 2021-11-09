@@ -1,1 +1,0 @@
-﻿copy-item -force -recurse "C:\temp\imc\TestData\*.csv" -Destination "C:\WSUS\Merge"

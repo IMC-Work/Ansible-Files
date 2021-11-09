@@ -2,6 +2,7 @@
    $hostname = $env:COMPUTERNAME,
    $fqdn = [System.Net.DNS]::GetHostByName($env:COMPUTERNAME).Hostname.ToUpper(),
    $csvfile = "c:\temp\Patch\scan_results.csv",
+   $fileName = "C:\temp\Patch\"+$hostname+"_Installed.csv", 
    $update_type = "all",
    [switch]$include_title,
    $changeid = ""
@@ -187,9 +188,4 @@ Write-Output("Total de-duplicated updates from API and WMI, count: $($all_update
 
 $all_updates | ConvertTo-Csv -NoTypeInformation  -delimiter ',' | % { $_ -replace '"', "" } | out-file -Force $csvfile -en ascii
 
-$FileName ='imc_scan_results.csv'
-$hostname = $env:COMPUTERNAME
-$OldCode = $env:COMPUTERNAME
-$NewCode = (gwmi win32_bios).SerialNumber 
-
-Copy-Item -Path "C:\Temp\Patch\$Filename" -Destination "C:\Temp\Patch\$hostname.csv"
+Copy-Item -Path $csvfile -Destination $fileName
