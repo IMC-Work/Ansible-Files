@@ -40,8 +40,8 @@
 
   - name: copy Installed_Patches.ps1 from centos to windows
     win_copy:
-      src: /ansible/PS_Scripts/installed_Patches.PS1
-      dest: C:\temp\installed_Patches.ps1
+      src: /ansible/PS_Scripts/Installed_Patches.PS1
+      dest: C:\temp\Installed_Patches.ps1
     register: file_copy2
 
   - name: download failed
@@ -50,7 +50,7 @@
     when: file_copy2.failed == true
 
   - name: run PS_Script Installed_Patches.PS1
-    win_shell: C:\temp\installed_Patches.ps1
+    win_shell: C:\temp\Installed_Patches.ps1
 #
 # These 3 sections will create the file to identify what patches were installed on the server in the last 30 days
 # Then it will merge the data with c:\temp\{{serer_name_applicable.csv}}
