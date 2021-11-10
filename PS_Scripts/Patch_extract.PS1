@@ -1,6 +1,6 @@
 ﻿$days     = $args[0]
 $hostname = $env:COMPUTERNAME
-$path = "C:\temp\Patch\$hostname.csv"
+$path = "C:\temp\Patch\"+$hostname+"_Installed.csv"
 $csv = Import-Csv -Path $path
 $today = Get-Date
 $Vardaysago = $today.adddays(-$days).ToString('yyyy-MM-dd HH:mm:ss')
