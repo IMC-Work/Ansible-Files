@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    patch: KB5005698
+  tasks:
+
+  - name: Uninstall hotfix with KB
+    win_hotfix:
+      hotfix_kb: {{ patch }}
+      state: absent
+      register: hotfix_uninstall
+
+  - name: reboot (if required)
+    win_reboot:
+    when: hotfix_uninstall.reboot_required
