@@ -7,9 +7,17 @@
 
   - name: Uninstall hotfix with KB
     win_hotfix:
-      hotfix_kb: {{ patch }}
+      hotfix_kb: "{{ patch }}"
       state: absent
       register: hotfix_uninstall
+
+  - debug:
+      msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
+    when: hotifx_uninstall.reboot_required
+
+  - debug:
+      msg: "Patch {{ patch }} has been uninstalled from {{ inventory_hostname }} no reboot required"
+    when: hotifx_uninstall.reboot_required == false
 
   - name: reboot (if required)
     win_reboot:
