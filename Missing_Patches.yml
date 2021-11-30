@@ -5,9 +5,12 @@
 
   - name: search
     win_updates:
+      category_names:
+        - SecurityUpdates
+        - CriticalUpdates
       state: searched
       use_scheduled_task: yes
-      log_path: c:\temp\missing_patches.txt
+#      log_path: c:\temp\missing_patches.txt
     register: missing_patch_count
 
   - name: patch count
@@ -17,4 +20,4 @@
   - name: check for file
     win_stat:
       path: 'c:\temp\missing_patches.txt'
-    register: file_check  
+    register: file_check
