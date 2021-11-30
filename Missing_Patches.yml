@@ -16,12 +16,16 @@
     debug:
       msg: "{{ missing_patch_count }}"
 
-  - name: missing patches(1)
-    debug:
-      msg: " {{ missing_patch_count.updates }}"
+#  - name: missing patches(1)
+#    debug:
+#      msg: " {{ missing_patch_count.updates }}"
 
   - name: missing patches(2)
     debug:
       msg:
         - " {{ missing_patch_count.filtered_updates }} "
         - " {{ missing_patch_count.updates }} "
+
+  - name: missing_patches(3)
+    debug:
+      msg: " {{ missing_patch_count.updates_kb }}"
