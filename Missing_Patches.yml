@@ -23,5 +23,5 @@
   - name: missing patches(2)
     debug:
       msg:
-        - " {{ missing_patch_count.filtered_updates }}"
-        - " {{ missing_patch.count.updates}}"
+        - " {{ missing_patch_count.filtered_updates }} "
+        - " {{ missing_patch.count.updates }} "
