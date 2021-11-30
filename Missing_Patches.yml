@@ -16,6 +16,6 @@
     debug:
       msg: "{{ missing_patch_count }}"
 
-  - name: missing patches(1)
-    debug:
-      msg: " {{ missing_patch_count.updates[1] }}"
+#  - name: missing patches(1)
+#    debug:
+#      msg: " {{ missing_patch_count.updates[1] }}"
