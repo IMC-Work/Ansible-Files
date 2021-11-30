@@ -12,11 +12,10 @@
       log_path: c:\temp\missing_patches.txt
     register: missing_patch_count
 
-  - name: patch count
+  - name: missing patches
     debug:
-      msg: "we are missing {{ missing_patch_count }}"
+      msg: "{{ missing_patch_count }}"
 
-#  - name: check for file
-#    win_stat:
-#      path: 'c:\temp\missing_patches.txt'
-#    register: file_check
+  - name: missing patches(1)
+    debug:
+      msg: " {{ missing_patch_count.updates_title }}"
