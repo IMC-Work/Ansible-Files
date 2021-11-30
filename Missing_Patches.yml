@@ -18,4 +18,8 @@
 
   - name: missing patches(1)
     debug:
-      msg: " {{ missing_patch_count.updates['id'] }}"
+      msg: " {{ missing_patch_count.updates }}"
+
+  - name: missing patches(2)
+    debug:
+      msg: " {{ missing_patch_count.updates[0] }}"    
