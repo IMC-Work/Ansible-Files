@@ -11,13 +11,13 @@
       state: searched
       use_scheduled_task: yes
 #      log_path: c:\temp\missing_patches.txt
-    register: missing_patch_count
+#    register: missing_patch_count
 
-  - name: patch count
-    debug:
-      msg: "we are missing {{ missing_patch_count }}"
+#  - name: patch count
+#    debug:
+#      msg: "we are missing {{ missing_patch_count }}"
 
-  - name: check for file
-    win_stat:
-      path: 'c:\temp\missing_patches.txt'
-    register: file_check
+#  - name: check for file
+#    win_stat:
+#      path: 'c:\temp\missing_patches.txt'
+#    register: file_check
