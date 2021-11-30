@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   vars:
-    patch: KB5005698
+    patch: KB3192137
   tasks:
 
   - name: Uninstall hotfix with KB
