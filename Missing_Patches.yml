@@ -22,4 +22,4 @@
 
   - name: missing patches(2)
     debug:
-      msg: " {{ missing_patch_count.updates[0] }}"    
+      msg: " {{ missing_patch_count.updates_kb[0] }}"    
