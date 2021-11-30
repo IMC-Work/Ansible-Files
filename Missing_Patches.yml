@@ -9,9 +9,8 @@
         - SecurityUpdates
         - CriticalUpdates
       state: searched
-      use_scheduled_task: yes
-#      log_path: c:\temp\missing_patches.txt
-#    register: missing_patch_count
+      log_path: c:\temp\missing_patches.txt
+    register: missing_patch_count
 
 #  - name: patch count
 #    debug:
