@@ -33,4 +33,4 @@
   - local_action:
       module: copy
       content: " {{ missing_patch_count }} "
-      dest: "c:\temp\imc_patch.txt"
+      dest: "c:/temp/imc_patch.txt"
