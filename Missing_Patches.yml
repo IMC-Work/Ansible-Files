@@ -41,3 +41,8 @@
         - " {{ missing_patch_count.updates }}"
       dest: "c:/temp/imc_patch.csv"
       remote_src: yes
+
+  - name: insertline
+    lineinfile:
+      path: "c:/temp/imc_patch1.txt"
+      line: " added this file "
