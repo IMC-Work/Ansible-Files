@@ -35,8 +35,9 @@
   - name: copy information to local machine
     win_copy:
       content:
-        - " {{ missing_patch_count }}"
+        - " {{ invemtory_hostname }} ,"
+        - " {{ missing_patch_count.updates }}"
         - " hello "
-        - " {{ missing_patch_count }}"
+        - " {{ missing_patch_count.updates }}"
       dest: "c:/temp/imc_patch.csv"
       remote_src: yes
