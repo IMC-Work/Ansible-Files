@@ -31,6 +31,7 @@
 #      msg: " {{ missing_patch_count.updates.kb }}"
 
   - name: copy data
-      content: {{ missing_patch_count }}
+    win_copy:
+      content: "{ missing_patch_count }}"
       dest: "c:/temp/imc_patch.txt"
       remote_src: yes
