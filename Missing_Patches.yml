@@ -44,5 +44,5 @@
 
   - name: insertline
     lineinfile:
-      path: c:/temp/imc_patch1.txt
+      dest: c:/temp/imc_patch1.txt
       line: ' added this file '
