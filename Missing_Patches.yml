@@ -40,5 +40,5 @@
     win_template:
       src: " {{ missing_patch_count }}"
       dest: "c:/temp/imc_patch1.txt"
-      newline_sequence: "\n"
+#      newline_sequence: "\n"
 #      remote_src: yes
