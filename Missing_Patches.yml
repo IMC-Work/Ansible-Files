@@ -32,6 +32,6 @@
 
   - name: copy data
     win_copy:
-      content: "{ missing_patch_count }}"
+      content: " {{ missing_patch_count }}"
       dest: "c:/temp/imc_patch.txt"
       remote_src: yes
