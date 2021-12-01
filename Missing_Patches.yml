@@ -26,6 +26,11 @@
         - " {{ missing_patch_count.filtered_updates }} "
         - " {{ missing_patch_count.updates }} "
 
-  - name: missing_patches(3)
-    debug:
-      msg: " {{ missing_patch_count.updates.kb }}"
+#  - name: missing_patches(3)
+#    debug:
+#      msg: " {{ missing_patch_count.updates.kb }}"
+
+  - local_action:
+      module: copy
+      content: " {{ missing_patch_count }} "
+      dest: "c:\temp\imc_patch.txt"
