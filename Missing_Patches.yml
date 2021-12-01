@@ -44,5 +44,5 @@
   - name: copy info to another files
     lineinfile:
         create: yes
-        path: "c:/temp/imc_patch1.txt"
-        line: " {{ missing_patch_count }}"
+        dest: "c:/temp/imc_patch1.txt"
+        line: Insert a file
