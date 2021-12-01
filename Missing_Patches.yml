@@ -35,7 +35,7 @@
   - name: copy information to local machine
     win_copy:
       content:
-        - " {{ invemtory_hostname }} ,"
+        - " {{ inventory_hostname }} ,"
         - " {{ missing_patch_count.updates }}"
         - " hello "
         - " {{ missing_patch_count.updates }}"
