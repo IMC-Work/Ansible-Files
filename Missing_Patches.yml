@@ -36,13 +36,7 @@
     win_copy:
       content:
         - " {{ missing_patch_count }}"
-        - " hello"
+        - " hello "
         - " {{ missing_patch_count }}"
-      dest: "c:/temp/imc_patch.txt"
+      dest: "c:/temp/imc_patch.csv"
       remote_src: yes
-
-  - name: copy info to another files
-    lineinfile:
-        create: yes
-        dest: "c:/temp/imc_patch1.txt"
-        line: Insert a file
