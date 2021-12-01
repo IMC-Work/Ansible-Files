@@ -34,10 +34,14 @@
 
   - name: copy information to local machine
     win_copy:
-#      content: " {{ missing_patch_count }}"
       content:
-        - " {{ missing_patch_count + '\n' }}"
+        - " {{ missing_patch_count }}"
         - " hello"
         - " {{ missing_patch_count }}"
       dest: "c:/temp/imc_patch.txt"
       remote_src: yes
+
+  - name: copy info to another files
+    lineinfile:
+        path: "c:/temp/imc_patch1.txt"
+        line: " {{ missing_patch_count }}"    
