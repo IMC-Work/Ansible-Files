@@ -28,7 +28,9 @@
 
   - name: missing_patches(3)
     debug:
-      msg: " {{ missing_patch_count.updates_kb }}"
+      msg: " {{ item.kb }} "
+    loop: " {{ missing_patch_count.updates }}"
+  #    msg: " {{ missing_patch_count.updates_kb }}"
 
   - name: copy information to local machine
     win_copy:
