@@ -30,7 +30,7 @@
 #    debug:
 #      msg: " {{ missing_patch_count.updates.kb }}"
 
-  - local_action:
-      module: copy
+  - name: copy data
       content: " {{ missing_patch_count }} "
-      log_path: "c:/temp/imc_patch.txt"
+      dest: "c:/temp/imc_patch.txt"
+      remote_src: yes
