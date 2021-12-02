@@ -34,7 +34,7 @@
 
   - name: check 3
     debug:
-      msg: "{{ patch.updates_installed }} "
+      msg: "{{ patch.updates.installed }} "
 
   - name: copy information to local machine
     win_copy:
