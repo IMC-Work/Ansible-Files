@@ -49,3 +49,17 @@
       content: "{{ patch.filtered_updates }}"
       dest: "c:/temp/patch_filtered_updates.csv"
       remote_src: yes
+
+  - name: copy information to local machine
+    win_copy:
+      content:
+        - "{{ inventory_hostname }}"
+        - ","
+        - " server IP"
+        - ","
+        - ","
+        - "Applicable"
+        - ","
+        - "KB123456"
+      dest: "c:/temp/patch_test.csv"
+      remote_src: yes
