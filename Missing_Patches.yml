@@ -34,7 +34,8 @@
   - name: check 3
     debug:
       msg: "{{ item.installed }} "
-    loop: "{{ patch.updates }}"  
+      wantlist: True
+    loop: "{{ patch.updates }}"
 
   - name: copy information to local machine
     win_copy:
