@@ -3,14 +3,24 @@
   gather_facts: false
   tasks:
 
+  #- name: search
+  #  win_updates:
+  #    category_names:
+  #      - SecurityUpdates
+  #      - CriticalUpdates
+  #    state: searched
+  #    log_path: c:\temp\missing_patches.txt
+  #  register: missing_patch_count
+
   - name: search
     win_updates:
-      category_names:
-        - SecurityUpdates
-        - CriticalUpdates
+      category_names: " {{ item }}"
       state: searched
       log_path: c:\temp\missing_patches.txt
     register: missing_patch_count
+    with_items:
+        - SecurityUpdates
+        - CriticalUpdates
 
   - name: missing patches
     debug:
