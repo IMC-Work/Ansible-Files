@@ -29,7 +29,8 @@
   - name: check 2 - filtered_updates
     debug:
 #      msg: "{{ patch.filtered_updates }}"
-      msg: " {{ patch.results }}"
+#      msg: " {{ patch.results }}"
+      msg: "{{ results.changed }}"
 
 #  - name: check 3 - updates
 #    debug:
