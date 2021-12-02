@@ -34,10 +34,6 @@
     debug:
       msg: "{{ patch.updates }} "
 
-#  - name: check 4 - updates
-#    debug:
-#      msg: "{{ patch.updates.73f45b23-8537-455d-83fd-840e7e93b835.kb }}"
-
   - name: copy information to local machine
     win_copy:
       content: "{{ patch.updates }}"
@@ -55,7 +51,7 @@
       content:
         - "{{ inventory_hostname }}"
         - ","
-        - " server IP"
+        - "server IP"
         - ","
         - ","
         - "Applicable"
