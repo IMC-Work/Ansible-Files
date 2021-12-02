@@ -28,7 +28,7 @@
 
   - name: check 2
     debug:
-      msg: "{{ patch.updates[1] }}"
+      msg: "{{ patch.filtered_updates[1] }}"
 
   - name: check 3
     debug:
