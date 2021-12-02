@@ -28,7 +28,7 @@
 
   - name: check 2
     debug:
-      msg: " {{ patch.updates }}"
+      msg: " {{ patch.updates[0] }}"
 
 #  - name: missing patches(2)
 #    debug:
