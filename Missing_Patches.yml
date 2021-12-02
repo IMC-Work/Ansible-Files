@@ -28,7 +28,7 @@
 
   - name: missing_patches(3)
     debug:
-      msg: " {{ missing_patch_count.updates[0].kb }} "
+      msg: " {{ missing_patch_count.updates[1].kb }} "
 
   - name: copy information to local machine
     win_copy:
