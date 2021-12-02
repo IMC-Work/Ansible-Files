@@ -21,10 +21,14 @@
     with_items:
         - SecurityUpdates
         - CriticalUpdates
-        
+
+  - name: Check
+    debug:
+      msg: " {{ patch.results }}"
+
   - name: something
     debug:
-      msg: "{{ item.updates }}"
+      msg: "{{ item.kb }}"
     loop: " {{ patch.results }}"
 
 #    debug:
