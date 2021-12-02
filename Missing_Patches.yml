@@ -3,24 +3,24 @@
   gather_facts: false
   tasks:
 
-  - name: search
-    win_updates:
-      category_names:
-        - SecurityUpdates
-        - CriticalUpdates
-      state: searched
-      log_path: c:\temp\missing_patches.txt
-    register: patch
-
 #  - name: search
 #    win_updates:
-#      category_names: "{{ item }}"
+#      category_names:
+#        - SecurityUpdates
+#        - CriticalUpdates
 #      state: searched
 #      log_path: c:\temp\missing_patches.txt
 #    register: patch
-#    with_items:
-#        - SecurityUpdates
-#        - CriticalUpdates
+
+  - name: search
+    win_updates:
+      category_names: "{{ item }}"
+      state: searched
+      log_path: c:\temp\missing_patches.txt
+    register: patch
+    with_items:
+        - SecurityUpdates
+        - CriticalUpdates
 
   - name: Check
     debug:
@@ -36,7 +36,7 @@
 
   - name: check 4 - get part of updates
     debug:
-      msg: "{{ patch.updates_installed }}"    
+      msg: "{{ patch.updates.installed }}"
 
   - name: copy information to local machine
     win_copy:
