@@ -28,7 +28,8 @@
 
   - name: missing patches(1)
     debug:
-      msg: " {{ missing_patch_count.reults.kb }}"
+#      msg: " {{ missing_patch_count.reults.kb }}"
+      msg: " {{ item.kb }}"
 
 #  - name: missing patches(2)
 #    debug:
