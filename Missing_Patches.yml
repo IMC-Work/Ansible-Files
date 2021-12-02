@@ -30,7 +30,7 @@
     debug:
 #      msg: "{{ patch.filtered_updates }}"
 #      msg: " {{ patch.results }}"
-      msg: "{{ results.changed }}"
+      msg: "{{ patch.results.changed }}"
 
 #  - name: check 3 - updates
 #    debug:
