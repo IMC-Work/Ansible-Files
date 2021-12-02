@@ -17,19 +17,18 @@
       category_names: "{{ item }}"
       state: searched
       log_path: c:\temp\missing_patches.txt
-    register: missing_patch_count
+    register: patch
     with_items:
         - SecurityUpdates
         - CriticalUpdates
 
-  - name: missing patches
     debug:
-      msg: "{{ missing_patch_count.results }}"
+      msg: "{{ item.updates }}"
+    loop: " {{ patch.results }}"
 
-  - name: missing patches(1)
-    debug:
+#    debug:
 #      msg: " {{ missing_patch_count.reults.kb }}"
-      msg: " {{ item.updates }}"
+#      msg: " {{ item.updates }}"
 
 #  - name: missing patches(2)
 #    debug:
