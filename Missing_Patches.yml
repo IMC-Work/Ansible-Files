@@ -14,7 +14,7 @@
 
   - name: search
     win_updates:
-      category_names: " {{ item }}"
+      category_names: "{{ item }}"
       state: searched
       log_path: c:\temp\missing_patches.txt
     register: missing_patch_count
@@ -29,7 +29,7 @@
   - name: missing patches(1)
     debug:
 #      msg: " {{ missing_patch_count.reults.kb }}"
-      msg: " {{ item.kb }}"
+      msg: " {{ item.updates }}"
 
 #  - name: missing patches(2)
 #    debug:
