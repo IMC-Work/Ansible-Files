@@ -24,15 +24,15 @@
 
   - name: Check
     debug:
-      msg: " {{ patch }}"
+      msg: "{{ patch }}"
 
   - name: check 2
     debug:
-      msg: " {{ patch.updates }}"
+      msg: "{{ patch.updates }}"
 
   - name: check 3
     debug:
-      msg: " {{ patch.categories }} "
+      msg: "{{ patch.updates_categories[0] }} "
 
   - name: copy information to local machine
     win_copy:
