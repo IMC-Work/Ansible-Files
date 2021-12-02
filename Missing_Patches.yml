@@ -28,17 +28,11 @@
 
   - name: check 2
     debug:
-      msg: " {{ patch.updates[0] }}"
+      msg: " {{ patch.updates }}"
 
-#  - name: missing patches(2)
-#    debug:
-#      msg:
-#        - " {{ missing_patch_count.filtered_updates }} "
-#        - " {{ missing_patch_count.updates }} "
-
-  - name: missing_patches(3)
+  - name: check 3
     debug:
-      msg: " {{ missing_patch_count.updates[1].kb }} "
+      msg: " {{ patch.updates_kb }} "
 
   - name: copy information to local machine
     win_copy:
