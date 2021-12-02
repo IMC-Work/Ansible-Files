@@ -28,7 +28,7 @@
 
   - name: something
     debug:
-      msg: "{{ item.kb }}"
+      msg: "{{ item.updates }}"
     loop: " {{ patch.results }}"
 
 #    debug:
