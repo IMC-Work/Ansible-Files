@@ -36,7 +36,7 @@
 
   - name: check 4 - updates
     debug:
-      msg: "{{ patch.updates }} .a711f6a5-5bf3-4392-95d0-686f748789dd.kb "    
+      msg: "{{ patch.updates }}.73f45b23-8537-455d-83fd-840e7e93b835".kb "    
 
   - name: copy information to local machine
     win_copy:
