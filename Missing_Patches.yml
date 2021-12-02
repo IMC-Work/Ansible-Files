@@ -28,11 +28,11 @@
 
   - name: check 2
     debug:
-      msg: "{{ patch.filtered_updates[1] }}"
+      msg: "{{ patch.filtered_updates }}"
 
   - name: check 3
     debug:
-      msg: "{{ patch.updates_categories[0] }} "
+      msg: "{{ patch.updates_categories }} "
 
   - name: copy information to local machine
     win_copy:
