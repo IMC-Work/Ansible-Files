@@ -24,7 +24,7 @@
 
   - name: Check
     debug:
-      msg: " {{ patch.results }}"
+      msg: " {{ patch }}"
 
   - name: something
     debug:
