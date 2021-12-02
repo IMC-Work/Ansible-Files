@@ -24,7 +24,7 @@
 
   - name: missing patches
     debug:
-      msg: "{{ missing_patch_count }}"
+      msg: "{{ missing_patch_count.results }}"
 
 #  - name: missing patches(1)
 #    debug:
