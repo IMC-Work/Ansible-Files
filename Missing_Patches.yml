@@ -3,24 +3,24 @@
   gather_facts: false
   tasks:
 
-#  - name: search
-#    win_updates:
-#      category_names:
-#        - SecurityUpdates
-#        - CriticalUpdates
-#      state: searched
-#      log_path: c:\temp\missing_patches.txt
-#    register: patch
-
   - name: search
     win_updates:
-      category_names: "{{ item }}"
+      category_names:
+        - SecurityUpdates
+        - CriticalUpdates
       state: searched
       log_path: c:\temp\missing_patches.txt
     register: patch
-    with_items:
-        - SecurityUpdates
-        - CriticalUpdates
+
+#  - name: search
+#    win_updates:
+#      category_names: "{{ item }}"
+#      state: searched
+#      log_path: c:\temp\missing_patches.txt
+#    register: patch
+#    with_items:
+#        - SecurityUpdates
+#        - CriticalUpdates
 
   - name: Check
     debug:
@@ -32,7 +32,7 @@
 #      msg: " {{ patch.results }}"
 #      msg: "{{ item.changed }}"
       msg: "{{ item.categories }}"
-    loop: "{{ patch.results }}"  
+    loop: "{{ patch.results }}"
 
 #  - name: check 3 - updates
 #    debug:
