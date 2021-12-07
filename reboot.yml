@@ -37,6 +37,10 @@
 
     - debug:
         msg: "{{ inventory_hostname }} {{ ping_test1 }} has been rebooted"
+
+    - debug:
+        msg: "helllllo"
+      when: ping_test1.ping == "pong"        
 #      when: ping_test1.ping == true
 #    - name: pause tasks for xx seconds to allow service to be stopped
 #      pause:
