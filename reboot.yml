@@ -39,7 +39,11 @@
         msg: "{{ inventory_hostname }} has been rebooted"
       when: ping_test1.ping == "pong"
 
-    - name: pause tasks for 60 seconds to allow service to be stopped
+    when: reboot_status.failed == true
+
+  - name: perform when server is not responding from reboot
+    block:
+    - name: pause tasks for another 60 seconds to allow service to be stopped
       pause:
         seconds: 60
         prompt: Waiting for server to reboot
@@ -50,6 +54,6 @@
 
     - debug:
         msg: "{{ inventory_hostname }} has been rebooted"
-      when: ping_test2.ping == "pong" 
+      when: ping_test2.ping == "pong"
 
-    when: reboot_status.failed == true
+    when: ping_test1.ping != "pong"
