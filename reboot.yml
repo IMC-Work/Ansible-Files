@@ -10,13 +10,20 @@
     ignore_errors: true
     register: reboot_status
 
-  - name: pause for another 5 minutes for server to reboot
-    pause:
-      minutes: 1
-    when: reboot_status.failed == true
+  - name: server still rebooting
+    block:
 
-  - name: ping server
-    win_ping:
+    - name: server still rebooting
+      debug:
+        msg: "server is still rebooting - please wait 5 minutes"
+
+    - name: pause for another 5 minutes for server to reboot
+      pause:
+        minutes: 1
+
+    - name: ping server
+      win_ping:
+
     when: reboot_status.failed == true
 
   - name: all tickitee boo
