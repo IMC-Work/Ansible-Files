@@ -6,7 +6,7 @@
   tasks:
   - name: Reboot server
     win_reboot:
-      reboot_timeout: 1
+      reboot_timeout: 100
     ignore_errors: true
     register: reboot_status
 
