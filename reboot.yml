@@ -18,14 +18,17 @@
       msg: "{{ inventory_hostname }} has not been rebooted"
     when: reboot_status.failed == true
 
-#   block
-#      pause for 5 minutes
-#      ping server
-#   when reboot_status.failed == true
+  - name: perform when server is not responding from reboot
+    block:
+    - name: pause tasks for xx seconds to allow service to be stopped
+      pause:
+        seconds: 120
+        prompt: Waiting for server to reboot
 
-  - name: test play
-    win_ping:
-    register: ping_test1
+    - name: test play
+      win_ping:
+      register: ping_test1
 
-  - debug:
-      msg: "{{ ping_test1 }}"    
+    - debug:
+        msg: "{{ ping_test1 }}"
+    when: reboot_status.failed == true
