@@ -12,12 +12,11 @@
 
   - name: pause for another 5 minutes for server to reboot
     pause:
-      seconds: 60
+      minutes: 1
     when: reboot_status.failed == true
 
   - name: ping server
     win_ping:
-    ignore_errors: true
     when: reboot_status.failed == true
 
   - name: all tickitee boo
