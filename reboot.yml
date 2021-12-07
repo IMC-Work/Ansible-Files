@@ -7,7 +7,7 @@
   - name: Reboot server
     win_reboot:
       reboot_timeout: 1
-    ignore_errors: true     
+    ignore_errors: true
     register: reboot_status
 
   - debug:
@@ -15,5 +15,5 @@
     when: reboot_status == true
 
   - debug:
-      msg: "{{ inventory_hostname }} has not been rebooted"
-    when: reboot_status == false
+      msg: "{{ inventory_hostname }} {{ reboot_status }} has not been rebooted"
+#    when: reboot_status == false
