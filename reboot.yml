@@ -34,7 +34,7 @@
 
     - name: pause tasks for xx seconds to allow service to be stopped
       pause:
-        seconds: 100
+        seconds: 10
         prompt: Waiting for server to reboot
 
     - name: test play
