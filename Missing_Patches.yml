@@ -12,59 +12,14 @@
       log_path: c:\temp\missing_patches.txt
     register: patch
 
-#  - name: search
-#    win_updates:
-#      category_names: "{{ item }}"
-#      state: searched
-#      log_path: c:\temp\missing_patches.txt
-#    register: patch
-#    with_items:
-#        - SecurityUpdates
-#        - CriticalUpdates
-
-#  - name: Check
-#    debug:
-#      msg: "{{ patch }}"
-#
-#  - name: check 2 - filtered_updates
-#    debug:
-#      msg: "{{ patch.filtered_updates }}"
-#      msg: " {{ patch.results }}"
-#      msg: "{{ item.changed }}"
-#      msg: "{{ item.categories }}"
-#    loop: "{{ patch.results }}"
-
-#  - name: check 3 - updates
-#    debug:
-#      msg: "{{ patch.updates }}"
-
-#  - name: check 4 - get part of updates
-#    debug:
-#      msg: "{{ patch.updates.installed }}"
-
-  - name: copy information to local machine
+  - name: copy patch_update information to local machine
     win_copy:
       content: "{{ patch.updates }}"
       dest: "c:/temp/patch_updates.txt"
       remote_src: yes
 
-  - name: copy information to local machine
+  - name: copy patch_filtered_update information to local machine
     win_copy:
       content: "{{ patch.filtered_updates }}"
       dest: "c:/temp/patch_filtered_updates.txt"
       remote_src: yes
-#
-#  - name: copy information to local machine
-#    win_copy:
-#      content:
-#        - "{{ inventory_hostname }}"
-#        - ","
-#        - "server IP"
-#        - ","
-#        - ","
-#        - "Applicable"
-#        - ","
-#        - "KB123456"
-#      dest: "c:/temp/patch_test.csv"
-#      remote_src: yes
-#
