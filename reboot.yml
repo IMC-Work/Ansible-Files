@@ -22,7 +22,7 @@
     block:
     - name: pause tasks for xx seconds to allow service to be stopped
       pause:
-        seconds: 120
+        seconds: 1
         prompt: Waiting for server to reboot
 
     - name: test play
