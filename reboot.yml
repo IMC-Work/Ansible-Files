@@ -20,10 +20,10 @@
 
   - name: perform when server is not responding from reboot
     block:
-    - name: pause tasks for xx seconds to allow service to be stopped
-      pause:
-        seconds: 1
-        prompt: Waiting for server to reboot
+#    - name: pause tasks for xx seconds to allow service to be stopped
+#      pause:
+#        seconds: 1
+#        prompt: Waiting for server to reboot
 
     - name: test play
       win_ping:
