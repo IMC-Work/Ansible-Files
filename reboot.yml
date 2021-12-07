@@ -15,7 +15,7 @@
     when: reboot_status.failed == false
 
   - debug:
-      msg: "{{ inventory_hostname }} has not been rebooted"
+      msg: "{{ inventory_hostname }} is still being rebooted"
     when: reboot_status.failed == true
 
   - name: perform when server is not responding from reboot
@@ -36,8 +36,8 @@
       ignore_errors: true
 
     - debug:
-        msg: "{{ ping_test1 }} so server is now back on line again"
-
+        msg: "{{ inventory_hostname }} has been rebooted"
+      when: ping_test1.ping == pong
 #    - name: pause tasks for xx seconds to allow service to be stopped
 #      pause:
 #        seconds: 10
