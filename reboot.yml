@@ -10,14 +10,6 @@
     ignore_errors: true
     register: reboot_status
 
-  - debug:
-      msg: "{{ inventory_hostname }} has been rebooted"
-    when: reboot_status.failed == false
-
-  - debug:
-      msg: "{{ inventory_hostname }} is still being rebooted"
-    when: reboot_status.failed == true
-
   - name: perform when server is not responding from reboot
     block:
 
@@ -27,11 +19,10 @@
 
     - name: ping server
       win_ping:
-      register: ping_test
       ignore_errors: true
 
-    - debug:
-        msg: "{{ inventory_hostname }} has been rebooted"
-      when: ping_test.ping == "pong"
-
     when: reboot_status.failed == true
+
+  - name: all tickitee boo
+    debug:
+      msg: "all good in the world"  
