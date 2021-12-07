@@ -6,7 +6,7 @@
   tasks:
   - name: Reboot server
     win_reboot:
-      reboot_timeout: 50
+      reboot_timeout: 1
     ignore_errors: true
     register: reboot_status
 
@@ -17,6 +17,7 @@
 
   - name: ping server
     win_ping:
+    ignore_errors: true
     when: reboot_status.failed == true
 
   - name: all tickitee boo
