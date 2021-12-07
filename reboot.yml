@@ -30,7 +30,7 @@
 #        reboot_timeout: 1
 #      ignore_errors: true
 
-    - name: ping server
+    - name: ping server 1
       win_ping:
       register: ping_test1
       ignore_errors: true
@@ -48,7 +48,7 @@
         seconds: 60
         prompt: Waiting for server to reboot
 
-    - name: test play
+    - name: ping server 2
       win_ping:
       register: ping_test2
 
