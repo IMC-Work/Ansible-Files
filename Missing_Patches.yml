@@ -42,17 +42,17 @@
 #    debug:
 #      msg: "{{ patch.updates.installed }}"
 
-#  - name: copy information to local machine
-#    win_copy:
-#      content: "{{ patch.updates }}"
-#      dest: "c:/temp/patch_updates.csv"
-#      remote_src: yes
+  - name: copy information to local machine
+    win_copy:
+      content: "{{ patch.updates }}"
+      dest: "c:/temp/patch_updates.txt"
+      remote_src: yes
 
-#  - name: copy information to local machine
-#    win_copy:
-#      content: "{{ patch.filtered_updates }}"
-#      dest: "c:/temp/patch_filtered_updates.csv"
-#      remote_src: yes
+  - name: copy information to local machine
+    win_copy:
+      content: "{{ patch.filtered_updates }}"
+      dest: "c:/temp/patch_filtered_updates.txt"
+      remote_src: yes
 #
 #  - name: copy information to local machine
 #    win_copy:
