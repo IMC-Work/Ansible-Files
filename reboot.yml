@@ -36,22 +36,20 @@
       ignore_errors: true
 
     - debug:
-        msg: "{{ inventory_hostname }} {{ ping_test1 }} has been rebooted"
+        msg: "{{ inventory_hostname }} has been rebooted"
+      when: ping_test1.ping == "pong"
+
+    - name: pause tasks for 60 seconds to allow service to be stopped
+      pause:
+        seconds: 60
+        prompt: Waiting for server to reboot
+
+    - name: test play
+      win_ping:
+      register: ping_test2
 
     - debug:
-        msg: "helllllo"
-      when: ping_test1.ping == "pong"        
-#      when: ping_test1.ping == true
-#    - name: pause tasks for xx seconds to allow service to be stopped
-#      pause:
-#        seconds: 10
-#        prompt: Waiting for server to reboot
-#
-#    - name: test play
-#      win_ping:
-#      register: ping_test2
-#
-#    - debug:
-#        msg: "{{ ping_test2 }}"
+        msg: "{{ inventory_hostname }} has been rebooted"
+      when: ping_test2.ping == "pong" 
 
     when: reboot_status.failed == true
