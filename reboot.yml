@@ -25,9 +25,13 @@
 #        seconds: 1
 #        prompt: Waiting for server to reboot
 
-    - name: test play
-      win_ping:
-      register: ping_test1
+#    - name: test play
+#      win_ping:
+#      register: ping_test1
+    - name: Reboot server
+      win_reboot:
+        reboot_timeout: 1
+      ignore_errors: true
 
     - debug:
         msg: "{{ ping_test1 }}"
