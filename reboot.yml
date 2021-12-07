@@ -23,7 +23,7 @@
 
     - name: pause for another 5 minutes for server to reboot
       pause:
-        seconds: 5
+        seconds: 60
 
 #    - name: Reboot server (to ensure server is down for testing)
 #      win_reboot:
@@ -41,7 +41,7 @@
 
     when: reboot_status.failed == true
 
-  - name: perform when server is not responding from reboot
+  - name: perform when server is still not responding from reboot
     block:
     - name: pause tasks for another 60 seconds to allow service to be stopped
       pause:
