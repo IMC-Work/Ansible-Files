@@ -15,5 +15,5 @@
     when: reboot_status == true
 
   - debug:
-      msg: "{{ inventory_hostname }} {{ reboot_status }} has not been rebooted"
+      msg: "{{ inventory_hostname }} {{ reboot_status.failed }} has not been rebooted"
 #    when: reboot_status == false
