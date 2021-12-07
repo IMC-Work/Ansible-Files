@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+
+  tasks:
+  - name: Reboot server
+      win_reboot:
+        reboot_timeout: 1
+      register: reboot_status
+
+  - debug:
+      msg: "{{ inventory_hostname }} has been rebooted"
+    when: reboot_status == true
+
+  - debug:
+      msg: "{{ inventory_hostname }} has not been rebooted"
+    when: reboot_status == false
