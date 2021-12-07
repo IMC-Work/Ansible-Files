@@ -6,23 +6,19 @@
   tasks:
   - name: Reboot server
     win_reboot:
-      reboot_timeout: 1
+      reboot_timeout: 50
     ignore_errors: true
     register: reboot_status
 
-  - name: perform when server is not responding from reboot
-    block:
+  - name: pause for another 5 minutes for server to reboot
+    pause:
+      seconds: 60
+    when: reboot_status.failed == true
 
-    - name: pause for another 5 minutes for server to reboot
-      pause:
-        seconds: 60
-
-    - name: ping server
-      win_ping:
-      ignore_errors: true
-
+  - name: ping server
+    win_ping:
     when: reboot_status.failed == true
 
   - name: all tickitee boo
     debug:
-      msg: "all good in the world"  
+      msg: "all good in the world"
