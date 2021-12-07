@@ -22,17 +22,17 @@
 #        - SecurityUpdates
 #        - CriticalUpdates
 
-  - name: Check
-    debug:
-      msg: "{{ patch }}"
-
-  - name: check 2 - filtered_updates
-    debug:
+#  - name: Check
+#    debug:
+#      msg: "{{ patch }}"
+#
+#  - name: check 2 - filtered_updates
+#    debug:
 #      msg: "{{ patch.filtered_updates }}"
 #      msg: " {{ patch.results }}"
 #      msg: "{{ item.changed }}"
-      msg: "{{ item.categories }}"
-    loop: "{{ patch.results }}"
+#      msg: "{{ item.categories }}"
+#    loop: "{{ patch.results }}"
 
 #  - name: check 3 - updates
 #    debug:
@@ -42,28 +42,29 @@
 #    debug:
 #      msg: "{{ patch.updates.installed }}"
 
-  - name: copy information to local machine
-    win_copy:
-      content: "{{ patch.updates }}"
-      dest: "c:/temp/patch_updates.csv"
-      remote_src: yes
+#  - name: copy information to local machine
+#    win_copy:
+#      content: "{{ patch.updates }}"
+#      dest: "c:/temp/patch_updates.csv"
+#      remote_src: yes
 
-  - name: copy information to local machine
-    win_copy:
-      content: "{{ patch.filtered_updates }}"
-      dest: "c:/temp/patch_filtered_updates.csv"
-      remote_src: yes
-
-  - name: copy information to local machine
-    win_copy:
-      content:
-        - "{{ inventory_hostname }}"
-        - ","
-        - "server IP"
-        - ","
-        - ","
-        - "Applicable"
-        - ","
-        - "KB123456"
-      dest: "c:/temp/patch_test.csv"
-      remote_src: yes
+#  - name: copy information to local machine
+#    win_copy:
+#      content: "{{ patch.filtered_updates }}"
+#      dest: "c:/temp/patch_filtered_updates.csv"
+#      remote_src: yes
+#
+#  - name: copy information to local machine
+#    win_copy:
+#      content:
+#        - "{{ inventory_hostname }}"
+#        - ","
+#        - "server IP"
+#        - ","
+#        - ","
+#        - "Applicable"
+#        - ","
+#        - "KB123456"
+#      dest: "c:/temp/patch_test.csv"
+#      remote_src: yes
+#
