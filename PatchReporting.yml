@@ -5,50 +5,6 @@
      days: 30
      server_location: 192.168.1.250
   tasks:
-
-#  - name: search
-#    win_updates:
-#      category_names:
-#        - SecurityUpdates
-#        - CriticalUpdates
-#      state: searched
-#      log_path: c:\temp\missing_patches.txt
-#    register: patch
-#
-#  - name: copy patch_update information to local machine
-#    win_copy:
-#      content: "{{ patch.updates }}"
-#      dest: "c:/temp/patch_updates.txt"
-#      remote_src: yes
-#
-#  - name: copy patch_filtered_update information to local machine
-#    win_copy:
-#      content: "{{ patch.filtered_updates }}"
-#      dest: "c:/temp/patch_filtered_updates.txt"
-#      remote_src: yes
-#
-# These 3 sections will create the file C:\TEMP\{{sever_name_applicable.csv}} on the server
-#
-#- name: download Missing_Patches.ps1 file from bds server
-#  win_get_url:
-#    url: https://10.177.57.227:8081/repository/lbg/temp/patching/Missing_Patches.PS1
-#    dest: c:\temp
-#    validate_certs: no
-#  register: file_copy1
-
-  - name: copy Applicable_Patches.ps1 from centos to windows
-    win_copy:
-      src: /ansible/PS_Scripts/Applicable_Patches.PS1
-      dest: C:\temp\Applicable_Patches.ps1
-    register: file_copy1
-
-  - name: download failed
-    fail:
-      msg: " ### Applicable_Patches.ps1 file download failed - please investigate *** "
-    when: file_copy1.failed == true
-
-#  - name: run PS_Script Applicable_Patches.PS1
-#    win_shell: C:\temp\Applicable_Patches.ps1
 #
 # These 3 sections will create the file C:\TEMP\{{sever_name_installed.csv}} on the server - conatains all patches installed
 #
