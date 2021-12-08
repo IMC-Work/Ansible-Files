@@ -1,9 +1,16 @@
 ﻿$hostname  = $env:COMPUTERNAME
-$file1     = "C:\temp\Patch\"+$hostname+"_Installed.csv"
-$file2     = "C:\temp\Patch\"+$hostname+"_Applicable.csv"
-$file3     = "C:\temp\Patch\"+$hostname+"_Extracted.csv"
-$file4     = "C:\temp\Patch\"+$hostname+".txt"
-$file5     = "C:\temp\Patch\"+$hostname+".csv"
+$file1     = "C:\temp\"+$hostname+"_Installed.csv"
+$file2     = "C:\temp\"+$hostname+"_Applicable.csv"
+$file3     = "C:\temp\"+$hostname+"_Extracted.csv"
+$file4     = "C:\temp\"+$hostname+".txt"
+$file5     = "C:\temp\"+$hostname+".csv"
+$file6     = "C:\temp\missing_patches.txt"
+$file7     = "C:\temp\patch_filtered_updates.txt"
+$file8     = "C:\temp\patch_updates.txt"
+$file9     = "C:\temp\patch1.txt"
+$file10    = "C:\temp\patch2.txt"
+$file11    = "C:\temp\scan_results.csv"
+$file12    = "C:\temp\temp_"+$hostname+"_Extracted.txt"
 
 #copy 1st line of $file to $file3 (Gives me the headers for the file)
 
@@ -22,4 +29,14 @@ Add-Content -Path $file4 -Value $from
 # convert TXT file to CSV file
 
 import-csv $file4 |sort -Property @{Expression = "device" ; Descending = $false} | Export-Csv -Path $file5 -NoTypeInformation
+
+# Tidy up and delete all the temporary files
+
 Remove-Item -Path $file4
+Remove-Item -Path $file6
+Remove-Item -Path $file7
+Remove-Item -Path $file8
+Remove-Item -Path $file9
+Remove-Item -Path $file10
+Remove-Item -Path $file11
+Remove-Item -Path $file12

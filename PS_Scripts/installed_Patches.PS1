@@ -1,8 +1,8 @@
 ﻿param(
    $hostname = $env:COMPUTERNAME,
    $fqdn = [System.Net.DNS]::GetHostByName($env:COMPUTERNAME).Hostname.ToUpper(),
-   $csvfile = "c:\temp\Patch\scan_results.csv",
-   $fileName = "C:\temp\Patch\"+$hostname+"_Installed.csv", 
+   $csvfile = "c:\temp\scan_results.csv",
+   $fileName = "C:\temp\"+$hostname+"_Installed.csv", 
    $update_type = "all",
    [switch]$include_title,
    $changeid = ""

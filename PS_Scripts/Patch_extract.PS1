@@ -1,11 +1,11 @@
 ﻿$days     = $args[0]
 $hostname = $env:COMPUTERNAME
-$path = "C:\temp\Patch\"+$hostname+"_Installed.csv"
+$path = "C:\temp\"+$hostname+"_Installed.csv"
 $csv = Import-Csv -Path $path
 $today = Get-Date
 $Vardaysago = $today.adddays(-$days).ToString('yyyy-MM-dd HH:mm:ss')
-$file = "C:\temp\Patch\Temp_"+$hostname+"_Extracted.txt"
-$file1 = "C:\temp\Patch\"+$hostname+"_Extracted.csv"
+$file = "C:\temp\Temp_"+$hostname+"_Extracted.txt"
+$file1 = "C:\temp\"+$hostname+"_Extracted.csv"
 $all_updates=@()
 
 foreach($line in $csv)
@@ -42,8 +42,8 @@ $all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | ou
 # This code removes the patch "Windows Malicious Software Removal Tool x64" from the file
 #
 $csv = Import-Csv -Path $file
-$file1 = "C:\temp\Patch\"+$hostname+"_Extracted_temp.csv"
-$file2 ="C:\temp\Patch\"+$hostname+"_Extracted.csv"
+$file1 = "C:\temp\"+$hostname+"_Extracted_temp.csv"
+$file2 ="C:\temp\"+$hostname+"_Extracted.csv"
 $all_updates=@()
 
 foreach($line in $csv)
@@ -79,5 +79,3 @@ foreach($line in $csv)
 
 $all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file1 -en ascii
 import-csv $file1 |sort installdate -Descending | Export-Csv -Path $file2 -NoTypeInformation
-remove-item $file
-remove-item $file1

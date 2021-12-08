@@ -7,7 +7,7 @@ $hostname = $env:COMPUTERNAME
 $path = "C:\temp\patch1.txt"
 $file_data = Get-Content C:\temp\patch1.txt
 $file = "C:\temp\patch2.txt"
-$file2 = "C:\temp\Patch\"+$hostname+"_Applicable.csv"
+$file2 = "C:\temp\"+$hostname+"_Applicable.csv"
 $all_updates = "Device,Server_IP,Operating_System,Status,FixNunber,InstallDate,Title"
 Add-Content -Path $file -Value $all_updates
 
