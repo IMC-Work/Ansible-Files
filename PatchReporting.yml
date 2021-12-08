@@ -47,8 +47,8 @@
       msg: " ### Applicable_Patches.ps1 file download failed - please investigate *** "
     when: file_copy1.failed == true
 
-  - name: run PS_Script Applicable_Patches.PS1
-    win_shell: C:\temp\Applicable_Patches.ps1
+#  - name: run PS_Script Applicable_Patches.PS1
+#    win_shell: C:\temp\Applicable_Patches.ps1
 #
 # These 3 sections will create the file C:\TEMP\{{sever_name_installed.csv}} on the server - conatains all patches installed
 #
