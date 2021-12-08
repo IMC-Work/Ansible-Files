@@ -18,6 +18,24 @@
 #        dest: /ansible-files/
         remote_src: yes
 
+    - name: file copy1
+      fetch:
+        src: C:\temp\installed_Patches.ps1
+        dest: /home/ian/files/
+        remote_src: yes
+
+    - name: file copy2
+      fetch:
+        src: C:\temp\Patch_Extract.ps1
+        dest: /home/ian/files/
+        remote_src: yes
+
+    - name: file copy3
+      fetch:
+        src: C:\temp\Patching_Merge.ps1
+        dest: /home/ian/files/
+        remote_src: yes
+
 #    - name: copy ansible directory from centos to windows
 #      win_copy:
 #        src: /ansible-files/

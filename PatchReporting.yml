@@ -122,8 +122,8 @@
     win_shell: C:\temp\Patching_Merge.ps1
 
   - name: copy C:\Temp\{{ inventory_hostname}}.csv from Windows host to SFS Server
-    win_copy:
-#      src: C:\temp\Patch\{{ inventory_hostname }}.csv
-      src: C:\temp\Patch\WIN-1D3KJCL01N5.csv
-      dest: \\{{ server_location }}\C$\WSUS\Merge\{{ inventory_hostname }}.csv
+#     copy file to HOME/IAN/FILES/192.168.1.82/C:/TEMP/IAN.TXT
+    fetch:
+      src: C:\temp\WIN-1D3KJCL01N5.csv
+      dest: /home/ian/files/
       remote_src: yes
