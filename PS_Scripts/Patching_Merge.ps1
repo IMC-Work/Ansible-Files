@@ -4,9 +4,6 @@ $file2     = "C:\temp\"+$hostname+"_Applicable.csv"
 $file3     = "C:\temp\"+$hostname+"_Extracted.csv"
 $file4     = "C:\temp\"+$hostname+".txt"
 $file5     = "C:\temp\"+$hostname+".csv"
-$file6     = "C:\temp\missing_patches.txt"
-$file7     = "C:\temp\patch_filtered_updates.txt"
-$file8     = "C:\temp\patch_updates.txt"
 $file9     = "C:\temp\patch1.txt"
 $file10    = "C:\temp\patch2.txt"
 $file11    = "C:\temp\scan_results.csv"
@@ -36,9 +33,6 @@ import-csv $file4 |sort -Property @{Expression = "device" ; Descending = $false}
 # Tidy up and delete all the temporary files
 
 Remove-Item -Path $file4
-Remove-Item -Path $file6
-Remove-Item -Path $file7
-Remove-Item -Path $file8
 Remove-Item -Path $file9
 Remove-Item -Path $file10
 Remove-Item -Path $file11
