@@ -4,12 +4,14 @@ $path = "C:\temp\"+$hostname+"_Installed.csv"
 $csv = Import-Csv -Path $path
 $today = Get-Date
 $Vardaysago = $today.adddays(-$days).ToString('yyyy-MM-dd HH:mm:ss')
-$file = "C:\temp\Temp_"+$hostname+"_Extracted.txt"
-$file1 = "C:\temp\"+$hostname+"_Extracted.csv"
+$file1 = "C:\temp\"+$hostname+"_Extracted_1.csv"
 $all_updates=@()
 
 foreach($line in $csv)
 {
+ 
+    write-host "hello"
+ 
     $properties = $line | Get-Member -MemberType Properties
     for($i=0; $i -lt $properties.Count;$i++)
     {
@@ -36,14 +38,62 @@ foreach($line in $csv)
         }
     }
 }
+$all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file1 -en ascii
+#
+# This code amends the installdate to a blank value for all Applicable Patches
+#
+$csv = Import-Csv -Path $file1
+$file2 = "C:\temp\"+$hostname+"_Extracted_2.csv"
+$all_updates=@()
 
-$all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file -en ascii
+foreach($line in $csv)
+{
+    $properties = $line | Get-Member -MemberType Properties
+    for($i=0; $i -lt $properties.Count;$i++)
+    {
+        $column = $properties[$i]
+        $columnvalue = $line | Select -ExpandProperty $column.Name
+
+        If ($column.Name -eq "Status")
+            {  
+                if ($line.Status -like "*Applicable*")
+                {
+                    $date = " "
+                    $update_entry = [pscustomobject]@{
+                    Device           = $line.Device
+                    Server_IP        = $line.Server_IP
+                    Operating_System = $line.Operating_System
+                    Status           = $line.Status
+                    FixNumber        = $line.FixNumber
+                    Installdate      = $date
+                    Title            = $line.Title}
+                
+                    $all_updates += $update_entry
+                }
+                elseif ($line.Status -like "*Installed*")
+                {
+                    $update_entry = [pscustomobject]@{
+                    Device           = $line.Device
+                    Server_IP        = $line.Server_IP
+                    Operating_System = $line.Operating_System
+                    Status           = $line.Status
+                    FixNumber        = $line.FixNumber
+                    Installdate      = $line.Installdate
+                    Title            = $line.Title}
+                
+                    $all_updates += $update_entry
+                }
+            }
+    }
+}
+
+$all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file2 -en ascii
 #
 # This code removes the patch "Windows Malicious Software Removal Tool x64" from the file
 #
-$csv = Import-Csv -Path $file
-$file1 = "C:\temp\"+$hostname+"_Extracted_temp.csv"
-$file2 ="C:\temp\"+$hostname+"_Extracted.csv"
+$csv = Import-Csv -Path $file2
+$file3 = "C:\temp\"+$hostname+"_Extracted_3.csv"
+$file4 ="C:\temp\"+$hostname+"_Extracted.csv"
 $all_updates=@()
 
 foreach($line in $csv)
@@ -77,5 +127,5 @@ foreach($line in $csv)
     }
 }
 
-$all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file1 -en ascii
-import-csv $file1 |sort installdate -Descending | Export-Csv -Path $file2 -NoTypeInformation
+$all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file3 -en ascii
+import-csv $file3 |sort installdate -Descending | Export-Csv -Path $file4 -NoTypeInformation

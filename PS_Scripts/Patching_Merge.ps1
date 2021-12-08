@@ -11,6 +11,9 @@ $file9     = "C:\temp\patch1.txt"
 $file10    = "C:\temp\patch2.txt"
 $file11    = "C:\temp\scan_results.csv"
 $file12    = "C:\temp\temp_"+$hostname+"_Extracted.txt"
+$file13    = "C:\temp\"+$hostname+"_Extracted_1.csv"
+$file14    = "C:\temp\"+$hostname+"_Extracted_2.csv"
+$file15    = "C:\temp\"+$hostname+"_Extracted_3.csv"
 
 #copy 1st line of $file to $file3 (Gives me the headers for the file)
 
@@ -40,3 +43,6 @@ Remove-Item -Path $file9
 Remove-Item -Path $file10
 Remove-Item -Path $file11
 Remove-Item -Path $file12
+Remove-Item -Path $file13
+Remove-Item -Path $file14
+Remove-Item -Path $file15

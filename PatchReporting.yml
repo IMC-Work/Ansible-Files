@@ -6,26 +6,26 @@
      server_location: 192.168.1.250
   tasks:
 
-  - name: search
-    win_updates:
-      category_names:
-        - SecurityUpdates
-        - CriticalUpdates
-      state: searched
-      log_path: c:\temp\missing_patches.txt
-    register: patch
-
-  - name: copy patch_update information to local machine
-    win_copy:
-      content: "{{ patch.updates }}"
-      dest: "c:/temp/patch_updates.txt"
-      remote_src: yes
-
-  - name: copy patch_filtered_update information to local machine
-    win_copy:
-      content: "{{ patch.filtered_updates }}"
-      dest: "c:/temp/patch_filtered_updates.txt"
-      remote_src: yes
+#  - name: search
+#    win_updates:
+#      category_names:
+#        - SecurityUpdates
+#        - CriticalUpdates
+#      state: searched
+#      log_path: c:\temp\missing_patches.txt
+#    register: patch
+#
+#  - name: copy patch_update information to local machine
+#    win_copy:
+#      content: "{{ patch.updates }}"
+#      dest: "c:/temp/patch_updates.txt"
+#      remote_src: yes
+#
+#  - name: copy patch_filtered_update information to local machine
+#    win_copy:
+#      content: "{{ patch.filtered_updates }}"
+#      dest: "c:/temp/patch_filtered_updates.txt"
+#      remote_src: yes
 #
 # These 3 sections will create the file C:\TEMP\{{sever_name_applicable.csv}} on the server
 #
