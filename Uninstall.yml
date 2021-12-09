@@ -20,15 +20,18 @@
     when: hotfix_uninstall.reboot_required == true or hotfix.uninstall.reboot_required == false
     ignore_errors: true
 
-  - debug: Patch failed to uninstall
+  - name: Patch failed to uninstall
+    debug:
       msg: "Patch {{ patch }} failed to uninstall from {{ inventory_hostname }}, please investigate"
     when: patch_failed == true
 
-  - debug: Patch uninstalled, no reboot required
+  - name: Patch uninstalled, no reboot required
+    debug:
       msg: "Patch {{ patch }} has been uninstalled from {{ inventory_hostname }} no reboot required"
     when: patch_failed == false and hotfix_uninstall.reboot_required == false
 
-  - debug: Patch uninstalled, reboot required
+  - name: Patch uninstalled, reboot required
+    debug:
       msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
     when: patch_failed == false and hotfix_uninstall.reboot_required == true
 
