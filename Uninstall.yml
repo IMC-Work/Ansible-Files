@@ -8,9 +8,8 @@
   - name: set the fact for the service
     set_fact: patch_failed="true"
 
-  - name: debug1
-     debug:
-       msg: "the fact is set to {{ patch_failed }}"
+  - debug:
+      msg: "the fact is set to {{ patch_failed }}"
 
   - name: Uninstall hotfix with KB
     win_hotfix:
