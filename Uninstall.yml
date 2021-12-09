@@ -13,8 +13,8 @@
 
   - name: Uninstall hotfix with KB
     win_hotfix:
-    hotfix_kb: "{{ patch }}"
-    state: absent
+      hotfix_kb: "{{ patch }}"
+      state: absent
     register: hotfix_uninstall
     ignore_errors: true
 
