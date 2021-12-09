@@ -5,11 +5,8 @@
     patch: KB3192137
   tasks:
 
-  - name: set the fact for the service
+  - name: set the fact to "true"
     set_fact: patch_failed="true"
-
-  - debug:
-      msg: "the fact is set to {{ patch_failed }}"
 
   - name: Uninstall hotfix with KB
     win_hotfix:
@@ -24,19 +21,17 @@
     ignore_errors: true
 
   - debug:
-      msg: "Patch {{ patch }} failed to uninstall, please investigate"
+      msg: "Patch {{ patch }} failed to uninstall from {{ inventory_hostname }}, please investigate"
     when: patch_failed == true
 
   - debug:
-      msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
-#    when: hotfix_uninstall.reboot_required == true
-    when: patch_failed == false
+      msg: "Patch {{ patch }} has been uninstalled from {{ inventory_hostname }} no reboot required"
+    when: patch_failed == false and hotfix_uninstall.reboot_required == false
 
   - debug:
-      msg: "Patch {{ patch }} has been uninstalled from {{ inventory_hostname }} no reboot required"
-#    when: hotfix_uninstall.reboot_required == false
-    when: patch_failed == false
+      msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
+    when: patch_failed == false and hotfix_uninstall.reboot_required == true
 
   - name: reboot (if required)
     win_reboot:
-    when: hotfix_uninstall.reboot_required == true
+    when: patch_failed == false and hotfix_uninstall.reboot_required == true
