@@ -25,12 +25,12 @@
 
   - debug:
       msg: "Patch {{ patch }} failed to uninstall, please investigate"
-     when: patch_failed == true
+    when: patch_failed == true
 
   - debug:
       msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
 #    when: hotfix_uninstall.reboot_required == true
-     when: patch_failed == false
+    when: patch_failed == false
 
   - debug:
       msg: "Patch {{ patch }} has been uninstalled from {{ inventory_hostname }} no reboot required"
