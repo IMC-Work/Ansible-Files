@@ -15,6 +15,9 @@
       msg: "{{ hotfix_uninstall }}"
 
   - debug:
+      msg: "Patch {{ patch }} failed to uninstall, please investigate"
+      
+  - debug:
       msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
     when: hotifx_uninstall.reboot_required
 
