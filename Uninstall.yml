@@ -8,7 +8,7 @@
   - name: set the fact to "true"
     set_fact: patch_failed="true"
 
-  - name: Uninstall hotfix with KB
+  - name: Uninstall {{ patch }}
     win_hotfix:
       hotfix_kb: "{{ patch }}"
       state: absent
