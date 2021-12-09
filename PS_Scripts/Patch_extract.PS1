@@ -8,10 +8,7 @@ $file1 = "C:\temp\"+$hostname+"_Extracted_1.csv"
 $all_updates=@()
 
 foreach($line in $csv)
-{
- 
-    write-host "hello"
- 
+{ 
     $properties = $line | Get-Member -MemberType Properties
     for($i=0; $i -lt $properties.Count;$i++)
     {
@@ -129,3 +126,19 @@ foreach($line in $csv)
 
 $all_updates | ConvertTo-Csv -NoTypeInformation | % { $_ -replace '"', "" } | out-file -Force $file3 -en ascii
 import-csv $file3 |sort installdate -Descending | Export-Csv -Path $file4 -NoTypeInformation
+#
+# This code removes all the temporary files that have been created during this process
+#
+$file5  = "C:\temp\"+$hostname+".txt"
+$file6  = "C:\temp\"+$hostname+".csv"
+$file7  = "C:\temp\scan_results.csv"
+
+$from = Get-Content -Path $file4 | Select-Object -skip 1
+Add-Content -Path $file5 -Value $from
+import-csv $file5 |sort installdate -Descending | Export-Csv -Path $file6 -NoTypeInformation
+
+Remove-Item -Path $file1
+Remove-Item -Path $file2
+Remove-Item -Path $file3
+Remove-Item -Path $file5
+Remove-Item -Path $file7
