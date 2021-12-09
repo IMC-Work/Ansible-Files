@@ -12,6 +12,9 @@
       register: hotfix_uninstall
 
   - debug:
+      msg: "{{ hotfix_uninstall }}"
+
+  - debug:
       msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
     when: hotifx_uninstall.reboot_required
 
