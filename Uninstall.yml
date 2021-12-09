@@ -12,12 +12,12 @@
       register: hotfix_uninstall
     ignore_errors: true
 
-  - debug:
-      msg: "{{ hotfix_uninstall }}"
+#  - debug:
+#      msg: "{{ hotfix_uninstall }}"
 
   - debug:
       msg: "Patch {{ patch }} failed to uninstall, please investigate"
-    when: update_result.failed == true  
+    when: update_result.failed == true
 
   - debug:
       msg: "Patch {{ patch }} has been uninstalled, rebooting {{ inventory_hostname }} now"
