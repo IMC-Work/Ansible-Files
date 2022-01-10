@@ -27,4 +27,4 @@
       fail:
         msg: "server patched, server not back"
 
-    when: reboot_status.failed == true
+      when: reboot_status.failed == true
