@@ -1,16 +1,12 @@
 ---
- - name: check service
-   ansible.windows.win_service_info:
-     name: "{{ item }}"
-   register: res1
-   ignore_errors: true
+- name: welcome to Playbook1 - test12
+  debug:
+    msg: " welcome to Playbook1 (test12)- lets' call Playbook 2"
 
- - name: debug
-   ansible.builtin.debug:
-     msg: "{{res1}}"
+- name: call the roll Playbook2 - testxx
+  include_role:
+   name: playbook2
 
- - name: write to file
-   community.windows.win_lineinfile:
-     path: C:\temp\ian.txt
-     line: "Service={{  }}"
-     #   when: res1.start_mode == "auto"   
+- name: end of Playbook1 - test12
+  debug:
+    msg: "end of playbok1 - test12, back to playbook test10"

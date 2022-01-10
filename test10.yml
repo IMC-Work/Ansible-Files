@@ -1,23 +1,16 @@
 ---
 - hosts: all
   gather_facts: true
-  vars:
-    num: 0
   tasks:
 
-#  - name: debug
-#    debug:
-#      msg: "{{ ansible_default_ipv4 }}"
-
-#  - name: debug2
-#    debug:
-#      msg: "{{ ansible_ssh_host }}"
-
-  - name: nslookup the default gateway
-  #    shell: 'nslookup "{{ ansible_default_ipv4.gateway }}"'
-    win_command: ipconfig
-    register: ipconfig_results
-
-  - name: print
+  - name: First Playbook start
     debug:
-      msg: "{{ ipconfig_results.stdout }}"
+      msg: "start of playbook - let's call the roll Playbook1 (test12)"
+
+  - name: call the roll test12
+    include_role:
+      name: test12
+
+  - name: The end
+    debug:
+      msg: "All done"

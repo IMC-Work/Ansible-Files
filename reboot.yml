@@ -7,25 +7,14 @@
   - name: Reboot server
     win_reboot:
       reboot_timeout: 1
-    ignore_errors: true
     register: reboot_status
 
-  - name: server still rebooting
-    block:
-
-    - name: server still rebooting
-      debug:
-        msg: "server is still rebooting - please wait 5 minutes"
-
-    - name: pause for another 5 minutes for server to reboot
-      pause:
-        minutes: 1
-
-    - name: ping server
-      win_ping:
-
-    when: reboot_status.failed == true
-
-  - name: all tickitee boo
+  - name: server patched, rebooted ok
     debug:
-      msg: "all good in the world"
+      msg: "server patched and rebooted ok"
+    when: reboot_status.failed == false
+
+  - name: server patched, not rebooted
+    debug:
+      msg: "server patched, server not back"
+    when: reboot_status.failed == true
