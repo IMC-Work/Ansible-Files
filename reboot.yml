@@ -15,12 +15,12 @@
 
     - name: reboot_status
       debug:
-        msg: "reboot_status = {{ reboot_status }}"  
+        msg: "reboot_status = {{ reboot_status }}"
 
     - name: server patched, rebooted ok
       debug:
         msg: "server patched and rebooted ok"
-      when: reboot_status.failed == false
+      when: reboot_status.rebooted == true
 
     rescue:
     - name: server patched, not rebooted
