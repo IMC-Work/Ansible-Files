@@ -4,20 +4,22 @@
   vars:
 
   tasks:
-  block:
   - name: Reboot server
-    win_reboot:
-      reboot_timeout: 1
-    ignore_errors: true
-    register: reboot_status
+    block:
 
-  - name: server patched, rebooted ok
-    debug:
-      msg: "server patched and rebooted ok"
-    when: reboot_status.failed == false
+    - name: reboot server
+      win_reboot:
+        reboot_timeout: 1
+      ignore_errors: true
+      register: reboot_status
 
-  rescue:
-  - name: server patched, not rebooted
-    debug:
-      msg: "server patched, server not back"
-    when: reboot_status.failed == true
+    - name: server patched, rebooted ok
+      debug:
+        msg: "server patched and rebooted ok"
+      when: reboot_status.failed == false
+
+    rescue:
+    - name: server patched, not rebooted
+      debug:
+        msg: "server patched, server not back"
+      when: reboot_status.failed == true
