@@ -13,10 +13,6 @@
 #      ignore_errors: true
       register: reboot_status
 
-    - name: reboot_status
-      debug:
-        msg: "reboot_status = {{ reboot_status }}"
-
     - name: server patched, rebooted ok
       debug:
         msg: "server patched and rebooted ok"
@@ -26,4 +22,9 @@
     - name: server patched, not rebooted
       debug:
         msg: "server patched, server not back"
-      when: reboot_status.failed == true
+
+    - name: server patched, not rebooted
+      fail:
+        msg: "server patched, server not back"
+
+    when: reboot_status.failed == true
