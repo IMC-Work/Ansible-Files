@@ -9,7 +9,7 @@
 
     - name: reboot server
       win_reboot:
-        reboot_timeout: 1
+        reboot_timeout: 20
       ignore_errors: true
       register: reboot_status
 
@@ -20,10 +20,10 @@
     - name: server patched, rebooted ok
       debug:
         msg: "server patched and rebooted ok"
-      when: reboot_status.rebooted == true
+      when: reboot_status.failed == false
 
     rescue:
     - name: server patched, not rebooted
       fail:
         msg: "server patched, server not back"
-      when: reboot_status.rebooted == false
+      when: reboot_status.failed == true
