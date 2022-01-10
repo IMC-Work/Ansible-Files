@@ -20,6 +20,6 @@
 
     rescue:
     - name: server patched, not rebooted
-      debug:
+      fail:
         msg: "server patched, server not back"
       when: reboot_status.failed == true
