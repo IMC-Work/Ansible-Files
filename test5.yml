@@ -22,6 +22,11 @@
       msg: "service does not equal IC3 {{ service_name }}"
     when: service_name != "IC3"
 
+  - name: debug1c
+    debug:
+      msg: "service does not equal IC3 {{ service_name }}"
+    when: service_name.find("IC3") != -1  
+
   - name: block section (only run when not IC3)
     block:
 
