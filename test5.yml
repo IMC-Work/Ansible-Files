@@ -10,10 +10,22 @@
 
   - name: debug1
     debug:
-      msg: "service is equal to IC3 {{ service_name }}"
-    when: service_name == "ic3"
+      msg: "service contains IC3 {{ service_name }}"
+    when: service_name != "ic3"
 
-  - name: debug2
-    debug:
-      msg: "service contains the word IC3 {{ service_name }}"
+  - name: block section
+    block:
+
+      - name: debug2
+        debug:
+          msg: "debug 2"
+
+      - name: debug3
+        debug:
+          msg: "debug 3"
+
+      - name: debug4
+        debug:
+          msg: "debug 4"
+
     when: service_name != "ic3"
