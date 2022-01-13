@@ -6,14 +6,14 @@
 
   - name: set fact
     set_fact:
-      service_name: "adaptor"
+      service_name: "IC3 adaptor"
 
   - name: debug1
     debug:
-      msg: "service contains IC3 {{ service_name }}"
+      msg: "service is equal to IC3 {{ service_name }}"
     when: service_name == "ic3"
 
   - name: debug2
     debug:
-      msg: "service does not contains IC3 {{ service_name }}"
+      msg: "service contains the word IC3 {{ service_name }}"
     when: service_name != "ic3"
