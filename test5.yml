@@ -1,42 +1,19 @@
----   
+---
 - hosts: all
   gather_facts: false
   vars:
-    number: 0
-  tasks: 
+  tasks:
 
-  - name: collect facts
-#    ansible.windows.win_service_info:
-    win_service:    
-#      name: '*:!webdefense'
-      name: 'a*'
-      state: started 
-    register: info
-    ignore_errors: true
+  - name: set fact
+    set_fact:
+      service_name: "adaptor"
 
-#  - name: set number
-#  number_of_elements: 'ansible_loop.length'
-
-  - name: Increment
-    set_fact: 
-      number: "{{ number + 1 }}"
-
-#  - name: bla
-#    debug:
-#  msg: "info service {{info.services[index]}} "
-#    loop_control:
-#      index_var: index
-#    debug:
-#      msg: "{{info.services[number]}}"
-      
-  - name: debug
+  - name: debug1
     debug:
-      msg: "service {{ info }}"  
+      msg: "service contains IC3 {{ service_name }}"
+    when: service_name == "ic3"
 
-#  - name: debug
-#    debug:
-#      msg: " {{info.services['{{ number }}'].name }} "
-
-#  - name: debug2
-#    debug:
-#      msg: " {{info.services[90].name}} is set to {{info.services[30].start_mode}}"    
+  - name: debug2
+    debug:
+      msg: "service does not contains IC3 {{ service_name }}"
+    when: service_name != "ic3"
