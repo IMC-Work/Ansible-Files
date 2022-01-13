@@ -6,7 +6,7 @@
 
   - name: set fact
     set_fact:
-      service_name: "IC3"
+      service_name: "IC4 Adaptor"
 
   - name: debug1a
     debug:
@@ -45,6 +45,6 @@
 
       - name: debug7
         debug:
-          msg: "debug 7"      
+          msg: "debug 7"
 
     when: service_name != "IC3"
