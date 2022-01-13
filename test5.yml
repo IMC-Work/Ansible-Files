@@ -13,7 +13,7 @@
       msg: "service contains IC3 {{ service_name }}"
     when: service_name != "ic3"
 
-  - name: block section
+  - name: block section (only run when not IC3)
     block:
 
       - name: debug2
@@ -28,4 +28,4 @@
         debug:
           msg: "debug 4"
 
-    when: service_name == "ic3"
+    when: {{ service_name}} not in "ic3"
