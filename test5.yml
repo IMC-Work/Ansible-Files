@@ -15,8 +15,8 @@
 
   - name: debug1b
     debug:
-      msg: "service does not equal IC4 {{ service_name }}"
-    when: service_name != "IC4"
+      msg: "service does not equal IC3 {{ service_name }}"
+    when: service_name != "IC3"
 
   - name: block section (only run when not IC3)
     block:
