@@ -16,7 +16,7 @@
   - name: debug1b
     debug:
       msg: "service does not contain IC4 {{ service_name }}"
-    when: service_name != "IC3"
+    when: service_name != "IC4"
 
   - name: block section (only run when not IC3)
     block:
