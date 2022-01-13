@@ -51,4 +51,4 @@
         debug:
           msg: "debug 7"
 
-    when: bypass == "false"
+    when: bypass == false
