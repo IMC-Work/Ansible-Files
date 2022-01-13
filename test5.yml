@@ -6,12 +6,13 @@
 
   - name: set fact
     set_fact:
-      service_name: "IC4 adaptor"
+      service_name: "IC3 adaptor"
 
   - name: debug1
     debug:
       msg: "service contains IC3 {{ service_name }}"
-    when: service_name != "ic3"
+    when: service_name.value.find("ic3") != -1  
+#    when: service_name != "ic3"
 
   - name: block section (only run when not IC3)
     block:
