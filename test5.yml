@@ -28,4 +28,4 @@
         debug:
           msg: "debug 4"
 
-    when: {{ service_name}} not in "ic3"
+    when: {{ service_name}} != "ic3"
