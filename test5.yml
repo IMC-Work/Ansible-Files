@@ -11,7 +11,7 @@
   - name: debug1a
     debug:
       msg: "service contains IC3 {{ service_name }}"
-    when: service_name == "IC3"
+    when: service_name contains "IC3"
 
   - name: debug1b
     debug:
