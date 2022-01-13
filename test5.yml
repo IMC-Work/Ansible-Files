@@ -6,7 +6,7 @@
 
   - name: set fact
     set_fact:
-      service_name: "IC3"
+      service_name: "IC3 Adaptor"
 
   - name: debug1a
     debug:
