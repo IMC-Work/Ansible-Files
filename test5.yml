@@ -33,4 +33,18 @@
         debug:
           msg: "debug 4"
 
+    rescue:
+
+      - name: debug5
+        debug:
+          msg: "debug 5"
+
+      - name: debug6
+        debug:
+          msg: "debug 6"
+
+      - name: debug7
+        debug:
+          msg: "debug 7"      
+
     when: service_name != "IC3"
