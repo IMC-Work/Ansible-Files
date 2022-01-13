@@ -33,4 +33,4 @@
         debug:
           msg: "debug 4"
 
-    when: service_name != "ic3"
+    when: service_name != "IC3"
