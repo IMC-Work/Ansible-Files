@@ -6,7 +6,7 @@
 
   - name: set fact
     set_fact:
-      service_name: "IC4 Adaptor"
+      service_name: "IC3 Adaptor"
 
   - name: debug1a
     debug:
@@ -15,7 +15,7 @@
 
   - name: debug1b
     debug:
-      msg: "service does not contain IC4 {{ service_name }}"
+      msg: "service does not equal IC4 {{ service_name }}"
     when: service_name != "IC4"
 
   - name: block section (only run when not IC3)
