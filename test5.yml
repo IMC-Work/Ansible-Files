@@ -44,4 +44,4 @@
         debug:
           msg: "debug 5"
 
-    when: service_name != "IC3"
+    when: service_name.find("IC3") != -1
