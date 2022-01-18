@@ -8,10 +8,6 @@
     set_fact:
       service_name: "IC3 Adaptor"
 
-  - name: set fact
-    set_fact:
-      bypass: "false"
-
   - name: debug1a
     debug:
       msg: "service contains IC3 {{ service_name }}"
@@ -48,12 +44,4 @@
         debug:
           msg: "debug 5"
 
-      - name: debug6
-        debug:
-          msg: "debug 6"
-
-      - name: debug7
-        debug:
-          msg: "debug 7"
-
-    when: bypass == false
+    when: service_name != "IC3"
