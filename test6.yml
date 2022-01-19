@@ -1,21 +1,25 @@
 ---
-- hosts: all
-  gather_facts: false   
-  tasks:
-      
-   - name: restart a single service
-     win_service:
-       name: wuauserv
-       state: started
-     register: result  
+- name: set variables as gather_facts
+  set_fact:
+    node: "{{ item.split('-')[0] }}"
+    start_time: "{{ item.split('-')[1] }}"
+    end_time: "{{ item.split('-')[2] }}"
 
-   - name: debug1
-     ansible.builtin.debug:
-       msg: "service is set to auto"
-     when: result.start_mode == "auto"
+- name: add line to file to record suppression being sent
+    lineinfile:
+    path: c:\temp\ian.txt
+    line: "attempting to put {{ node }} from {{ start_time }} to {{ end_time }}"
+  register: file_updated
+  when: node != pause
 
-   - name: debug2
-     ansible.builtin.debug:  
-       msg: "service is not set to auto" 
-     when: result.start_mode != "auto"
-    
+- name: add line to file to confirm server under maintenance
+    lineinfile:
+    path: c:\temp\ian.txt
+    line: "{{ node }} has been put under maintenance mode"
+  register: file_updated
+  when: node != pause
+
+- name: pause after 50 seconds
+  pause:
+    seconds: 10
+  when: node == "pause"    

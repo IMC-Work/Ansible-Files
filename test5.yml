@@ -4,55 +4,10 @@
   vars:
   tasks:
 
-  - name: copy text
-    win_shell:
-        Select-String -Path C:\temp\autoservices.txt -pattern "Service="
-    register: service
+  - name: include vars file
+    include_vars:
+      file: vars.yml
 
-  - name: read file, copy data to service
-    set_fact: service={{ service.stdout_lines [1] }}
-
-  - name: remove everything apart from service name
-    set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
-
-  - name: debug
-    debug:
-      msg: "service name is {{ service_name }}"
-
-  - name: debug1a
-    debug:
-      msg: "service contains IC3 {{ service_name }}"
-    when: service_name == "IC3"
-
-  - name: debug1b
-    debug:
-      msg: "service does not equal IC3 {{ service_name }}"
-    when: service_name != "IC3"
-
-  - name: debug1c
-    debug:
-      msg: "service contains IC3 {{ service_name }}"
-    when: service_name.find("dap") != -1
-
-  - name: block section (only run when not IC3)
-    block:
-
-      - name: debug2
-        debug:
-          msg: "debug 2"
-
-      - name: debug3
-        debug:
-          msg: "debug 3"
-
-      - name: debug4
-        debug:
-          msg: "debug 4"
-
-    rescue:
-
-      - name: debug5
-        debug:
-          msg: "debug 5"
-
-    when: service_name.find("IC3") == -1
+  - name: loop through vars files
+    iclude_tasks: test6.yml
+    loop: "{{ nodes }}"
