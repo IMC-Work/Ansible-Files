@@ -17,6 +17,8 @@
 
 - name: server B only
   hosts: serverB
+  
+  tasks:
 
   - name: Server B debug
     debug:
