@@ -9,6 +9,7 @@
 
 - name: Server A only
   hosts: serverA
+  gather_facts: false
 
   tasks:
   - name: server A debug
@@ -17,6 +18,7 @@
 
 - name: server B only
   hosts: serverB
+  gather_facts: false
   
   tasks:
 
