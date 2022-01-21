@@ -1,13 +1,16 @@
 ---
-- hosts: all
+- hosts: wintest
   gather_facts: false
   vars:
   tasks:
 
-  - name: include vars file
-    include_vars:
-      file: vars.yml
+  - name: test play
+    win_ping:
 
-  - name: loop through vars files
-    iclude_tasks: test6.yml
-    loop: "{{ nodes }}"
+  - name: ping serverA only
+    debug:
+      msg: "ping server A only"
+
+  - name: ping serverB only
+    debug:
+      msg: "ping server B only"
