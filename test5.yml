@@ -8,9 +8,11 @@
     win_ping:
 
   - name: ping serverA only
+    hosts: serverA
     debug:
       msg: "ping server A only"
 
   - name: ping serverB only
+    hosts: serverB
     debug:
       msg: "ping server B only"
