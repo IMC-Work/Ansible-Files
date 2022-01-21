@@ -7,12 +7,17 @@
   - name: test play
     win_ping:
 
-  - name: ping serverA only
-    hosts: serverA
+- name: Server A only
+  hosts: serverA
+
+  tasks:
+  - name: server A debug
     debug:
       msg: "ping server A only"
 
-  - name: ping serverB only
-    hosts: serverB
+- name: server B only
+  hosts: serverB
+
+  - name: Server B debug
     debug:
       msg: "ping server B only"
