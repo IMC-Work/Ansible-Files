@@ -11,9 +11,10 @@
     debug:
       msg: "ping server A only"
 #    when: "'serverA' in {{ group_names }}"
-    when: groups['serverA']
+    when: {{ inventory_hostname }} in groups["serverA"]
 
   - name: Server B debug
     debug:
       msg: "ping server B only"
-    when: "'serverA' not in {{ group_names }}"
+#    when: "'serverA' not in {{ group_names }}"
+    when: {{ inventory_hostname }} in groups["serverB"]
