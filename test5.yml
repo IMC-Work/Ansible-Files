@@ -7,12 +7,12 @@
   - name: test play
     win_ping:
 
-  - name: Run the "reboot" playbook for {{ inventory_hostname }}
+  - name: Run the "reboot" playbook
     debug:
-      msg: "run the 'reboot' playbooks"
+      msg: "run the 'reboot' playbooks for {{ inventory_hostname }}"
     when: "inventory_hostname in groups['patch']"
 
-  - name: Run the "no reboot" playbook for {{ inventory_hostname }}
+  - name: Run the "no reboot" playbook
     debug:
-      msg: "run the 'no reboot' playbooks"
+      msg: "run the 'no reboot' playbooks for {{ inventory_hostname }}"
     when: "inventory_hostname not in groups['patch']"
