@@ -10,7 +10,7 @@
   - name: server A debug
     debug:
       msg: "ping server A only"
-    when: "inventory_hostname in groups['server*']"
+    when: "inventory_hostname in groups['servera']"
 
   - name: Server B debug
     debug:
