@@ -2,13 +2,14 @@
 - hosts: all
   gather_facts: false
   vars:
+    letter: A
   tasks:
 
   - name: test play
     win_ping:
 
 - name: Server A only
-  hosts: serverA
+  hosts: server{{ letter }}
   gather_facts: false
 
   tasks:
@@ -19,7 +20,7 @@
 - name: server B only
   hosts: serverB
   gather_facts: false
-  
+
   tasks:
 
   - name: Server B debug
