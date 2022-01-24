@@ -10,7 +10,8 @@
   - name: server A debug
     debug:
       msg: "ping server A only"
-    when: "'serverA' in {{ group_names }}"
+#    when: "'serverA' in {{ group_names }}"
+    when: groups['serverA']
 
   - name: Server B debug
     debug:
