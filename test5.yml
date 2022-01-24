@@ -17,4 +17,4 @@
     debug:
       msg: "ping server B only"
 #    when: "'serverA' not in {{ group_names }}"
-    when: "{{ inventory_hostname }} in groups['serverB']"
+    when: "inventory_hostname in groups['serverB']"
