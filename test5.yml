@@ -15,4 +15,4 @@
   - name: Server B debug
     debug:
       msg: "ping server B only"
-    when: "'serverB' in {{ group_names }}"
+    when: "'serverA' not in {{ group_names }}"
