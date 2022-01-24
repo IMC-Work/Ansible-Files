@@ -3,10 +3,10 @@
 192.168.1.249
 192.168.1.250
 
-[serverA]
+[patch]
 192.168.1.249
 
-[serverB]
+[noreboot]
 192.168.1.250
 
 [wintest:vars]

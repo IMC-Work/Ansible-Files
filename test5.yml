@@ -7,12 +7,12 @@
   - name: test play
     win_ping:
 
-  - name: server A debug
+  - name: Run the "reboot" playbooks
     debug:
-      msg: "ping server A only"
-    when: "inventory_hostname in groups['serverA']"
+      msg: "run the 'reboot' playbooks"
+    when: "inventory_hostname in groups['patch']"
 
-  - name: Server B debug
+  - name: Run the "no reboot" playbooks
     debug:
-      msg: "ping server B only"
-    when: "inventory_hostname not in groups['serverA']"
+      msg: "run the 'no reboot' playbooks"
+    when: "inventory_hostname not in groups['patch']"
