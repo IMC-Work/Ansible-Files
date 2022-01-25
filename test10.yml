@@ -10,7 +10,7 @@
   - name: call the tasks test11 and test12
     include_tasks:
       name: "{{ item }}"
-    loop:
+    with_item:
       - "test11.yml"
       - "test12.yml"
 
