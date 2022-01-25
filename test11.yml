@@ -1,13 +1,13 @@
 ---
-- name: welcome to Playbook1 - test11
+- name: welcome to Playbook - test11
   debug:
-    msg: "welcome to Playbook1 (test11)"
+    msg: "welcome to Playbook (test11)"
 
 - name: set the facts
   set_fact:
     bds_1: "BDS Server 1"
     bds_2: "BDS Server 2"
 
-- name: end of Playbook1 - test11
+- name: end of Playbook - test11
   debug:
-    msg: "end of playbook test11, off to playbook test12"
+    msg: "end of playbook test11, let's head off to playbook test12"
