@@ -11,8 +11,8 @@
     include_tasks:
       name: "{{ item }}"
     loop:
-      - 'test11.yml'
-      - 'test12.yml'
+      - "test11.yml"
+      - "test12.yml"
 
   - name: The end
     debug:
