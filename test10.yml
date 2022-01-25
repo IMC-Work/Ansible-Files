@@ -1,15 +1,17 @@
 ---
-- hosts: all
+- hosts: noreboot
   gather_facts: true
   tasks:
 
   - name: First Playbook start
     debug:
-      msg: "start of playbook - let's call the roll Playbook1 (test12)"
+      msg: "start of playbook - let's call the roll TEST11 and TEST12"
 
   - name: call the roll test12
     include_role:
-      name: test12
+      name:
+      - test11
+      - test12
 
   - name: The end
     debug:
