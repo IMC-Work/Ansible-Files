@@ -4,9 +4,10 @@
     msg: " welcome to Playbook12"
 
 - name: call the roll Playbook2 - testxx
-  msg:
-    - debug: "BDS1 is {{ bds_1 }}"
-    - debug: "BDS2 is {{ bds_2 }}"
+  debug:
+    msg:
+      - "BDS1 is {{ bds_1 }}"
+      - "BDS2 is {{ bds_2 }}"
 
 - name: end of Playbook1 - test12
   debug:
