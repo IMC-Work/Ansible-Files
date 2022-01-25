@@ -8,7 +8,8 @@
         msg: "start of playbook - let's call the tasks TEST11 and TEST12"
 
     - name: call the tasks test11 and test12
-      include_tasks: test11.yml
+      include_tasks:
+        - test11.yml
 #        - "{{ item }}"
 #      loop:
 #        - "test11.yml"
