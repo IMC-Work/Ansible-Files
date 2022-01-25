@@ -7,11 +7,12 @@
     debug:
       msg: "start of playbook - let's call the role TEST11 and TEST12"
 
-  - name: call the roles test11
-    include_tasks: test11.yml
-
-  - name: call the roles test12
-    include_tasks: test12.yml
+  - name: call the roles test11 and test12
+    include_tasks:
+      name: {{ item }}
+    loop:
+      - test11 
+      - test12
 
   - name: The end
     debug:
