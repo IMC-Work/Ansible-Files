@@ -8,7 +8,7 @@
       msg: "start of playbook - let's call the roll TEST11 and TEST12"
 
   - name: call the rolls test11 and test12
-    include_roles:
+    include_tasks:
       - test11
       - test12
 
