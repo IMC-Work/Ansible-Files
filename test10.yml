@@ -8,9 +8,9 @@
       msg: "start of playbook - let's call the roll TEST11 and TEST12"
 
   - name: call the rolls test11 and test12
-    include_role:
-       - test11
-       - test12
+    include_roles:
+      - test11
+      - test12
 
   - name: The end
     debug:
