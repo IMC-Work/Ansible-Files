@@ -12,10 +12,6 @@
       loop:
         - test11.yml
         - test12.yml
-#        - "{{ item }}"
-#      loop:
-#        - "test11.yml"
-#        - "test12.yml"
 
     - name: The end
       debug:
