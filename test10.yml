@@ -5,14 +5,14 @@
 
   - name: First Playbook start
     debug:
-      msg: "start of playbook - let's call the role TEST11 and TEST12"
+      msg: "start of playbook - let's call the tasks TEST11 and TEST12"
 
-  - name: call the roles test11 and test12
-    include_role:
+  - name: call the tasks test11 and test12
+    include_tasks:
       name: "{{ item }}"
     loop:
-      - test11
-      - test12
+      - test11.yml
+      - test12.yml
 
   - name: The end
     debug:
