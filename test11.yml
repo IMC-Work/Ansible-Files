@@ -10,4 +10,4 @@
 
 - name: end of Playbook1 - test11
   debug:
-    msg: "end of playbok1 - test11, off to playbook test12
+    msg: "end of playbook test11, off to playbook test12"

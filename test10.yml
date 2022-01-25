@@ -5,9 +5,9 @@
 
   - name: First Playbook start
     debug:
-      msg: "start of playbook - let's call the roll TEST11 and TEST12"
+      msg: "start of playbook - let's call the role TEST11 and TEST12"
 
-  - name: call the rolls test11 and test12
+  - name: call the roles test11 and test12
     include_tasks: test11.yml
 #      - test11.yml
 #      - test12.yml
