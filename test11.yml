@@ -5,8 +5,8 @@
 
 - name: set the facts
   set_fact:
-    - bds_1: "BDS Server 1"
-    - bds_2: "BDS Server 2"
+    bds_1: "BDS Server 1"
+    bds_2: "BDS Server 2"
 
 - name: end of Playbook1 - test11
   debug:
