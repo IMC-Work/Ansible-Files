@@ -1,34 +1,10 @@
 ---
 - hosts: all
   gather_facts: false
-  vars:
-    filepath: c:\temp\autoservicesnumber.txt
-
   tasks:
 
-#  - name: copy PS1 files from Ansible node to host temp folder
-#    ansible.windows.win_copy:
-#      src: \\VBOXsvr\VM_Shared_Folder\PS_Scripts
-#      dest: C:\temp
-#      remote_src: yes
-#    register: file_copy
-
-#  - name: run PS_Script
-#    ansible.windows.win_shell: C:\temp\PS_Scripts\AutoServices.ps1
-
-  - name: Get number of services to restart
-    ansible.windows.win_command: powershell.exe -
-    args:
-      stdin: (Get-Content C:\temp\autoservices.txt).Length
-    register: restart_number
-
-  - name: set_fact
-    set_fact: loop={{ restart_number.stdout_lines[0] }}
-
-  - name: Restart the Services Module
-    include_tasks: test31.yml
-    when: loop | int >= 1
-
-  - name: information
-    debug:
-      msg: "All Auto Services are now started {{ loop }} hhh"
+    - name: copy file from Windows to Windows
+      ansible.windows.win_copy:
+        src: C:\temp\ian.txt
+        dest: C:\temp\a\ian.txt
+        remote_src: yes
