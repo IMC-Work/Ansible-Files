@@ -4,7 +4,13 @@
   tasks:
 
     - name: copy file from Windows to Windows
-      ansible.windows.win_copy:
+      win_copy:
         src: C:\temp\ian.txt
         dest: C:\temp\a\ian.txt
         remote_src: yes
+
+    - name: copy file from Windows to Windows
+      win_copy:
+        src: C:\Temp\ian.txt
+        dest: C:\temp\b\ian.txt
+        remote_src: yes    
