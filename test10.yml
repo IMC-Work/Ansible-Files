@@ -10,7 +10,7 @@
     register: auto_services
 
   - name: set_fact
-    set_fact: loop_num={{ auto_services_num.stdout[0]|int }}
+    set_fact: loop_num={{ auto_services.stdout[0]|int }}
 
   - name: debug
     debug:
