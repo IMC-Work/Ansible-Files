@@ -10,26 +10,11 @@
   - name: remove everything apart from service name
     set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
-  - name: debug1
-    debug:
-      msg: "I have a name, and that is {{ service_name }}"
-    when: service_name != None
-
-  - name: debug2
-    debug:
-      msg: "I have no name {{ service_name }}"
-    when: service_name == None
-
   - name: debug3
     debug:
       msg: "I also have no name {{ service_name }}"
     when: service_name == ""
   # service.stdout == ""
-
-  - name: debug4
-    debug:
-      msg: "I may have a name, behold {{ service_name }}"
-    when: service_name != " "
 
   - name: restart the Auto service
     block:
@@ -48,3 +33,5 @@
         debug:
           msg: "Service {{ service_name }} has now started"
         when: result.state != "running"
+        
+    when: service_name != ""
