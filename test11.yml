@@ -6,6 +6,7 @@
 
   - name: set the fact for the service
     set_fact: service={{ service.stdout_lines[item] }}
+    ignore_errors: true
 
   - name: remove everything apart from service name
     set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
@@ -33,5 +34,5 @@
         debug:
           msg: "Service {{ service_name }} has now started"
         when: result.state != "running"
-        
+
     when: service_name != ""
