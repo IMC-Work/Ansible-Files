@@ -18,4 +18,4 @@
 
   - name: loop
     include_tasks: test11.yml
-    loop: " {{ range(1,(loop_num|int )) | list }}"
+    loop: "{{ range(1,(loop_num|int )) | list }}"
