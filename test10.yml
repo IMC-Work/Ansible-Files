@@ -1,5 +1,5 @@
 ---
-- hosts: noreboot
+- hosts: wintest
   gather_facts: true
   tasks:
 
