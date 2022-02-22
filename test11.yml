@@ -20,6 +20,17 @@
       msg: "I am nothing"
     when: service_name == None
 
+  - name: debug3
+    debug:
+      msg: "I am also nothing"
+    when: service_name == ""
+  # service.stdout == ""
+
+  - name: debug4
+    debug:
+      msg: "I may have a name"
+    when: service_name != " "
+
   - name: restart the Auto service
     block:
       - name: restart the {{ service_name }} service
