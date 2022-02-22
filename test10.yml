@@ -3,16 +3,19 @@
   gather_facts: true
   tasks:
 
-    - name: First Playbook start
-      debug:
-        msg: "start of playbook - let's call the tasks TEST11 and TEST12"
+    - name: get number of lines
+      win_command: powershell.exe -
+      args:
+        stdin: (Get-content c:\temp\autoservices1.txt).length
+      regsiter: auto_services
 
-    - name: call the tasks test11 and test12
-      include_tasks: "{{ item }}"
-      loop:
-        - test11.yml
-        - test12.yml
+    - name: set_fact
+      set_fact: loop_num={{ auto_services_num.stdout[0]|int }}
 
-    - name: The end
+    - name: debug
       debug:
-        msg: "All done"
+        msg: perform the loop {{ loop_num }} times
+
+    - name: loop
+      include_tasks: test11.yml
+      loop: " {{ range(1,loop_num|int )) | list }}"
