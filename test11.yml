@@ -10,6 +10,16 @@
   - name: remove everything apart from service name
     set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
+  - name: debug1
+    debug:
+      msg: "I have a name"
+    when: service_name != None
+
+  - name: debug2
+    debug:
+      msg: "I am nothing"
+    when: service_name == None
+
   - name: restart the Auto service
     block:
       - name: restart the {{ service_name }} service
