@@ -11,6 +11,10 @@
   - name: remove everything apart from service name
     set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
 
+  - name: debug2
+    debug:
+      msg: "this is item number {{ item }} in the loop"  
+
   - name: debug3
     debug:
       msg: "I also have no name {{ service_name }}"
