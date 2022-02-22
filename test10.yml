@@ -7,7 +7,7 @@
     win_command: powershell.exe -
     args:
       stdin: (Get-content c:\tmp\autoservices1.txt).length
-    regsiter: auto_services
+    register: auto_services
 
   - name: set_fact
     set_fact: loop_num={{ auto_services_num.stdout[0]|int }}
