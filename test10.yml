@@ -3,19 +3,19 @@
   gather_facts: true
   tasks:
 
-    - name: get number of lines
-      win_command: powershell.exe -
-      args:
-        stdin: (Get-content c:\temp\autoservices1.txt).length
-      regsiter: auto_services
+  - name: get number of lines
+    win_command: powershell.exe -
+    args:
+      stdin: (Get-content c:\tmp\autoservices1.txt).length
+    regsiter: auto_services
 
-    - name: set_fact
-      set_fact: loop_num={{ auto_services_num.stdout[0]|int }}
+  - name: set_fact
+    set_fact: loop_num={{ auto_services_num.stdout[0]|int }}
 
-    - name: debug
-      debug:
-        msg: perform the loop {{ loop_num }} times
+  - name: debug
+    debug:
+      msg: perform the loop {{ loop_num }} times
 
-    - name: loop
-      include_tasks: test11.yml
-      loop: " {{ range(1,loop_num|int )) | list }}"
+  - name: loop
+    include_tasks: test11.yml
+    loop: " {{ range(1,loop_num|int )) | list }}"
