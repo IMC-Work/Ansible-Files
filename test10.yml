@@ -6,7 +6,7 @@
   - name: get number of lines
     win_command: powershell.exe -
     args:
-      stdin: (Get-content c:\tmp\autoservices1.txt).length
+      stdin: (Get-content c:\temp\autoservices1.txt).length
     register: auto_services
 
   - name: set_fact
