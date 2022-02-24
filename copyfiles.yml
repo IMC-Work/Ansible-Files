@@ -14,7 +14,7 @@
       fetch:
         src: C:/temp/Applicable_Patches1.ps1
 #        dest: /home/files/192.168.1.249
-        dest: /home/ian/files/ian
+        dest: /home/ian/files/ian/
 #        dest: /ansible-files/
         flat: yes
         remote_src: yes
