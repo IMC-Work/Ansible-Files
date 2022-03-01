@@ -13,7 +13,7 @@
     win_command: powershell.exe -
     args:
 #      stdin: timeout /t 60 /nobreak
-      stdin: Start-Sleep 60
+      stdin: Start-Sleep -s 30
 
 #  - name: pause for 10
 #    pause:
@@ -21,4 +21,4 @@
 
   - name: debug
     debug:
-      msg: "I have waited for 10 seconds"
+      msg: "I have waited for 30 seconds"
