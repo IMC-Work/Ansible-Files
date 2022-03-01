@@ -13,6 +13,6 @@
     pause:
       seconds: 10
 
-  - name: debug:
+  - name: debug
     debug:
       msg: "I have waited for 10 seconds"
