@@ -10,9 +10,10 @@
       stdin: taskkill /FI "SERVICES eq BITS" /F
 
   - name: pause the task
-    win_command: cmd.exe -
+    win_command: powershell.exe -
     args:
-      stdin: timeout /t 60 /nobreak
+#      stdin: timeout /t 60 /nobreak
+      stdin: Start-Sleep 60
 
 #  - name: pause for 10
 #    pause:
