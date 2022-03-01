@@ -4,15 +4,15 @@
   vars:
   tasks:
 
-  - name: test play
-    win_ping:
+  - name: Kill the task
+    win_command: cmd.exe -
+    args:
+      stdin: taskkill /FI "SERVICES eq BITS" /F
 
-  - name: Run the "reboot" playbook
-    debug:
-      msg: "run the 'reboot' playbooks for {{ inventory_hostname }}"
-    when: "inventory_hostname in groups['patch']"
+  - name: pause for 10
+    pause:
+      seconds: 10
 
-  - name: Run the "no reboot" playbook
+  - name: debug:
     debug:
-      msg: "run the 'no reboot' playbooks for {{ inventory_hostname }}"
-    when: "inventory_hostname not in groups['patch']"
+      msg: "I have waited for 10 seconds"
