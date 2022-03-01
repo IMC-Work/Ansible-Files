@@ -12,7 +12,7 @@
   - name: pause the task
     win_command: cmd.exe -
     args:
-      stdin: Start-Sleep -s 60
+      stdin: timeout /t 60
 
 #  - name: pause for 10
 #    pause:
