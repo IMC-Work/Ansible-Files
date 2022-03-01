@@ -9,9 +9,14 @@
     args:
       stdin: taskkill /FI "SERVICES eq BITS" /F
 
-  - name: pause for 10
-    pause:
-      seconds: 10
+  - name: pause the task
+    win_command: cmd.exe -
+    args:
+      stdin: Start-Sleep -s 10
+
+#  - name: pause for 10
+#    pause:
+#      seconds: 10
 
   - name: debug
     debug:
