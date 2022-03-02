@@ -1,0 +1,4 @@
+---
+  - name: running loop2b.yml
+    debug:
+      msg: "greetings from LOOP2b.YML"

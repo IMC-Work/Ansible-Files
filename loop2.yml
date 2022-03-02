@@ -1,4 +1,12 @@
 ---
   - name: running loop2.yml
     debug:
-      msg: "greetings from LOOP2.YML"
+      msg: "greetings from LOOP2.YML - let's run LOOP2A and LOOP2B"
+
+  - name: run several tasks
+    include_tasks: "{{ item2 }}"
+    loop:
+      - loop2a.yml
+      - loop2b.yml
+    loop_control:
+      loop_var: item2
