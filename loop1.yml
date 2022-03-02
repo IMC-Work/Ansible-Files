@@ -1,8 +1,6 @@
 ---
 - hosts: all
   gather_facts: false
-  vars:
-    item1: 1
   tasks:
 
   - name: run several tasks
@@ -11,3 +9,5 @@
       - loop2.yml
       - loop3.yml
       - loop4.yml
+    loop_control:
+      index_var: item1  
