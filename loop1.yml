@@ -4,14 +4,8 @@
   tasks:
 
   - name: run several tasks
-    include_tasks: "{{ item }}"
-#      name: "{{ item }}"
+    include_tasks: "{{ item1 }}"
     loop:
       - loop2.yml
       - loop3.yml
       - loop4.yml
-
-#  - name: restart multiple services - part 1
-#    include_tasks: loop2.yml
-#    loop:
-#      - '*'
