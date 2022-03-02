@@ -1,7 +1,8 @@
 ---
 - hosts: all
   gather_facts: false
-  vars: item1
+  vars:
+    item1: 1
   tasks:
 
   - name: run several tasks
