@@ -3,15 +3,15 @@
   gather_facts: false
   tasks:
 
-#    - name: run several tasks
-#      include_tasks:
-#        name: "{{ item }}"
-#      loop:
-#        - loop2.yml
-#        - loop3.yml
-#        - loop4.yml
+  - name: run several tasks
+    include_tasks: "{{ item }}"
+#      name: "{{ item }}"
+    loop:
+      - loop2.yml
+      - loop3.yml
+      - loop4.yml
 
-  - name: restart multiple services - part 1
-    include_tasks: loop2.yml
+#  - name: restart multiple services - part 1
+#    include_tasks: loop2.yml
 #    loop:
 #      - '*'
