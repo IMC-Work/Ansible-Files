@@ -5,7 +5,7 @@
 
   - name: run several tasks
     include_tasks:
-      name: {{ item }}
+      name: "{{ item }}"
     loop:
       - loop2.yml
       - loop3.yml
