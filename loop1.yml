@@ -3,22 +3,15 @@
   gather_facts: false
   tasks:
 
-  - name: run PS_Script Pete1.PS1
-    win_shell: C:\temp\PS_Scripts\Pete1.ps1
+  - name: run several tasks
+    include_tasks:
+      name: {{ item }}
+    loop:
+      - loop2.yml
+      - loop3.yml
+      - loop4.yml
 
-  - name: Get number of drives on the sevrer
-    win_command: powershell.exe -
-    args:
-      stdin: (Get-Content C:\temp\disks.txt).Length
-    register: num_drives
-
-  - name: user powershell to add "1" to the number of times to run the loop
-    win_shell: "{{ num_drives.stdout_lines[0] }} + 1"
-    register: drives
-
-  - name: identify number of times to run the loop
-    set_fact: loop_num={{ drives.stdout_lines[0]|int}}
-
-  - name: run the loop to get the information for each drive letter
-    include_tasks: loop2.yml
-    loop: "{{ range(1,(loop_num|int)) | list }}"
+#  - name: restart multiple services - part 1
+#    include_tasks: test12.yml
+#    loop:
+#      - '*'

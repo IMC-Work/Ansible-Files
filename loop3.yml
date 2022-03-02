@@ -1,0 +1,4 @@
+---
+  - name: running loop3.yml
+    debug:
+      msg: "greetings from LOOP3.YML"

@@ -1,18 +1,4 @@
 ---
-  - name: read c:\temp\disks.txt to get the drive letter to check
-    win_shell:
-      Select-String -Path C:\temp\disks.txt -pattern "DiskDriveLetter= "
-    register: disk_letter
-
-  - name: set the fact for the service
-    set_fact: disk={{ disk_letter.stdout_lines[item] }}
-
-  - name: remove everything apart from drive letter name
-    set_fact: disk_name={{ disk | regex_replace('.*=') | regex_replace ("'.*") }}
-
-  - name: Check Service Status
+  - name: running loop2.yml
     debug:
-      msg: "checking ACL against the{{ disk_name }} drive"
-
-  - name: run PS_Script
-    win_shell: C:\temp\PS_Scripts\Pete2.ps1 {{ disk_name }}
+      msg: "greetings from LOOP2.YML"
