@@ -10,4 +10,4 @@
       - loop3.yml
       - loop4.yml
     loop_control:
-      index_var: item1  
+      loop_var: item1
