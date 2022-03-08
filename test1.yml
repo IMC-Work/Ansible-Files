@@ -15,3 +15,4 @@
 #     debug:
 #       msg: "or the IP Address is {{ ansible_default_ipv4.address }}"
    - debug: var=ansible_default_ipv4.address
+   - debug: var=ansible_all_ipv4_addresses
