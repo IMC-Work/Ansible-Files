@@ -4,29 +4,9 @@
   tasks:
 
    - name: facts
-     debug:
-       var: ansible_facts
-
-#   - name: get the IP Address of the server
-#     win_command: ping {{ inventory_hostname }}
-#     register: ping_result
-#
-#   - name: wot's the IP Address
 #     debug:
-#       msg: "IP Address is {{ ping_result.stdout }}"
-#
-#   - debug: var=ansible_default_ipv4.address
-#   - debug: var=ansible_all_ipv4_addresses
-#     register: ip
-#
+#       var: ansible_facts
+
    - name: debug1
      debug:
        msg: "ip is {{ ansible_ip_addresses }}"
-
-   - name: debug2
-     debug:
-       msg: "ip is {{ ansible_interfaces }}"
-
-   - name: debug2
-     debug:
-       msg: "info is {{ ansible_interfaces[macaddress] }}"   
