@@ -6,7 +6,7 @@
    - name: facts
      debug:
        var: ansible_facts
-       
+
    - name: get the IP Address of the server
      win_command: ping {{ inventory_hostname }}
      register: ping_result
@@ -21,4 +21,4 @@
 
    - name: debug1
      debug:
-       msg: "ip is {{ ansible_eth0.ipv4.address }}"
+       msg: "ip is {{ ansible_ip_addresses }}"
