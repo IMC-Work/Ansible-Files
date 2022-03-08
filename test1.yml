@@ -18,7 +18,7 @@
   - name: greater than 192.168.1.200
     debug:
       msg: "IP is greater than 192.168.1.200"
-    when: ip >= "192.168.1.200" and ip <= "192.168.1.300"
+    when: ip >= "192.168.1.200" and ip <= "192.168.1.240"
 
 #  - name: remove everything apart from service name
 #    set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
