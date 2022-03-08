@@ -7,6 +7,6 @@
      win_command: ping {{ inventory_hostname }}
      register: ping_result
 
-  - name: wot's the IP Address
-    debug:
-      msg: "IP Address is {{ ping_result }}"
+   - name: wot's the IP Address
+     debug:
+       msg: "IP Address is {{ ping_result }}"
