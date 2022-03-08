@@ -3,7 +3,7 @@
   gather_facts: yes
   tasks:
 
-   - name: facts
+#   - name: facts
 #     debug:
 #       var: ansible_facts
 
