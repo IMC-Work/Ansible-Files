@@ -20,4 +20,4 @@
 
    - name: debug1
      debug:
-       msg: "ip is {{ ip.msg }}"
+       msg: "ip is {{ ansible_eth0.ipv4.address }}"
