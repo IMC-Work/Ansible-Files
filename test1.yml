@@ -3,6 +3,10 @@
   gather_facts: yes
   tasks:
 
+   - name: facts
+     debug:
+       var: ansible_facts
+       
    - name: get the IP Address of the server
      win_command: ping {{ inventory_hostname }}
      register: ping_result
@@ -11,9 +15,6 @@
      debug:
        msg: "IP Address is {{ ping_result.stdout }}"
 
-#   - name: debug1
-#     debug:
-#       msg: "or the IP Address is {{ ansible_default_ipv4.address }}"
    - debug: var=ansible_default_ipv4.address
    - debug: var=ansible_all_ipv4_addresses
      register: ip
