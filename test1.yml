@@ -11,10 +11,10 @@
 #  - name: set_fact
 #    set_fact: ip2={{ ip }}
 
-  - name: remove mac address fe80
+  - name: remove mac address
 #    set_fact: ip1={{ ansible_ip_addresses | regex_replace('.*,') | regex_replace ("'.*") }}
 #    set_fact: ip1={{ ip2 | regex_replace('fe80','') }}
-    set_fact: ip1={{ ip | regex_replace(',.*','') | regex_replace('[','')}}
+    set_fact: ip1={{ ip | regex_replace(',.*','') | regex_replace('[','') }}
 
   - name: debug2
     debug:
