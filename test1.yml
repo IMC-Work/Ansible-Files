@@ -17,3 +17,7 @@
    - debug: var=ansible_default_ipv4.address
    - debug: var=ansible_all_ipv4_addresses
      register: ip
+
+   - name: debug1
+     debug:
+       msg: "ip is {{ ip }}"     
