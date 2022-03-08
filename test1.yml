@@ -1,16 +1,11 @@
 ---
 - hosts: all
-  gather_facts: yes
+  gather_facts: false
   tasks:
 
   - name: debug1
     debug:
       msg: "ip is {{ ansible_ip_addresses }}"
-
-  - name: set_fact
-  #  set_fact: ip={{ ansible_ip_addresses }}
-  #  192.168.1.250, 5435435-53435-3543--35435
-    set_fact: ip=192.168.1.250
 
   - name: remove mac address
     set_fact: ip1={{ ip | regex_replace('.*,') | regex_replace ("'.*") }}
