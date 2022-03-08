@@ -20,4 +20,4 @@
 
    - name: debug1
      debug:
-       msg: "ip is {{ ip.stdout }}"
+       msg: "ip is {{ ip }}"
