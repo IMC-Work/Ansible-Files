@@ -29,4 +29,4 @@
 
    - name: debug2
      debug:
-       msg: "info is {{ ansible_interfaces.macaddress }}"   
+       msg: "info is {{ ansible_interfaces_macaddress }}"   
