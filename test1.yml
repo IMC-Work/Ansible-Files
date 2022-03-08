@@ -9,12 +9,16 @@
 
   - name: set_fact
   #  set_fact: ip={{ ansible_ip_addresses }}
+  #  192.168.1.250, 5435435-53435-3543--35435
     set_fact: ip=192.168.1.250
+
+  - name: remove mac address
+    set_fact: ip1={{ ip | regex_replace('.*,') | regex_replace ("'.*") }}
 
   - name: debug
     debug:
-      msg: "ip is {{ ip }}"
-
+      msg: "ip is {{ ip }} and {{ ip1 }}"
+      
   - name: greater than 192.168.1.200
     debug:
       msg: "IP is greater than 192.168.1.200"
