@@ -1,8 +1,6 @@
 ---
 - hosts: all
   gather_facts: true
-  vars:
-      ansible_default_ipv4.address:
   tasks:
 
    - name: get the IP Address of the server
@@ -13,6 +11,7 @@
      debug:
        msg: "IP Address is {{ ping_result.stdout }}"
 
-   - name: debug1
-     debug:
-       msg: "or the IP Address is {{ ansible_default_ipv4.address }}"
+#   - name: debug1
+#     debug:
+#       msg: "or the IP Address is {{ ansible_default_ipv4.address }}"
+   - debug: var=ansible_default_ipv4.address
