@@ -10,7 +10,7 @@
   - name: set_fact
     set_fact: ip={{ ansible_ip_address }}
 
-  - name: debug:
+  - name: debug
     debug:
       msg: "ip is {{ ip }}"
 
