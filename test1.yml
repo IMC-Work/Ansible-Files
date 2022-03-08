@@ -25,4 +25,4 @@
 
    - name: debug1
      debug:
-       msg: "ip is {{ ansible_interfaces_default_gateway }}"
+       msg: "ip is {{ ansible_interfaces.default_gateway }}"
