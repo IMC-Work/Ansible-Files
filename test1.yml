@@ -1,6 +1,8 @@
 ---
 - hosts: all
   gather_facts: true
+  vars:
+      ansible_default_ipv4.address:
   tasks:
 
    - name: get the IP Address of the server
