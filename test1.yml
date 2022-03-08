@@ -13,5 +13,4 @@
 
    - name: debug1
      debug:
-       msg: "or the IP Address is {{ var=ansible_default_ipv4.address }}
-     
+       msg: "or the IP Address is {{ var=ansible_default_ipv4.address }}"
