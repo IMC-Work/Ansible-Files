@@ -3,10 +3,16 @@
   gather_facts: yes
   tasks:
 
-#   - name: facts
-#     debug:
-#       var: ansible_facts
+  - name: debug1
+    debug:
+      msg: "ip is {{ ansible_ip_addresses }}"
 
-   - name: debug1
-     debug:
-       msg: "ip is {{ ansible_ip_addresses }}"
+  - name: set_fact
+    set_fact: ip={{ ansible_ip_address }}
+
+  - name: debug:
+    debug:
+      msg: "ip is {{ ip }}"
+
+#  - name: remove everything apart from service name
+#    set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
