@@ -9,4 +9,4 @@
 
    - name: wot's the IP Address
      debug:
-       msg: "IP Address is {{ ping_result }}"
+       msg: "IP Address is {{ ping_result.stdout }}"
