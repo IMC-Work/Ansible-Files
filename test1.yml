@@ -9,7 +9,7 @@
     register: ip
 
   - name: set_fact
-    set_fact: ip= {{ ip }}  
+    set_fact: ip2= {{ ip }}
 
   - name: remove mac address
 #    set_fact: ip1={{ ansible_ip_addresses | regex_replace('.*,') | regex_replace ("'.*") }}
@@ -17,7 +17,7 @@
 
   - name: debug2
     debug:
-      msg: "ip is {{ ip }} and {{ ip1 }}"
+      msg: "ip is {{ ip2 }} and {{ ip1 }}"
 
   - name: greater than 192.168.1.200
     debug:
