@@ -6,6 +6,7 @@
   - name: debug1
     debug:
       msg: "ip is {{ ansible_ip_addresses }}"
+    register: ip
 
   - name: remove mac address
     set_fact: ip1={{ ip | regex_replace('.*,') | regex_replace ("'.*") }}
