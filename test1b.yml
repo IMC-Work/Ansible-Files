@@ -1,7 +1,14 @@
 ---
 - hosts: all
-  gather_facts: yes
+  gather_facts: no
   tasks:
+  - name: ping
+    win_ping:
+    register: ping  
+
+  - name: win_ping
+    debug:
+      msg: {{ ping }}
 
   - name: set_fact
     set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
