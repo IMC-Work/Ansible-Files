@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+
+  - name: set_fact
+    set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
+
+  - name: greater than 192.168.1.200 and less than 192.168.1.260
+    debug:
+      msg: "IP is greater than 192.168.1.200"
+    when: ip2 >= "192.168.1.200" and ip2 <= "192.168.1.260"
