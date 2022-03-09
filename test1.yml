@@ -3,9 +3,13 @@
   gather_facts: yes
   tasks:
 
-  - name: print facts 
+  - name: print facts
     debug:
       var: ansible_facts
+
+  - name: default gateway
+    debug:
+      msg: "{{ ansible_facts['interfaces']['default_gateway'] }}"    
 
   - name: debug1
     debug:
