@@ -1,14 +1,14 @@
 ---
 - hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
   - name: ping
     win_command: ping {{ inventory_hostname }}
     register: ping
 
-#  - name: win_ping
-#    debug:
-#      msg: "{{ ping.cmd }}"
+  - name: debug
+    debug:
+      msg: " {{ ping }} "  
 
   - name: regex
     set_fact: ip={{ ping.cmd | regex_replace("ping ","") }}
