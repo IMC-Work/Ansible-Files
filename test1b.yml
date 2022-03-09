@@ -13,11 +13,11 @@
   - name: regex
     set_fact: ip={{ ping.cmd | regex_replace("ping ","") }}
 
-#  - name: greater than 192.168.1.200 and less than 192.168.1.260
-#    debug:
-#      msg: "{{ ip }}"
+  - name: greater than 192.168.1.200 and less than 192.168.1.260
+    debug:
+      msg: "{{ ip }}"
 
   - name: greater than 192.168.1.200 and less than 192.168.1.260
     debug:
       msg: "IP is greater than 192.168.1.200"
-    when: (ip >= "192.168.1.200" and ip <= "192.168.1.260") or (ip >= "192.168.1.261 and ip <= "192.168.1.270)
+    when: (ip >= "192.168.1.200" and ip <= "192.168.1.260") or (ip >= "192.168.1.261" and ip <= "192.168.1.270")
