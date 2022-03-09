@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
   - name: ping
-    win_ping:
+    win_command: ping {{ inventory_hostname }}
     register: ping
 
   - name: win_ping
