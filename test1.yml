@@ -15,7 +15,7 @@
 #    set_fact: ip1={{ ansible_ip_addresses | regex_replace('.*,') | regex_replace ("'.*") }}
 #    set_fact: ip1={{ ip | regex_replace("'","") | regex_replace(",.*","") }}
 #    set_fact: ip1={{ ip | regex_replace("\[","") }}
-    set_fact: ip1={{ ip | regex_replace("'msg': ","") | regex_replace("\['","") | regex_replace("',.*","") }}
+    set_fact: ip1={{ ip | regex_replace("'msg'\: ","") | regex_replace("\['","") | regex_replace("',.*","") }}
 #    set_fact: ip1={{ ip | regex_replace(".{5}","") }}
 
   - name: debug2
