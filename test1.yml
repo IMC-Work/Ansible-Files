@@ -9,7 +9,10 @@
 
   - name: default gateway
     debug:
-      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"    
+      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
+
+  - name: set_fact
+    set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
 
   - name: debug1
     debug:
@@ -33,7 +36,7 @@
   - name: greater than 192.168.1.200
     debug:
       msg: "IP is greater than 192.168.1.200"
-    when: ip1 >= "192.168.1.200" and ip1 <= "192.168.1.450"
+    when: ip2 >= "192.168.1.200" and ip2 <= "192.168.1.450"
 
 #  - name: remove everything apart from service name
 #    set_fact: service_name={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
