@@ -8,7 +8,7 @@
 
   - name: win_ping
     debug:
-      msg: "{{ ping }}"
+      msg: "{{ ping.cmd }}"
 
   - name: set_fact
     set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
