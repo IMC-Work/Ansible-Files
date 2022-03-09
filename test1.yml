@@ -5,7 +5,7 @@
 
   - name: debug1
     debug:
-      msg: "ip is {{ ansible_ip_addresses }}"
+      msg: "{{ ansible_ip_addresses }}"
     register: ip
 
 #  - name: set_fact
@@ -15,7 +15,7 @@
 #    set_fact: ip1={{ ansible_ip_addresses | regex_replace('.*,') | regex_replace ("'.*") }}
 #    set_fact: ip1={{ ip | regex_replace("',.*","") }}
 #    set_fact: ip1={{ ip | regex_replace("ip is ","") }}
-    set_fact: ip1={{ ip | regex_replace(".{8}","") }}
+    set_fact: ip1={{ ip | regex_replace(".{5}","") }}
 
   - name: debug2
     debug:
