@@ -3,6 +3,10 @@
   gather_facts: yes
   tasks:
 
+  - name: print facts 
+    debug:
+      var: ansible_facts
+
   - name: debug1
     debug:
       msg: "{{ ansible_ip_addresses }}"
