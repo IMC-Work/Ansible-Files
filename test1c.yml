@@ -1,11 +1,11 @@
 ---
 - hosts: all
-  gather_facts: yes
+  gather_facts: no
   tasks:
 
-  - name: print facts
-    debug:
-      var: ansible_facts
+  - name: gather limited facts
+    setup:
+      filter: "ansible_facts['interfaces'][0]['default_gateway']"
 
   - name: default gateway
     debug:
