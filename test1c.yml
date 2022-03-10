@@ -1,0 +1,35 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  - name: ping
+    win_command: ping {{ inventory_hostname }}
+    register: ping
+
+  - name: debug 0
+    debug:
+      msg: " {{ ping.stdout_lines[0] }} "
+
+  - name: debug 1
+    debug:
+      msg: " {{ ping.stdout_lines[1] }} "
+
+  - name: debug 2
+    debug:
+      msg: " {{ ping.stdout_lines[2] }} "
+
+  - name: debug 3
+    debug:
+      msg: " {{ ping.stdout_lines[3] }} "
+
+  - name: regex
+    set_fact: ip={{ ping.stdout_lines[0] | regex_replace('/].*,') }}
+
+  - name: greater than 192.168.1.200 and less than 192.168.1.260
+    debug:
+      msg: "{{ ip }}"
+
+  - name: greater than 192.168.1.200 and less than 192.168.1.260
+    debug:
+      msg: "IP is greater than 192.168.1.200"
+    when: (ip >= "192.168.1.200" and ip <= "192.168.1.250") or (ip >= "192.168.1.252" and ip <= "192.168.1.270")
