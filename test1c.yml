@@ -23,7 +23,7 @@
       msg: " {{ ping.stdout_lines[3] }} "
 
   - name: regex
-    set_fact: ip={{ ping.stdout_lines[2] | regex_replace('/:.*,') }}
+    set_fact: ip={{ ping.stdout_lines[2] | regex_replace("/:.*","") }}
 
   - name: greater than 192.168.1.200 and less than 192.168.1.260
     debug:
