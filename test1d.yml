@@ -12,7 +12,7 @@
 
   - name: debug
     debug:
-      msg: "IP is now {{ ip }}"
+      msg: "IP is now {{ ping }}"
 
   - name: debug_1
     debug:
