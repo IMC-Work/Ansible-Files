@@ -8,8 +8,9 @@
     register: ping
 
   - name: regex_1
-    set_fact: ip1={{ ping.stdout_lines[1] | regex_replace ('.*\.','') | regex_replace('\].*','') }}
-
+#    set_fact: ip1={{ ping.stdout_lines[1] | regex_replace ('.*\[','') | regex_replace('\].*','') }}
+    set_fact: ip1={{ ping.stdout_lines[1] | regex_replace ('.*\.','') }}
+    
   - name: debug
     debug:
       msg: "IP is now {{ ping.stdout_lines[1] }}"
