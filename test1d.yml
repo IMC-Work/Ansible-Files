@@ -12,4 +12,8 @@
 
   - name: debug
     debug:
+      msg: "IP is now {{ ip }}"
+
+  - name: debug_1
+    debug:
       msg: "IP is now {{ ip1 }}"
