@@ -12,7 +12,7 @@
 
   - name: debug
     debug:
-      msg: "IP is now {{ ping }}"
+      msg: "IP is now {{ ping.stdout_lines[1] }}"
 
   - name: debug_1
     debug:
