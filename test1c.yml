@@ -21,6 +21,13 @@
   - name: part 2
     debug: msg={{ ip2.split('.')[-3] }}
 
+  - name: set_fact
+     set_fact: part2={{ ip2.split('.')[-3] }}
+
+  - name: debug
+    debug:
+     msg: "second part is {{ part2 }}"       
+
   - name: greater than 192.168.1.200 and less than 260
     debug:
       msg: "IP is greater than 192.168.1.200 and less than 260"
