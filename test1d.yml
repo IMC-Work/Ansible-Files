@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+
+  - name: ping server
+    win_command: ping {{ inventory_hostname }}
+    register: ping
+
+  - name: regex_1
+    set_fact: ip1={{ ping.stdout_lines[1] | regex_replace ('.*\[','') | regex_replace('\].*','') }}
+
+  - name: debug
+    debug:
+      msg: "IP is now {{ ip1 }}"

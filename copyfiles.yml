@@ -1,6 +1,9 @@
 ---
 - hosts: all
   gather_facts: false
+  vars:
+    source: c:\temp\ian.TXT
+    destination: \\iisqtv0487.test01global.lloydstsb.com\test\test$
   tasks:
 
 #    - name: copy file from Windows to Windows
@@ -38,7 +41,7 @@
         dest: /home/ian/files/
         remote_src: yes
 
-#    - name: copy ansible directory from centos to windows
-#      win_copy:
-#        src: /ansible-files/
-#        dest: C:\WSUS\
+    - name:  copy from file to share
+      win_shell:
+        copy_item: -path {{ source }} -destination {{ destination }}
+      register: output
