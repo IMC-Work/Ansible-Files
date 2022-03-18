@@ -5,31 +5,16 @@
 
   - name: gather limited facts
     setup:
-      filter: "ansible_facts['interfaces'][0]['default_gateway']"
+      filter: "ansible_facts['reboot_pending']"
 
   - name: default gateway
     debug:
-      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
+      msg: "{{ ansible_facts['uptime_seconds] }}"
 
   - name: set_fact
-    set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
+    set_fact: uptime={{ ansible_facts['uptime_seconds'] }}
 
-
-  - name: IP Address (ip2)
+  - name: reboot server
     debug:
-      msg: " IP2 Address is set to {{ ip2 }}"
-
-  - name: part 2
-    debug: msg={{ ip2.split('.')[-3] }}
-
-  - name: set_fact
-    set_fact: part2={{ ip2.split('.')[-3] }}
-
-  - name: debug
-    debug:
-     msg: "second part is {{ part2 }}"
-
-  - name: greater than 192.168.1.200 and less than 260
-    debug:
-      msg: "IP is greater than 192.168.1.200 and less than 260"
-    when: ip2 >= "192.168.1.200" and ip2 <= "192.168.1.250"
+      msg: "server wants a reboot"
+    when: uptime | int >= 5000
