@@ -13,4 +13,4 @@
 
   - name: uptime_seconds
     debug:
-       vars: " {{ ansible_facts['uptime_seconds'] }}"  
+      msg: "{{ ansible_facts['uptime_seconds'] }}"  
