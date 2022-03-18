@@ -7,9 +7,9 @@
     setup:
       filter: "ansible_facts['reboot_pending']"
 
-  - name: default gateway
+  - name: gather uptime seconds
     debug:
-      msg: "{{ ansible_facts['uptime_seconds] }}"
+      msg: "{{ ansible_facts['uptime_seconds'] }}"
 
   - name: set_fact
     set_fact: uptime={{ ansible_facts['uptime_seconds'] }}
