@@ -7,9 +7,9 @@
     debug:
       var: ansible_facts
 
-#  - name: default gateway
-#    debug:
-#      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
+  - name: default gateway
+    debug:
+      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
 
   - name: pending_reboot
     debug:
