@@ -11,10 +11,15 @@
 #    debug:
 #      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
 
+  - name: pending_reboot
+    debug:
+      msg: "{{ ansible_facts['reboot_pending'] }}"
+
   - name: uptime_seconds
     debug:
       msg: "{{ ansible_facts['uptime_seconds'] }}"
 
-  - name: pending_reboot
+  - name: reboot server
     debug:
-      msg: "{{ ansible_facts['reboot_pending'] }}"      
+      msg: "server wants a reboot"
+    when: {{ ansible_facts['uptime_seconds'] }} >= 500   
