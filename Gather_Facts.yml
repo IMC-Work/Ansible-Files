@@ -13,4 +13,8 @@
 
   - name: uptime_seconds
     debug:
-      msg: "{{ ansible_facts['uptime_seconds'] }}"  
+      msg: "{{ ansible_facts['uptime_seconds'] }}"
+
+  - name: pending_reboot
+    debug:
+      msg: "{{ ansible_facts['reboot_pending'] }}"      
