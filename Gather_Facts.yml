@@ -7,30 +7,10 @@
     debug:
       var: ansible_facts
 
-  - name: default gateway
+#  - name: default gateway
+#    debug:
+#      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
+
+  - name: uptime_seconds
     debug:
-      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
-
-  - name: set_fact
-    set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
-
-  - name: debug1
-    debug:
-      msg: "{{ ansible_ip_addresses }}"
-    register: ip
-
-  - name: remove mac address
-#    set_fact: ip1={{ ansible_ip_addresses | regex_replace('.*,') | regex_replace ("'.*") }}
-#    set_fact: ip1={{ ip | regex_replace("'","") | regex_replace(",.*","") }}
-#    set_fact: ip1={{ ip | regex_replace("\[","") }}
-    set_fact: ip1={{ ip | regex_replace("\['","") | regex_replace("',.*","") }}
-#    set_fact: ip1={{ ip | regex_replace(".{5}","") }}
-
-  - name: debug2
-    debug:
-      msg: "{{ ip1 }}"
-
-  - name: greater than 192.168.1.200 and less than 260
-    debug:
-      msg: "IP is greater than 192.168.1.200 and less than 260"
-    when: ip2 >= "192.168.1.200" and ip2 <= "192.168.1.260"
+       vars: " {{ ansible_facts['uptime_seconds'] }}"  
