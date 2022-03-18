@@ -22,4 +22,4 @@
   - name: reboot server
     debug:
       msg: "server wants a reboot"
-    when: {{ ansible_facts['uptime_seconds'] }} >= 500   
+    when: "{{ ansible_facts['uptime_seconds'] }}" >= 500   
