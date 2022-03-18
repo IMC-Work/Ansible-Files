@@ -14,6 +14,7 @@
   - name: set_fact
     set_fact: ip2={{ ansible_facts['interfaces'][0]['default_gateway'] }}
 
+
   - name: IP Address (ip2)
     debug:
       msg: " IP2 Address is set to {{ ip2 }}"
