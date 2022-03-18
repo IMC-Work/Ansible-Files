@@ -25,4 +25,4 @@
   - name: reboot server
     debug:
       msg: "server wants a reboot"
-    when: uptime >= 500
+    when: uptime | int >= 500
