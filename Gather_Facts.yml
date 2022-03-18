@@ -19,7 +19,10 @@
     debug:
       msg: "{{ ansible_facts['uptime_seconds'] }}"
 
+  - name: set_fact
+    set_fact: uptime={{ ansible_facts['uptime_seconds'] }}
+
   - name: reboot server
     debug:
       msg: "server wants a reboot"
-    when: "{{ ansible_facts['uptime_seconds'] }}" >= 500   
+    when: uptime >= 500
