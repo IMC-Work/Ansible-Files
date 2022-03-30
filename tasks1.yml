@@ -6,8 +6,16 @@
   - name: Get number of services to restart
     win_command: powershell.exe -
     args:
-      stdin: (Get-Content C:\temp\autoservices.txt).Length
+#     stdin: (Get-Content C:\temp\autoservices.txt).Length
+      stdin: (Get-Content C:\temp\autoservices.txt) | Measure-Object -lines
     register: auto_services
+ #
+ #    if there is more than 1 line in the file, it's ok
+ #    however, if there is only 1 line of code - it gives the number of chars
+ #
+  - name: debug the auto_services value
+    debug:
+      msg: "auto services = {{ auto_services.stdout_lines[0] }} "
 
   - name: user powershell to add "1" to the number of times to run the loop
     win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
