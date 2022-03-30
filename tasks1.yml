@@ -1,13 +1,12 @@
 ---
 - hosts: all
   gather_facts: false
-
   tasks:
 
   - name: Get number of services to restart
-    ansible.windows.win_command: powershell.exe -
+    win_command: powershell.exe -
     args:
-      stdin: (Get-Content C:\temp\autoservices1.txt).Length
+      stdin: (Get-Content C:\temp\autoservices.txt).Length
     register: auto_services
 
   - name: user powershell to add "1" to the number of times to run the loop
