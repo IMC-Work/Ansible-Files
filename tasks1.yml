@@ -1,21 +1,21 @@
 ---
-  - name: Get number of services to restart
-    win_command: powershell.exe -
-    args:
-      stdin: (Get-Content C:\temp\autoservices1.txt).Length
-    register: auto_services
+- name: Get number of services to restart
+  win_command: powershell.exe -
+  args:
+    stdin: (Get-Content C:\temp\autoservices1.txt).Length
+  register: auto_services
 
-  - name: user powershell to add "1" to the number of times to run the loop
-    win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
-    register: auto_services_num
+- name: user powershell to add "1" to the number of times to run the loop
+  win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
+  register: auto_services_num
 
-  - name: identify number of times to run the loop
-    set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
+- name: identify number of times to run the loop
+  set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
 
-  - name: number of times to loop
-    debug:
-      msg: "run loop {{ loop_num }} times"
+- name: number of times to loop
+  debug:
+    msg: "run loop {{ loop_num }} times"
 
-  - name: restart all the Auto Services that require to be restarted
-    include_tasks: tasks1b.yml
-    loop: "{{ range(1,(loop_num|int)) | list }}"
+- name: restart all the Auto Services that require to be restarted
+  include_tasks: tasks1b.yml
+  loop: "{{ range(1,(loop_num|int)) | list }}"
