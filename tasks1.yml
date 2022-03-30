@@ -1,30 +1,21 @@
 ---
-  - name: copy text
-    ansible.windows.win_shell:
-      Select-String -Path C:\temp\autoservices.txt -pattern "Service="
-    register: service
+  - name: Get number of services to restart
+    win_command: powershell.exe -
+    args:
+      stdin: (Get-Content C:\temp\autoservices1.txt).Length
+    register: auto_services
 
-  - name: read file, copy data to service
-    set_fact: service={{ service.stdout_lines [item] }}
+  - name: user powershell to add "1" to the number of times to run the loop
+    win_shell: "{{ auto_services.stdout_lines[0] }} + 1"
+    register: auto_services_num
 
-  - name: remove everything apart from service name
-    set_fact: data1={{ service | regex_replace('.*=') | regex_replace ("'.*") }}
+  - name: identify number of times to run the loop
+    set_fact: loop_num={{ auto_services_num.stdout_lines[0]|int}}
 
-  - name: restart the {{ data1 }} service
-    ansible.windows.win_service:
-      name: "{{ data1 }}"
-      state: started
-    register: result
+  - name: number of times to loop
+    debug:
+      msg: "run loop {{ loop_num }} times"
 
-  - name: Service Status
-    ansible.builtin.debug:
-      msg: "Service {{ data1 }} has now started"
-    when: result.state == "running"
-
-  - name: Write entry to the windows event log
-    win_eventlog_entry:
-      log: Application
-      source: Ansible
-      event_id: 1971
-      message: "{{ data1 }} has been successfully started via Ansible"
-    when: result.state == "running"
+  - name: restart all the Auto Services that require to be restarted
+    include_tasks: tasks1b.yml
+    loop: "{{ range(1,(loop_num|int)) | list }}"

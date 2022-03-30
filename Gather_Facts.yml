@@ -7,9 +7,9 @@
     debug:
       var: ansible_facts
 
-  - name: default gateway
-    debug:
-      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
+#  - name: default gateway
+#    debug:
+#      msg: "{{ ansible_facts['interfaces'][0]['default_gateway'] }}"
 
   - name: pending_reboot
     debug:
@@ -22,7 +22,7 @@
   - name: set_fact
     set_fact: uptime={{ ansible_facts['uptime_seconds'] }}
 
-  - name: reboot server
+  - name: reboot server if no reboot in last 60 days
     debug:
       msg: "server wants a reboot"
-    when: uptime | int >= 50000000
+    when: uptime | int >= 5184000

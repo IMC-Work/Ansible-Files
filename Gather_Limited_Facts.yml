@@ -5,7 +5,7 @@
 
   - name: gather limited facts
     setup:
-      filter: "ansible_facts['reboot_pending']"
+      filter: "ansible_facts['uptime_seconds']"
 
   - name: gather uptime seconds
     debug:
