@@ -24,7 +24,7 @@
         msg: "server patched and rebooted ok"
       when: reboot_status.failed == false
 
-    rescue:
+    fail:
     - name: reboot failed
       debug:
         msg: "server patched, server not back"
