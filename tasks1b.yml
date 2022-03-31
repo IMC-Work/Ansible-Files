@@ -13,8 +13,4 @@
 - name: debug service
   debug:
     msg: "restart the {{ service_name }}"
-
-- name: non service
-  debug:
-    msg: "there is no service to start this time {{ service_name }}"
-  when: "{{ service_name|length }} == 0"   
+  
