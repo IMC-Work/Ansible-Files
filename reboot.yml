@@ -16,7 +16,7 @@
     - name: reboot the server
       win_reboot:
         reboot_timeout: 50
-#      ignore_errors: true
+      ignore_errors: true
       register: reboot_status
 
     - name: reboot completed
@@ -28,7 +28,7 @@
     - name: reboot failed
       fail:
         msg: "server patched, server not back"
-      when: reboot_status.failed == true
+  #    when: reboot_status.failed == true
 
     when: rebootrequired.exists == true
 
