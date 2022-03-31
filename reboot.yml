@@ -32,6 +32,6 @@
 
     when: rebootrequired.exists == true
 
-    - name: do the rest of the stuff
-      debug:
-        msg: "carry on, nothing to see here"
+  - name: do the rest of the stuff
+    debug:
+      msg: "carry on, nothing to see here"
